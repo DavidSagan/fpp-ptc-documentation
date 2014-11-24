@@ -1,0 +1,1007 @@
+% TEX TS-program = pdflatex
+\documentclass[%
+  letterpaper,%
+  %afourpaper,%
+  10pt,%
+  extrafontsizes,%
+  twoside,
+  openright,% start each chapter on a recto page
+  %openany,% start each chapter on the next blank page
+  showtrims,% show trim marks
+]{memoir}
+%\RequirePackage[english]{babel}
+
+
+%:----- preamble -----
+
+%:draft or final?
+\newcommand*{\dfFix}{draft} % fixme
+\newcommand*{\dfKey}{draft} % showkeys
+
+%:draft, version, year
+\newcommand{\PTCDocDraft}{sixth}
+\newcommand{\PTCDocVersion}{0.4.3}
+\newcommand{\PTCDocYear}{2011}
+
+%:color
+\RequirePackage[usenames,dvipsnames,svgnames]{xcolor}
+\definecolor{DarkRed}{rgb}{0.545,0,0}
+\newcommand{\hlred}[1]{\textcolor{DarkRed}{#1}}% prints in red
+\newcommand{\hlblue}[1]{\textcolor{DarkBlue}{#1}}% prints in blue
+\newcommand{\redcolor}{\color{Maroon}}% prints in red
+
+
+%:fonts
+%% memoir provides sizes tiny, scriptsize, footnotesize, small,
+%% normalsize, large, Large, LARGE, huge, and Huge.
+\RequirePackage[T1]{fontenc}
+%\RequirePackage[scaled=0.90]{helvet}   % san serif
+\RequirePackage[scaled=1.05]{libertine}             % san serif
+%\renewcommand*\sfdefault{uop}         % Optima (san serif)
+\RequirePackage[scaled=0.85]{beramono} % monospaced
+\RequirePackage[osf,sc]{mathpazo}      % Palatino and Pazo math
+\RequirePackage{textcomp} % `text companion'
+%% improve letterspacing of small caps and all-caps text.
+\RequirePackage{textcase} % provides \MakeTextUppercase and \MakeTextLowercase
+%\RequirePackage{letterspace}
+\RequirePackage{microtype}
+\DeclareTextFontCommand{\textsmallcaps}{\scshape}
+\newcommand*{\acls}{200}
+\newcommand*{\scls}{50}
+\renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
+\newcommand{\allcapsspacing}[1]{\textls[\acls]{#1}}
+\newcommand{\smallcapsspacing}[1]{\textls[\scls]{#1}}
+\newcommand{\allcaps}[1]{\allcapsspacing{\MakeTextUppercase{#1}}}
+\newcommand{\smallcaps}[1]{\textsc{\MakeTextLowercase{#1}}}
+%% use the AMS macros for math
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{mathtools}
+%% definition of Lie operators and transforms using Dragt's colon notation
+\RequirePackage{liecolon}
+%% define graphical clock
+%\RequirePackage{clock}
+%% define \url
+\RequirePackage{url}
+%% \pi for units
+\protected\def\piunit{\ensuremath{\mathnormal{\pi}}}
+
+
+%:page layout
+%% we want this to print properly on both A4 and US letter
+\RequirePackage{layout}
+\settrimmedsize{11in}{210mm}{*} % length(US letter) x width(A4)
+\setlength{\trimtop}{0pt}
+\setlength{\trimedge}{\stockwidth}
+  \addtolength{\trimedge}{-\paperwidth}
+%\settypeblocksize{222mm}{133mm}{*} % ratio 5:3
+%\settypeblocksize{*}{133mm}{1.666} % ratio 5:3
+\settypeblocksize{215mm}{*}{0.6} % ratio 5:3
+\setlrmargins{25mm}{*}{*} % set spine margin
+\setulmargins{25mm}{*}{*} % set upper margin
+\setheadfoot{\baselineskip}{3\baselineskip} % head height, foot skip
+\setheaderspaces{*}{2\baselineskip}{*} % set head sep
+\setmarginnotes{17pt}{102pt}{\baselineskip}
+\checkandfixthelayout
+%\setlength{\topskip}{1.6\topskip} 
+%\checkandfixthelayout
+%\sloppybottom
+
+%\enlargethispage*{\baselineskip}
+%\newcommand{\blankpage}{{\ }\thispagestyle{empty}\cleardoublepage}
+\newcommand{\blankpage}{\newpage\hbox{}\thispagestyle{empty}\newpage}
+
+
+%:headers and footers
+% make header span full width of page
+% place folios on fore edge of headers
+% place chapter title near fore edge on verso pages
+% place section title near fore edge on recto pages
+% leave footer empty---even at start of chapters, etc.
+\makepagestyle{fwhead}
+\setlength{\headwidth}{\textwidth}
+  \addtolength{\headwidth}{\marginparsep}
+  \addtolength{\headwidth}{\marginparwidth}
+\makerunningwidth{fwhead}{\headwidth}
+\makeheadrule{fwhead}{\headwidth}{0pt}
+\makeheadposition{fwhead}{flushright}{flushleft}{}{}
+\makepsmarks{fwhead}{%
+  \nouppercaseheads
+  \createmark{chapter}{both}{nonumber}{}{}
+  \createmark{section}{right}{shownumber}{}{{} \space}
+  \createplainmark{toc}{both}{\contentsname}
+  \createplainmark{lof}{both}{\listfigurename}
+  \createplainmark{lot}{both}{\listtablename}
+  \createplainmark{bib}{both}{\bibname}
+  \createplainmark{index}{both}{\indexname}
+  \createplainmark{glossary}{both}{\glossaryname}}
+\makeevenhead{fwhead}{\normalfont\thepage\quad\smallcaps{\leftmark}}{}{}
+\makeoddhead{fwhead}{}{}{\normalfont\smallcaps{\rightmark}\quad\thepage}
+\pagestyle{fwhead}
+%% no footer (with folio) at start of part or chapter
+\aliaspagestyle{part}{empty}
+\aliaspagestyle{chapter}{empty}
+%% for the index, we want the header to guide the reader
+\usepackage{fixltx2e} % makes LaTeX marking robust in two-column mode
+\newcommand{\idxmark}[1]{#1\markboth{#1}{#1}}
+%\renewcommand{\idxmark}[1]{#1}
+\copypagestyle{index}{fwhead}
+\makeevenhead{index}{\normalfont\thepage\quad\rightmark}{}{\leftmark}
+\makeoddhead{index}{\rightmark}{}{\normalfont\leftmark\quad\thepage}
+%% for the list of FiXmes
+\copypagestyle{loxhead}{fwhead}
+\makeevenhead{loxhead}{\normalfont\thepage\quad\smallcaps{\englishlistfixmename}}{}{}
+\makeoddhead{loxhead}{}{}{\normalfont\smallcaps{\englishlistfixmename}\quad\thepage}
+
+
+%:styles for ToC, ToF, etc.
+%% set indents
+\cftsetindents{chapter}{0em}{1.3em}
+\cftsetindents{section}{1.3em}{1.8em}
+\cftsetindents{subsection}{4.1em}{2.3em}
+\cftsetindents{subsubsection}{6.3em}{2.8em}
+\cftsetindents{paragraph}{9.1em}{3.3em}
+\cftsetindents{subparagraph}{12.4em}{3.8em}
+\cftsetindents{figure}{0em}{3.0em}
+\cftsetindents{table}{0em}{3.0em}
+%% remove dotted leaders
+\renewcommand{\cftsectiondotsep}{\cftnodots}
+\renewcommand{\cftsubsectiondotsep}{\cftnodots}
+\renewcommand{\cftsubsubsectiondotsep}{\cftnodots}
+\renewcommand{\cftparagraphdotsep}{\cftnodots}
+\renewcommand{\cftsubparagraphdotsep}{\cftnodots}
+\renewcommand{\cftfiguredotsep}{\cftnodots}
+\renewcommand{\cfttabledotsep}{\cftnodots}
+%% modify spacing between chapters
+\newlength{\cftchapskip}
+\setlength{\cftchapskip}{10pt}
+\setlength{\cftbeforechapterskip}{\the\cftchapskip plus 1pt}
+\renewcommand*{\insertchapterspace}{%
+  \addtocontents{lof}{\protect\addvspace{\cftchapskip}}%
+  \addtocontents{lot}{\protect\addvspace{\cftchapskip}}
+}
+%% short and long (main) ToC
+\makeatletter
+\newlength{\tocunitlength}
+\newcommand*{\setupshorttoc}{%
+  \renewcommand*{\contentsname}{Short contents}
+  \let\oldchangetocdepth\changetocdepth
+  \let\oldprecistoctext\precistoctext
+  \renewcommand{\precistoctext}[1]{}
+  \let\oldcftchapterfillnum\cftchapterfillnum
+  \renewcommand*{\changetocdepth}[1]{}
+  \setcounter{tocdepth}{0}% chapters
+  \renewcommand*{\cftchapterfont}{\hfill\normalfont\itshape}
+  \renewcommand*{\cftchapterpagefont}{\normalfont\upshape}
+  \renewcommand*{\cftchapterleader}{ \textperiodcentered\space}
+  \renewcommand*{\cftchapterafterpnum}{\cftparfillskip}
+  \renewcommand*{\cftchapterfillnum}[1]{%
+    {\cftchapterleader}\nobreak
+    \hbox to 1.5em{\cftchapterpagefont ##1\hfil}\cftchapterafterpnum\par}
+  \setrmarg{0.05\textwidth}
+  \setlength{\tocunitlength}{\@tocrmarg}
+  \addtolength{\tocunitlength}{1.5em}
+  \let\oldcftpartformatpnum\cftpartformatpnum
+  \renewcommand*{\cftpartformatpnum}[1]{%
+    \hbox to\tocunitlength{{\cftpartpagefont ##1}}}
+  \let\oldcftbookformatpnum\cftbookformatpnum
+  \renewcommand*{\cftbookformatpnum}[1]{%
+    \hbox to\tocunitlength{{\cftbookpagefont ##1}}}
+}
+\newcommand*{\setupparasubsecs}{%
+  \let\oldnumberline\numberline
+  \renewcommand*{\cftsubsectionfont}{\normalfont\itshape}
+  \renewcommand*{\cftsubsectionpagefont}{\normalfont\upshape}
+  \renewcommand{\l@subsection}[2]{
+    \ifnum\c@tocdepth > 1\relax
+      \def\numberline####1{\textit{####1}~}%
+      \leftskip=\cftsubsectionindent
+      \rightskip=\@tocrmarg
+      \advance\rightskip 0pt plus \hsize % raggedright
+      \parfillskip=\fill
+      \ifhmode ,\ \else\noindent\fi
+      \ignorespaces
+      {\cftsubsectionfont ##1}~{\cftsubsectionpagefont##2}%
+       \let\numberline\oldnumberline\ignorespaces
+    \fi}
+}
+\AtEndDocument{\addtocontents{toc}{\par}}
+\newcommand*{\setupmaintoc}{%
+  \renewcommand{\contentsname}{Contents}
+  \let\changetocdepth\oldchangetocdepth
+  \let\precistoctext\oldprecistoctext
+  \let\cftchapterfillnum\oldcftchapterfillnum
+  \addtodef{\cftchapterbreak}{\par}{}
+  \renewcommand*{\cftchapterfont}{\normalfont\itshape}
+  \renewcommand*{\cftchapterpagefont}{\normalfont\upshape}
+  \renewcommand*{\cftchapterleader}{ \space}
+  \renewcommand*{\cftchapterafterpnum}{\cftparfillskip}
+  \renewcommand*{\cftchapterfillnum}[1]{%
+    {\cftchapterleader}\nobreak
+    \hbox to 1.5em{\cftchapterpagefont ##1\hfil}\cftchapterafterpnum\par}
+  \renewcommand{\cftchapterbreak}{\par\addpenalty{-\@highpenalty}}
+  \renewcommand*{\cftsectionfont}{\normalfont\upshape}
+  \renewcommand*{\cftsectionpagefont}{\normalfont\upshape}
+  \renewcommand*{\cftsectionpresnum}{\normalfont\itshape}
+  \renewcommand*{\cftsectionleader}{\space}
+  \renewcommand*{\cftsectionafterpnum}{\cftparfillskip}
+  \renewcommand*{\cftsectionfillnum}[1]{%
+    {\cftsectionleader}\nobreak
+    \hbox to 1.5em{\cftsectionpagefont ##1\hfil}\cftsectionafterpnum\par}
+  \setpnumwidth{2em}
+  \setrmarg{3em}
+  \setcounter{tocdepth}{2} % subsection
+  \let\cftpartformatpnum\oldcftpartformatpnum
+  \addtodef{\cftpartbreak}{\par}{}
+  \let\cftbookformatpnum\oldcftbookformatpnum
+  \addtodef{\cftbookbreak}{\par}{}
+}
+\makeatother
+%% LoF
+\newcommand*{\setuplof}{%
+  \renewcommand*{\cftfigurefont}{\normalfont\upshape}
+  \renewcommand*{\cftfigurepagefont}{\normalfont\upshape}
+  \renewcommand*{\cftfigurepresnum}{\normalfont\itshape}
+  \renewcommand*{\cftfigureleader}{ \space}
+  \renewcommand*{\cftfigureafterpnum}{\cftparfillskip}
+  \renewcommand*{\cftfigurefillnum}[1]{%
+    {\cftfigureleader}\nobreak
+    \hbox to 1.5em{\cftfigurepagefont ##1\hfil}\cftfigureafterpnum\par}
+}
+%% LoT
+\newcommand*{\setuplot}{%
+  \renewcommand*{\cfttablefont}{\normalfont\upshape}
+  \renewcommand*{\cfttablepagefont}{\normalfont\upshape}
+  \renewcommand*{\cfttablepresnum}{\normalfont\itshape}
+  \renewcommand*{\cfttableleader}{ \space}
+  \renewcommand*{\cfttableafterpnum}{\cftparfillskip}
+  \renewcommand*{\cfttablefillnum}[1]{%
+    {\cfttableleader}\nobreak
+    \hbox to 1.5em{\cfttablepagefont ##1\hfil}\cfttableafterpnum\par}
+}
+
+
+%:chapter style
+\makeatletter
+\newcommand{\chapterrule}%
+  {\hrule width \textwidth height \normalrulethickness}
+\makechapterstyle{PTCLUGchapstyle}{%
+  \setlength{\beforechapskip}{3\baselineskip}
+  \setlength{\afterchapskip}{3.5\baselineskip}
+  \renewcommand*{\chapnumfont}{\normalfont\Huge\scshape}
+  \renewcommand*{\chaptitlefont}{\normalfont\Huge\itshape}
+  \renewcommand*{\printchapternum}{\chapnumfont
+    \ifanappendix \thechapter \else \textsc{\numtoname{\c@chapter}}\fi}
+  \renewcommand*{\printchaptername}{\centering}
+  \renewcommand*{\printchaptertitle}[1]{%
+    \chapterrule\vskip\onelineskip \raggedleft \chaptitlefont ##1}
+  \renewcommand*{\afterchaptertitle}{%
+    \vskip\onelineskip \chapterrule\vskip \afterchapskip}
+  \renewcommand*{\printchapternonum}{%
+    \vphantom{\chapnumfont One}
+    \afterchapternum%
+    \vskip\topskip}
+}
+\makeatother
+%% set American-style names for numbers
+\renewcommand*{\namenumberand}{ }
+\renewcommand*{\namenumbercomma}{ }
+\chapterstyle{PTCLUGchapstyle}
+
+
+%:sections and subsections
+\setsecnumdepth{section} % enumerate through this sectional division
+%% section
+\setsecheadstyle{\Large\scshape\raggedright}
+\setbeforesecskip{-3.5ex plus -1ex minus -.2ex}
+\setaftersecskip{2.5ex plus .2ex}
+%% subsection
+\setsubsecheadstyle{\large\itshape\raggedright}
+%\setsubsecheadstyle{\large\itshape\bfseries\addperiod}
+\setbeforesubsecskip{-3.25ex plus -1ex minus -.2ex}
+\setaftersubsecskip{1.5ex plus .2ex}
+%\setaftersubsecskip{-1em}
+%% new thought---a paragraph-style section
+\providecommand\newthought[1]{%
+   \addvspace{.6\baselineskip plus 0.5ex minus 0.2ex}%
+   \noindent\textsc{#1}%
+}
+
+
+%:epigraphs
+%% for epigraphs before title page
+\newcommand{\openepigraph}[2]{%
+  \begin{fullwidth} % environment defined in 'tufte-env'
+  \Large
+  \setlength{\baselineskip}{1.5em}
+  \raggedright
+  \noindent\textsc{#1}\\[0.5em]% epigraph
+%  \raggedleft
+  \noindent\textsc{#2}% source
+  \end{fullwidth}
+}
+%% settings for chapter epigraphs
+%\setlength{\epigraphwidth}{.382\textwidth} % 1/(1+\Phi) = 0.381966...
+\setlength{\beforeepigraphskip}{-\baselineskip}
+\setlength{\epigraphrule}{0pt}
+%\epigraphfontsize{\small}
+%% for epigraphs at chapters use
+%\epigraph{<text>}{\textit{<source>}\\ \textsc{<author>}}
+
+
+%:glossaries
+%% main glossary
+\makeglossary
+\changeglossref{\thesection}
+\changeglossnumformat{|hyperpage}
+%% PTC command summary
+\makeglossary[ptccmds]
+\changeglossref[ptccmds]{\thesection}
+\changeglossnumformat[ptccmds]{|hyperpage}
+
+
+%:indices
+\makeindex
+%\makeindex[xmpls]
+\newcommand*{\itpg}[1]{\textit{\hyperpage{#1}}} % italicize main entry
+%\showindexmarks % useful for checking index entries
+%% index headers are defined above under '%:headers and footers'
+
+
+%:cross referencing
+%% Except for the commands at the end of this section, which
+%% reference the title, the cross-referencing commands defined here
+%% take an optional argument that must be one or both (in either
+%% order) of the characters 'c' (capitalize) and 's' (plural form).
+%% They also have starred forms that does not print the reference
+%% name (e.g., chapter or figure).
+\RequirePackage{suffix}
+%% chapters
+\renewcommand*{\chapterrefname}{chapter}
+  \newcommand*{\Chapterrefname}{Chapter}
+  \newcommand*{\chaptersrefname}{chapters}
+  \newcommand*{\Chaptersrefname}{Chapters}
+\renewcommand*{\Cref}[2][]{\hyperref[cha:#2]{%
+  \ifthenelse{\isempty{#1}}{\chapterrefname}{%
+   \ifthenelse{\equal{#1}{s}}{\chaptersrefname}{%
+    \ifthenelse{\equal{#1}{c}}{\Chapterrefname}{%
+     \ifthenelse{\equal{#1}{cs}\OR\equal{#1}{sc}}{\Chaptersrefname}{%
+      \typeout{cross-ref error -- cha:#2}\chapterrefname}}}}~\ref{cha:#2}}}
+\WithSuffix\def\Cref*#1{\hyperref[cha:#1]{\ref{cha:#1}}}
+%% appendices
+\renewcommand*{\appendixrefname}{appendix}
+  \newcommand*{\Appendixrefname}{Appendix}
+  \newcommand*{\appendicesrefname}{appendices}
+  \newcommand*{\Appendicesrefname}{Appendices}
+\renewcommand*{\Aref}[2][]{\hyperref[app:#2]{%
+  \ifthenelse{\isempty{#1}}{\appendixrefname}{%
+   \ifthenelse{\equal{#1}{s}}{\appendicesrefname}{%
+    \ifthenelse{\equal{#1}{c}}{\Appendixrefname}{%
+     \ifthenelse{\equal{#1}{cs}\OR\equal{#1}{sc}}{\Appendicesrefname}{%
+      \typeout{cross-ref error -- app:#2}\appendixrefname}}}}~\ref{app:#2}}}
+\WithSuffix\def\Aref*#1{\hyperref[app:#1]{\ref{app:#1}}}
+%% sections
+\renewcommand*{\sectionrefname}{\S}
+  \newcommand*{\Sectionrefname}{Section}
+  \newcommand*{\sectionsrefname}{\S\S}
+  \newcommand*{\Sectionsrefname}{Sections}
+\renewcommand*{\Sref}[2][]{\hyperref[sec:#2]{%
+  \ifthenelse{\isempty{#1}}{\sectionrefname}{%
+   \ifthenelse{\equal{#1}{s}}{\sectionsrefname}{%
+    \ifthenelse{\equal{#1}{c}}{\Sectionrefname}{%
+     \ifthenelse{\equal{#1}{cs}\OR\equal{#1}{sc}}{\Sectionsrefname}{%
+      \typeout{cross-ref error -- sec:#2}\sectionrefname}}}}~\ref{sec:#2}}}
+\WithSuffix\def\Sref*#1{\hyperref[sec:#1]{\ref{sec:#1}}}
+%% figures
+\renewcommand*{\figurerefname}{figure}
+  \newcommand*{\Figurerefname}{Figure}
+  \newcommand*{\figuresrefname}{figures}
+  \newcommand*{\Figuresrefname}{Figures}
+\renewcommand*{\fref}[2][]{\hyperref[fig:#2]{%
+  \ifthenelse{\isempty{#1}}{\figurerefname}{%
+   \ifthenelse{\equal{#1}{s}}{\figuresrefname}{%
+    \ifthenelse{\equal{#1}{c}}{\Figurerefname}{%
+     \ifthenelse{\equal{#1}{cs}\OR\equal{#1}{sc}}{\Figuresrefname}{%
+      \typeout{cross-ref error -- fig:#2}\figurerefname}}}}~\ref{fig:#2}}}
+\WithSuffix\def\fref*#1{\hyperref[fig:#1]{\ref{fig:#1}}}
+%% tables
+\renewcommand*{\tablerefname}{table}
+  \newcommand*{\Tablerefname}{Table}
+  \newcommand*{\tablesrefname}{tables}
+  \newcommand*{\Tablesrefname}{Tables}
+\renewcommand*{\tref}[2][]{\hyperref[tbl:#2]{%
+  \ifthenelse{\isempty{#1}}{\tablerefname}{%
+   \ifthenelse{\equal{#1}{s}}{\tablesrefname}{%
+    \ifthenelse{\equal{#1}{c}}{\Tablerefname}{%
+     \ifthenelse{\equal{#1}{cs}\OR\equal{#1}{sc}}{\Tablesrefname}{%
+      \typeout{cross-ref error -- tbl:#2}\tablerefname}}}}~\ref{tbl:#2}}}
+\WithSuffix\def\tref*#1{\hyperref[tbl:#1]{\ref{tbl:#1}}}
+%% equations
+\newcommand*{\equationrefname}{}
+\newcommand*{\Equationrefname}{Equation~}
+\newcommand*{\equationsrefname}{}
+\newcommand*{\Equationsrefname}{Equations~}
+\renewcommand*{\eqref}[2][]{\hyperref[eq:#2]{%
+  \ifthenelse{\isempty{#1}}{\equationrefname}{%
+   \ifthenelse{\equal{#1}{s}}{\equationsrefname}{%
+    \ifthenelse{\equal{#1}{c}}{\Equationrefname}{%
+     \ifthenelse{\equal{#1}{cs}\OR\equal{#1}{sc}}{\Equationsrefname}{%
+      \typeout{cross-ref error -- eq:#2}\equationrefname}}}}(\ref{eq:#2})}}
+\WithSuffix\def\eqref*#1{\hyperref[eq:#1]{(\ref{eq:#1})}}
+%% pages
+\renewcommand*{\pagerefname}{page}
+  \newcommand*{\Pagerefname}{Page}
+  \newcommand*{\pagesrefname}{pages}
+  \newcommand*{\Pagesrefname}{Pages}
+\renewcommand*{\pref}[2][]{\hyperref[#2]{%
+  \ifthenelse{\isempty{#1}}{\pagerefname}{%
+   \ifthenelse{\equal{#1}{s}}{\pagesrefname}{%
+    \ifthenelse{\equal{#1}{c}}{\Pagerefname}{%
+     \ifthenelse{\equal{#1}{cs}\OR\equal{#1}{sc}}{\Pagesrefname}{%
+      \typeout{cross-ref error -- page #2}\pagerefname}}}}~\pageref{#2}}}
+\WithSuffix\def\pref*#1{\hyperref[#1]{\pageref{#1}}}
+%% lines
+\newcommand*{\linerefname}{line}
+\newcommand*{\Linerefname}{Line}
+\newcommand*{\linesrefname}{lines}
+\newcommand*{\Linesrefname}{Lines}
+\newcommand*{\lref}[2][]{\hyperref[lin:#2]{%
+  \ifthenelse{\isempty{#1}}{\linerefname}{%
+   \ifthenelse{\equal{#1}{s}}{\linesrefname}{%
+    \ifthenelse{\equal{#1}{c}}{\Linerefname}{%
+     \ifthenelse{\equal{#1}{cs}\OR\equal{#1}{sc}}{\Linesrefname}{%
+      \typeout{cross-ref error -- lin:#2}\linerefname}}}}~\ref{lin:#2}}}
+\WithSuffix\def\lref*#1{\hyperref[lin:#1]{\ref{lin:#1}}}
+%% titles
+%% These cross-referencing commands do not have options.
+\newcommand*{\Tref}[1]{\textit{\titleref{#1}}}
+\newcommand*{\TPref}[1]{\textit{\titleref{#1}}, \pref{#1},}
+\WithSuffix\def\TPref*#1{\textit{\titleref{#1}}, \pref{#1}}
+\newcommand*{\TCref}[1]{\textit{\titleref{cha:#1}}, \Cref{#1},}
+\WithSuffix\def\TCref*#1{\textit{\titleref{cha:#1}}, \Cref{#1}}
+\newcommand*{\TAref}[1]{\textit{\titleref{app:#1}}, \Aref{#1},}
+\WithSuffix\def\TAref*#1{\textit{\titleref{app:#1}}, \Aref{#1}}
+\newcommand*{\TSref}[1]{\textit{\titleref{sec:#1}}, \Sref{#1},}
+\WithSuffix\def\TSref*#1{\textit{\titleref{sec:#1}}, \Sref{#1}}
+\newcommand*{\CTref}[1]{\Cref{#1}, \textit{\titleref{cha:#1}},}
+\WithSuffix\def\CTref*#1{\Cref{#1}, \textit{\titleref{cha:#1}}}
+\newcommand*{\ATref}[1]{\Aref{#1}, \textit{\titleref{app:#1}},}
+\WithSuffix\def\ATref*#1{\Aref{#1}, \textit{\titleref{app:#1}}}
+\newcommand*{\STref}[1]{\Sref{#1}, \textit{\titleref{sec:#1}},}
+\WithSuffix\def\STref*#1{\Sref{#1}, \textit{\titleref{sec:#1}}}
+
+%% others
+\newcommand*{\Bibref}{\hyperref[bib]{\textit{Bibliography}}}
+
+%:text
+\frenchspacing
+\setlength{\parindent}{1pc}
+\strictpagecheck % odd or even page?
+%% i.e., e.g., cf., etc.
+%\RequirePackage{xspace} % smart trailing space
+\newcommand{\hairsp}{\hspace{0.5pt}}% hair space
+\newcommand{\mhsp}{\mspace{2mu}}% math hair space
+\newcommand{\hquad}{\hskip0.5em\relax}% half quad space
+\newcommand{\ie}{\emph{i.\hairsp{}e.}}
+\newcommand{\eg}{\emph{e.\hairsp{}g.}}
+\newcommand{\cf}{\emph{cf.}}
+\newcommand{\etc}{\emph{etc.}}
+\newcommand{\capitalize}[2]{\uppercase{#1}#2}
+
+
+%:lists
+\tightlists
+\renewcommand{\labelitemi}{\scriptsize\textbullet}
+
+
+%:graphics
+\RequirePackage{graphicx}
+%\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{./illustrations/}{./illustrations/MetaPost/}{./graphics/}{./figures/}}
+%% Note: some figures---and their captions---may not be placed
+%% correctly on the page. If multiple processing of the file does
+%% not correct this issue, you may need to insert one of the commands
+%%   \forcerectofloat or \forceversofloat
+%% inside the figure (or other float) environment.
+
+
+%:verbatim environments
+%% customise memoir's boxedverbatim environment
+%% no sides on 'box'
+\bvtopandtail
+%% use heavier rule for top and bottom
+\renewcommand{\bvtoprulehook}{%
+  \hrule width\linewidth height\heavyrulewidth \nobreak\vskip-.1pt}
+\renewcommand{\bvendrulehook}{\vspace{-.5\bvboxsep}%
+  \hrule width\linewidth height\heavyrulewidth}
+%% use smaller line numbers 
+\linenumberfont{\scriptsize\rmfamily}
+%\settowidth{\bvnumlength}{\footnotesize 9999}
+%% increase space between line numbers and verbatim material
+\newlength{\bvlinenumsep}
+\setlength{\bvlinenumsep}{8pt}
+\makeatletter
+\def\b@vdoinside{%
+  \ifbvcountlines\ifbvcountinside%
+    \makebox[\bvnumlength][r]{%
+      \vlvnumfont \theb@vlinenumber\hspace{\bvlinenumsep}}%
+  \fi\fi}
+\makeatother
+%% define a title/description
+\newlength{\bvtitlewidth}
+\setlength{\bvtitlewidth}{\textwidth-2\bvboxsep}
+\newlength{\bvtitleskip}
+\setlength{\bvtitleskip}{.3\bvboxsep+\baselineskip}
+\newcommand{\setbvtitlefont}[1]{\def\bvtitlefont{#1}}
+\setbvtitlefont{\normalfont}
+\newsavebox{\bvtitle}
+\newcommand{\clearbvtitle}{% set a strut
+  \renewcommand{\bvtopmidhook}{\rule{0pt}{\bvtitleskip}\hss}}
+\newcommand{\setbvtitle}[1]{%
+  \ifthenelse{\isempty{#1}}%
+  {\clearbvtitle}%
+  {\begin{lrbox}{\bvtitle}\begin{minipage}[b][\height+.3\baselineskip]{\textwidth}%
+     \hfill\parbox[b]{\bvtitlewidth}{\bvtitlefont#1}\hfill\vspace{.4em}%
+     \hrule width\linewidth height\lightrulewidth%
+   \end{minipage}\end{lrbox}
+   \renewcommand{\bvtopmidhook}{\raisebox{\bvtitleskip}{\usebox{\bvtitle}}}}%
+}
+%% customise fancyvrb's Verbatim environment
+%% NB: some of the macros here use some of the \bv... macros
+%\usepackage{fancyvrb} % modified to handle title/description instead of just `label'
+\usepackage{fancyvrb_mod} % modified to handle title/description instead of just `label'
+%%   title
+\newsavebox{\fvtitlebox}
+\newlength{\fvtitlewidth}
+\setlength{\fvtitlewidth}{\textwidth-2\bvboxsep}
+\makeatletter
+\newcommand{\fvtitle}[1]{%
+  %\begin{lrbox}{\fvtitle}\begin{minipage}[t][\height+.3\baselineskip]{\textwidth}%
+  \begin{lrbox}{\fvtitlebox}\enspace\hspace{1pt}\begin{minipage}[b]{\linewidth}%
+    {\FancyVerbRuleColor\hrule width\linewidth height\FV@FrameRule}%
+    \vspace{.3\baselineskip}%
+    \hfill\parbox{\fvtitlewidth}{\bvtitlefont#1}\hfill\vspace{.3\baselineskip}%
+    {\FancyVerbRuleColor\hrule width\linewidth height\lightrulewidth}%
+    \vspace{.25\baselineskip}%
+  \end{minipage}\end{lrbox}\usebox{\fvtitlebox}
+}
+\makeatother
+\newcommand{\setfvtitle}[1]{\fvset{label={\fvtitle{#1}}}}
+%%   line numbers
+\newlength{\fvnumlength}
+\newcommand*{\setfvnumlength}[2]{% {<number-example>}{<number-sep>}
+  \settowidth{\fvnumlength}{#1}
+  \setlength{\bvlinenumsep}{#2}
+}
+\setfvnumlength{\footnotesize 999}{8pt}
+\newcounter{fvlinemodrem}% remainder for modulo operation
+\makeatletter
+\newcommand*{\setfvlinenums}[2]{% {<first-line>}{<start-at>}
+  \c@FancyVerbLine #1\relax \advance\c@FancyVerbLine \m@ne
+  \ifnum\z@<\linemodnum%   we are printing line numbers
+    \@tempcnta #2\relax
+    \divide\@tempcnta\linemodnum
+    \multiply\@tempcnta\linemodnum
+    \c@fvlinemodrem #2\relax
+    \advance\c@fvlinemodrem-\@tempcnta
+  \fi}
+\makeatother
+\newcommand*{\resetfvlinenumber}{\setcounter{FancyVerbLine}{0}}
+\renewcommand{\FancyVerbFormatLine}[1]{% format for line numbers
+  \makebox[\fvnumlength][r]{%
+    \vlvnumfont%
+    \getthelinenumber{FancyVerbLine}{fvlinemodrem}}%
+    \hspace{\bvlinenumsep}#1}
+\renewcommand{\theFancyVerbLine}{\normalfont\arabic{FancyVerbLine}}% format for references
+
+
+%:extended date and time formats
+\RequirePackage[nodayofweek]{datetime}
+\settimeformat{xxivtime}         % 24-hour time
+\renewcommand{\timeseparator}{.} %   in form 12.34
+\newdateformat{dmydate}{\THEDAY~\monthname[\THEMONTH]\ \THEYEAR}
+\newdateformat{ndmydate}{\twodigit{\THEDAY}.\twodigit{\THEMONTH}.\THEYEAR}
+
+
+%:units
+%\RequirePackage{units} % prettier units and non-stacked fractions
+\RequirePackage{siunitx} % prettier units and non-stacked fractions
+\sisetup{numaddn=\piunit,valuemode=text}
+
+
+%:other packages
+%\RequirePackage{lipsum} % for dummy text
+\RequirePackage{longtable} % tables that can cross page breaks
+%\RequirePackage{multicol} % small sections of multiple columns
+
+
+%:FiXme notes
+%% use option 'draft' to show, 'final' to suppress
+\RequirePackage[\dfFix]{fixme}
+%%
+%% TeXLive 2008
+%% color FiXme logo
+%\renewcommand*{\fixmelogo}{\textsf{\redcolor FiXme}}
+%\renewcommand*{\fixmenoteprefix}{\fixmelogo\ \textsf{\redcolor Note}}
+%% the FiXme package doesn't recognize the memoir class, and
+%% hence the 'List of FiXme.s' defaults to the article style
+%% use memoir's \newlistof to set up the 'List of FiXme.s' by hand
+%% so its format matches the other 'List of ...'s
+%\renewcommand*{\listfixmename}{Corrections Needed}
+%\newlistof{listofFiXmes}{lox}{\listfixmename}
+%\addtodef*{\insertchapterspace}{}{%
+%  \addtocontents{lox}{\protect\addvspace{\cftchapskip}}}
+%% in 'final' mode, we turn this off
+%\makeatletter
+%  \ifx\fixme@note\fixme@note@final\renewcommand{\listofFiXmes}{}\fi
+%\makeatother
+%%
+%% TeXLive 2009
+%% color FiXme logo
+\renewcommand*{\fixmelogo}{\textsf{\hlred{FiXme}}}
+\renewcommand\fxenglishnotename{\textsf{\hlred{Note}}}
+\renewcommand\fxenglishnotesname{\textsf{\hlred{Notes}}}
+\renewcommand\fxenglishwarningname{\textsf{\hlred{Warning}}}
+\renewcommand\fxenglishwarningsname{\textsf{\hlred{Warnings}}}
+\renewcommand\fxenglisherrorname{\textsf{\hlred{Error}}}
+\renewcommand\fxenglisherrorsname{\textsf{\hlred{Errors}}}
+\renewcommand\fxenglishfatalname{\textsf{\hlred{Fatal}}}
+\renewcommand\fxenglishfatalsname{\textsf{\hlred{Fatal errors}}}
+%% The FiXme package doesn't recognize the memoir class, and
+%% hence the 'List of FiXme.s' defaults to the article style.
+%% Set the 'book' style by hand
+\renewcommand*{\englishlistfixmename}{Corrections Needed} % 2009
+\makeatletter
+  \let\@lox@prtc\@lox@prtc@book
+  \let\@lox@psttc\@lox@psttc@book
+\makeatother
+\fxsetface{margin}{\footnotesize\itshape}
+%% environment for Desmond to add comments
+\newenvironment{Desmond}{\color{MediumBlue}\textit{Desmond}:}{}
+
+%:show latex labels
+%% use option 'draft' to show, 'final' to suppress
+\RequirePackage[color,\dfKey]{showkeys}
+\definecolor{refkey}{rgb}{.8,.8,1}
+\definecolor{labelkey}{rgb}{.5,.5,1}
+\renewcommand*{\showkeyslabelformat}[1]{%
+  \raisebox{-1.4ex}{\makebox[.0\width][r]{\normalfont\footnotesize\ttfamily#1}}}
+
+
+%:hyperref
+%% Must load this package in the correct
+%% order relative to all other packages.
+\RequirePackage{hyperref}
+\hypersetup{%
+  pdfborder = {0 0 0},
+  bookmarksdepth = section,
+  hyperfootnotes = false,
+  colorlinks = true,
+  citecolor = DarkGreen,
+  linkcolor = DarkRed,
+  urlcolor = DarkGreen,
+}
+
+
+%:tufte-latex environments
+%% cribbed from the tufte-latex project
+\RequirePackage[symmetric,justified,raggedmargins]{tufte-env} % load after hyperref
+
+
+%:PTC code
+%% use customised boxedverbatim (above) to create new environment 'ptccode'
+%% the optional argument defines a title/description
+%\newenvironment{ptccode}[1][]{\setbvtitle{#1}\boxedverbatim}{\endboxedverbatim}
+%% line numbers are typeset automatically
+%% and continue across calls to ptccode
+%% use the following commands to adjust the numbering
+%\newcommand*{\setptclinenums}[2]{\setbvlinenums{#1}{#2}}% {<first-line>}{<start-at>}
+%\newcommand*{\resetptclinenumber}{\resetbvlinenumber}
+%%
+%% use customised Verbatim to create new environment 'ptccode'
+\DefineVerbatimEnvironment{ptccode}{Verbatim}%
+  {commandchars=\\\{\},
+   firstnumber=last,% so line numbers continue across calls, can override
+   frame=lines,framerule=\heavyrulewidth,framesep=.5\baselineskip}
+\let\ptctitle\fvtitle
+\let\setptctitle\setfvtitle
+\newcommand*{\resetptctitle}{\fvset{label=none}}
+%% command to input a PTC source file verbatim
+\newcommand{\inputptccode}[2]{%
+  \VerbatimInput[
+    label={\ptctitle{#2}},
+    frame=lines,framerule=\heavyrulewidth,framesep=.5\baselineskip
+  ]{#1}
+}
+%% line numbers are typeset automatically
+%% and continue across calls to ptccode
+%% use the following commands to adjust the numbering
+%\newcommand*{\resetptclinenumber}{\resetfvlinenumber}
+%\newcommand*{\setptclinenums}[2]{\setfvlinenums{#1}{#2}}% {<first-line>}{<start-at>}
+\let\resetptclinenumber\resetfvlinenumber
+\let\setptclinenums\setfvlinenums % {<first-line>}{<start-at>}
+\let\setptcnumlength\setfvnumlength % {<number-example>}{<number-sep>}
+%% start line
+\linenumberfrequency{1}% use zero (0) to turn off line numbers
+
+%% PTC uses the underscore character (\_) frequently, so we define
+%% two macros to modify its category code (us := underscore)
+\newcommand*{\makeusother}{\catcode`\_=12}    % catcode for `other'
+\newcommand*{\makeussubscript}{\catcode`\_=8} % catcode for `subscript'
+
+%% PTC text
+%\newcommand{\ptc}[1]{\texttt{#1}} % doesn't work with \makeusother ... \makeussubscript
+\let\ptc\texttt                    % use this instead
+%% PTC arguments
+\newcommand{\ptcarg}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}
+\newcommand{\argb}{\ptcarg{bool}}
+\newcommand{\argc}{\ptcarg{char}}
+\newcommand{\argi}{\ptcarg{int}}
+\newcommand{\argr}{\ptcarg{real}}
+\newcommand{\args}{\ptcarg{string}}
+%% PTC input
+\newcommand{\ptcinp}[1]{\texttt{\textsl{#1}}}
+
+%% PTC module, program, subroutine, function, variable
+\newcommand{\ptcmod}[1]{\textsf{\textsl{#1}}}
+\newcommand{\ptcprg}[1]{\textsf{\bfseries\slshape #1}}
+\newcommand{\ptcsub}[1]{\texttt{#1}}
+\newcommand{\ptcfun}[1]{\texttt{#1}}
+\newcommand{\ptcvar}[1]{\texttt{#1}}
+\newcommand{\ptcelm}[1]{\textsf{#1}}
+\newcommand{\ptctyp}[1]{\textsf{\textsl{#1}}}
+
+
+%% Fortran module, program, subroutine, function, variable
+\newcommand{\ftnmod}[1]{\textsf{\textsl{#1}}}
+\newcommand{\ftnprg}[1]{\texttt{#1}}
+\newcommand{\ftnsub}[1]{\texttt{#1}}
+\newcommand{\ftnfun}[1]{\texttt{#1}}
+\newcommand{\ftnvar}[1]{\texttt{#1}}
+
+%% for PTC Command Summary: new list environment and commands
+\makeatletter
+\newenvironment{ptccommands}%
+               {\list{}{\labelwidth\z@ \itemindent-\leftmargin
+                        \let\makelabel\ptccmdlabel}}%
+               {\endlist}
+\newcommand*{\ptccmdlabel}[1]{\hspace\labelsep\normalfont\ttfamily #1}
+\makeatother
+
+
+%: ...
+%% backslash in tt type in OT1/T1
+\newcommand{\tuftebs}{\symbol{'134}}
+%% a zero-width, flush-right, text box (use to push '\' into left margin
+\newcommand{\hangleft}[1]{\makebox[0pt][r]{#1}}
+%% command name -- adds backslash automatically
+\newcommand{\doccmd}[1]{%
+  \texttt{\tuftebs#1}%
+  \index{#1@\protect\hangleft{\texttt{\tuftebs}}\texttt{#1}}}
+%% command specification environment
+\newenvironment{docspec}{%
+  \begin{quotation}\ttfamily\parskip0pt\parindent0pt\ignorespaces}{%
+  \end{quotation}}
+%% environment name
+\newcommand{\docenv}[1]{\texttt{#1}%
+  \index{#1@\texttt{#1} environment}%
+  \index{environments!#1@\texttt{#1}}}
+%% package name
+\newcommand{\docpkg}[1]{\texttt{#1}%
+  \index{#1@\texttt{#1} package}%
+  \index{packages!#1@\texttt{#1}}}
+%% document class option name
+\newcommand{\docclsopt}[1]{\texttt{#1}%
+  \index{#1@\texttt{#1} class option}%
+  \index{class options!#1@\texttt{#1}}}
+
+
+%:other macros
+%% For commands that take an argument, prefer \newcommand* over \newcommand.
+%% The former version has better error checking, but does not allow the
+%% argument to contain a paragraph break. If you find yourself defining a
+%% new command that may contain a long argument, then consider using
+%% \newenvironment instead.
+\providecommand{\clearemptydoublepage}%
+  {\clearpage{\pagestyle{empty}\cleardoublepage}}
+
+%% abbreviations
+\newcommand{\BNL}{\textls[\scls]{BNL}}
+\newcommand{\CEBAF}{\textls[\scls]{CEBAF}}
+\newcommand{\Cpp}{\textsc{C\raisebox{0.75pt}{++}}}
+\newcommand{\DA}{\textls[\scls]{DA}}
+\newcommand{\DNA}{\textls[\scls]{DNA}}
+\newcommand{\Fsevens}{\textsc{Fortran$77$}}
+\newcommand{\Fninety}{\textsc{Fortran$90$}}
+\newcommand{\FPP}{\textls[\scls]{FPP}}
+\newcommand{\JLab}{\textsc{JLab}}
+\newcommand{\LBNL}{\textls[\scls]{LBNL}}
+\newcommand{\LEGO}{\textsc{LEGO}}
+\newcommand{\LEGOr}{\textsc{LEGO}$^\text{\textregistered}$}
+\newcommand{\LieLib}{\textsc{LieLib}}
+\newcommand{\MadX}{\textsc{Mad-X}}
+\newcommand{\PSR}{\textls[\scls]{PSR}}
+\newcommand{\PTC}{\textls[\scls]{PTC}}
+\newcommand{\RHIC}{\textls[\scls]{RHIC}}
+\newcommand{\SDGQ}{\textls[\scls]{SDGQ}}
+\newcommand{\TPS}{\textls[\scls]{TPS}}
+\newcommand{\TPSA}{\textls[\scls]{TPSA}}
+
+%% to set the rule and sep for \fbox
+%% e.g. \setfbox{0.5pt}{0pt} for super-tight \fbox [useful for debugging]
+\newcommand*{\setfbox}[2]{\setlength{\fboxrule}{#1}\setlength{\fboxsep}{#2}}
+
+
+%:hyphenation
+\hyphenation{sym-plec-tic}
+
+
+%:includeonly
+% for partial compilation
+%\includeonly{
+%  front/cover,
+%  front/epigraphs,
+%  front/titles,
+%  front/copyright,
+%  front/dedication,
+%  front/preface,
+%  front/ackn,
+%  chapters/chap00,
+%  chapters/chap01,
+%  chapters/chap02,
+%  chapters/chap03, % font issues
+%  chapters/chap04,
+%  chapters/chap05,
+%  chapters/chap06,
+%  chapters/chap07,
+%  chapters/chap08,
+%  chapters/chap09,
+%  chapters/chap10,
+%  chapters/chap11,
+%  chapters/chap12,
+%  appendices/appenA,
+%  appendices/appenB,
+%  appendices/appenC,
+%  appendices/appenD,
+%  appendices/appenE,
+%  appendices/appenF,
+%}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%:----- document -----
+\begin{document}
+%\layout
+
+%:front matter
+\frontmatter
+
+\include{front/cover}
+\setcounter{page}{1}
+\include{front/epigraphs}
+\include{front/titles}
+\include{front/copyright}
+\killtitle
+
+%% dedication
+%\include{front/dedication}
+
+%% table of contents
+%%   short
+\cleardoublepage
+\setupshorttoc
+\tableofcontents
+%%   long
+\clearpage
+\setupparasubsecs
+\setupmaintoc
+\tableofcontents
+
+%% list of figures
+\clearpage
+\setuplof
+\listoffigures
+
+%% list of tables
+\clearpage
+\setuplot
+\listoftables
+
+%% list of FiXmes
+%% comment out for final version
+\clearpage
+\pagestyle{loxhead}
+\thispagestyle{empty}
+\listoffixmes
+%\listofFiXmes
+\clearpage
+\pagestyle{fwhead}
+
+%% preface
+\include{front/preface}
+
+%% acknowledgements
+\include{front/ackn}
+
+
+%:main matter
+\mainmatter
+\include{chapters/chap00} % internal title page
+\include{chapters/chap01} % introduction
+\include{chapters/chap02} % overview
+\include{chapters/chap03} % modeling accelerators
+\include{chapters/chap04} % linking magnets
+\include{chapters/chap05} % polymorphism and knobs
+\include{chapters/chap06} % computing accelerator properties
+\include{chapters/chap07} % tracking routines
+\include{chapters/chap08} % geometry routines
+\include{chapters/chap09} % symplectic integration and splitting
+\include{chapters/chap10} % spin dynamics
+%\include{chapters/chap11} % space-charge computation
+%\include{chapters/chap12} % PTC structure and libraries
+
+\cleardoublepage
+\appendixpage
+\appendix
+\include{appends/appenA} % internal states
+\include{appends/appenB} % data types
+%\include{appends/appenC} % input to PTC from other codes
+%\include{appends/appenD} % flat files
+\include{appends/appenE} % geometry tutorial
+\include{appends/appenF} % splitting tutorial
+
+
+%:back matter
+\backmatter
+%\include{chapters/gloss}
+
+%:glossary
+%% NB: to add explanatory text before the glossary
+%% entries, redefine the command \preglossaryhook
+%%
+\renewcommand*{\glossaryname}{Concepts}
+\renewcommand*{\begintheglossaryhook}{\begin{description}}
+\renewcommand*{\atendtheglossaryhook}{\end{description}}
+\renewcommand{\glossitem}[4]{\item[#1.] #2 \ \S#3 #4}
+%\printglossary
+%%
+\renewcommand*{\glossaryname}{{\PTC} Command Summary}
+\renewcommand*{\begintheglossaryhook}{\begin{ptccommands}}
+\renewcommand*{\atendtheglossaryhook}{\end{ptccommands}}
+\renewcommand{\glossitem}[4]{\item[#1] #2 \ \S#3 #4}
+%\renewcommand{\memgloterm}[1]{\addperiod{\texttt{#1}}}
+%\printglossary[ptccmds]
+
+
+%:bibliography
+%\cleardoublepage
+\label{bib}
+\nocite{Forest:2002:PTC,%
+        Forest:2006:FPP.PTC,%
+        Forest:2006:FPPDoc}
+\nocite{Forest:1990:HamFree,%
+        Forest:1992:ContGuide,%
+        Forest:1997:DynEuclid,%
+        Forest:1998:BeamDyn,%
+        Forest:2006:GeomIntegPA}
+
+\bibliographystyle{PTC-LibUG}
+%\bibliographystyle{plainnat}
+%\bibliographystyle{abbrvnat}
+%\bibliographystyle{unsrtnat}
+\bibliography{PTCbibliography}
+
+%:index
+%% NB: to add explanatory text before the index
+%% entries, redefine the command \preindexhook
+%%
+%\cleardoublepage
+\pagestyle{index}
+\printindex
+
+\cleardoublepage
+\blankpage
+\blankpage
+
+\end{document}

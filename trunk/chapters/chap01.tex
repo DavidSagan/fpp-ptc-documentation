@@ -1,0 +1,163 @@
+%!TEX root = ../PTC-LibUG.tex
+
+\cleardoublepage
+\chapter{Introduction}
+\label{cha:intro}
+
+
+\section{\PTC\ and \FPP}
+
+\index{PTC!defined}
+\index{Polymorphic Tracking Code|see{\PTC}}
+%
+The Polymorphic Tracking Code (\PTC) is a library of \Fninety\ data
+structures and subroutines for integrating the equations of orbital
+and spin motion for particles in modern accelerators and storage rings.
+The data structures hold the material that we will mould into
+physically correct and consistent three-dimensional computer models
+of the complex topologies found in machines such as colliders and
+recirculating linacs, including the effects of errors in both
+location and strength of the various machine elements.
+We use the subroutines to actually construct the computer model
+of a machine and then integrate through it---including the
+geometric transformations (translations and rotations) of machine
+elements, connecting elements to form trackable beamlines, and
+tracking the orbital and spin degrees of freedom.
+In a word, \PTC\ is an \emph{integrator}.
+
+\index{FPP!defined}
+\index{Fully Polymorphic Package|see{\FPP}}
+\index{normal form!FPP analysis tool}
+\index{Taylor type!polymorphic}
+\index{Poincar\'e map!FPP}
+\index{map|see{one-turn map, Poincar\'e map, \emph{or} Taylor map}}
+%
+The Fully Polymorphic Package (\FPP)
+%\cite{Forest:2006:FPPDoc}
+is a package of polymorphic types and tools that provide \PTC\ with
+facilities for analysis. In particular, \FPP\ implements a polymorphic
+Taylor type (hence the \emph{P} in \PTC) that can change shape at
+execution time. This Taylor type makes it possible for \FPP\ to extract
+a Poincar\'e map from \PTC\ (or some other integrator). Moreover,
+\FPP\ provides the tools to analyse the resulting map. The most
+common---and most important---tool is the normal form: with
+this at hand, one can compute tunes, lattice functions,
+and nonlinear extensions of these and all other standard quantities of
+accelerator theory. Indeed, the combination of \PTC\ and \FPP\ gives
+access to all of standard perturbation theory on complicated
+accelerator lattice designs.
+
+\index{PTC!features}
+\index{Bengtsson, Johan!pioneering work}
+\index{Taylor map!derived from integrator}
+\index{integrator!Taylor map}
+%
+In a nutshell, then, the three central features of \PTC%
+\sidenote{When we say ``\PTC'', we shall (almost always) mean \PTC\ and
+\FPP\ combined; but you keep in mind the distinction.}
+ are
+\begin{itemize}
+  \item the \Fninety\ types and code that facilitate fully three-dimensional
+        placement of beamline elements and construction of non-simple
+        accelerator topologies: colliders, recirculators, dog-bones,
+        and combinations of these topologies;
+  \item the polymorphic integration routines for orbit and spin;
+  \item the use of maps derived from the integrator---via operator
+        overloading and polymorphism---for computing the full range
+        of accelerator properties, including the parameter dependence
+        of these properties.
+\end{itemize}
+
+\subsection{History of \PTC}
+
+\fxnote{Check this, and fill in details.}
+Latter half of 1980s, at SSC-CDG: Berz introduces automatic
+differentiation and develops \DA\ package in \Fsevens.
+Forest builds \LieLib\ on top of \DA, thus bringing the power
+of map methods to the analysis of maps produced by integrators.
+Early 1990s: J. Bengtsson pioneers the use of run-time polymorphism
+to greatly simplify and improve the process of making run-time
+changes to, for example, computing parameter dependence.
+Forest and Bengtsson together develop the ideas from which derive
+the fundamental building blocks of \PTC. Forest develops the
+dynamical Euclidean group.
+Middle to late 1990s: Forest develops \LieLib\ into \FPP\
+(using \LBNL\ versions of \DA\ and \LieLib).
+\FPP\ replaces the real variable type \ptc{real(8)} with a new type
+called \ptc{real\_8} to produce Taylor series for analysis.
+Forest also develops \PTC-proper (the integrator).
+Together these tools compose \PTC.
+Middle to late 2000s: Forest adds spin dynamics to \PTC.
+L. Yang develops a \Cpp\ replacement for Berz's \DA\ package.
+
+\subsection{Where to Obtain \PTC}
+
+\fxnote{\'Etienne: Is this the right place for people to go?}
+\url{http://www.takafumi.org/etienne/ptc/}
+
+%\subsection{How to Install \PTC}
+%
+%To be provided.
+
+
+\section{\PTC\ Library User Guide}
+
+%This section describes the goals of the \emph{\PTC\ Library User Guide}
+%and offers suggestions on where to start reading.
+%
+%
+%\subsection{Goals}
+%
+%This \emph{\PTC\ Library User Guide}
+%\begin{itemize}
+%  \item explains the advantages of using \PTC\ to model an accelerator;
+%  \item explains \PTC\ accelerator modeling concepts and techniques;
+%  \item provides tutorial examples of \PTC\ code;
+%  \item documents the Tech-X space-charge library.
+%\end{itemize}
+%
+
+\subsection{Where to Start Reading}
+
+The \TCref{overview} presents concepts important for understanding \PTC.
+In-depth discussions of all these concepts can be found in several
+publications by \'Etienne Forest:
+\begin{itemize}
+  \item \'Etienne Forest,
+``A Hamiltonian-free description of single particle dynamics for
+hopelessly complex periodic systems'',
+\emph{J. Math.\ Phys.}, 31(5):1133--1144, May 1990,
+\doi{10.1063/1.528795};
+
+  \item \'Etienne Forest and Kohji Hirata,
+``A contemporary guide to beam dynamics'',
+Technical Report KEK-92-12, KEK, Tsukuba, Japan, August 1992;
+
+  \item \'Etienne Forest,
+``Locally accurate dynamical Euclidean group'',
+\emph{Phys.\ Rev.\ E}, 55(4):4665--4674, April 1997,
+\doi{10.1103/PhysRevE.55.4665};
+
+  \item \'Etienne Forest,
+\emph{Beam Dynamics: A New Attitude and Framework},
+volume 8 of
+\emph{The Physics and Technology of Particle and Photon Beams},
+Harwood Academic Publishers, Amsterdam, 1998;
+
+  \item \'Etienne Forest,
+``Geometric integration for particle accelerators'',
+\emph{J. Phys.\ A: Math.\ Gen.}, 39(19):5321--5377, May 2006,
+\doi{10.1088/0305-4470/39/19/S03}.
+\end{itemize}
+
+%\cite{Forest:1990:HamFree,%
+%      Forest:1992:ContGuide,%
+%      Forest:1997:DynEuclid,%
+%      Forest:1998:BeamDyn,%
+%      Forest:2006:GeomIntegPA}
+
+If you want to get started right away, begin with \CTref{model.accel}
+and refer back to the overview as needed while working with the tutorial
+examples.
+
+\endinput

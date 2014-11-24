@@ -1,0 +1,138 @@
+%%
+%% This is file `liecolon.sty'.
+%%
+%% Copyright (C) 1995, 2009 Dan T. Abell.
+%% The command \liecolon was first implemented about 1994 or
+%% 1995, based on a suggestion from one of the TeX gurus. I
+%% no longer recall who, but perhaps it was Robin Fairbairns;
+%% or it might have been David Carlisle or Donald Arseneau.
+%%
+%% This was rewritten in 2009 to provide several sizes of the
+%% Lie operators.
+%%
+%% This package provides commands for formatting Lie operators
+%% and Lie transformations using the colon notation introduced
+%% by Alex Dragt in the early 1980s.
+%%
+\NeedsTeXFormat{LaTeX2e}% LaTeX 2.09 can't be used (nor non-LaTeX)
+  [1994/12/01]% LaTeX date must be December 1994 or later
+\ProvidesPackage{liecolon}[2009/08/13 v1.00 (DTA)]
+
+\RequirePackage{amsmath} % for \mathop
+\RequirePackage{xifthen} % for \ifthenelse
+
+% == Lie operators and adjoint Lie operators ==
+
+%% original definitions of \liecolon and \liehash
+%\def\liecolon{\delimiter"03A000}  % colon (:) as delimiter
+%\def\liehash{\delimiter"023000}   % hash (#) as delimiter
+
+%% The colon (:) and hash (#) delimiters need to be adjusted up
+%% or down depending on their size.
+\newlength{\@lc@colonheight}
+\setlength{\@lc@colonheight}{0.10ex}
+\newcommand*{\@lc@set@colonheight}[1][]{%
+ \ifthenelse{\isempty{#1}}{\setlength{\@lc@colonheight}{0.08ex}}{% assume \normalsize
+  \ifthenelse{\isundefined{#1}}{\setlength{\@lc@colonheight}{0.10ex}%
+                                \@liecolon@unknown@warning}{% assume \normalsize
+    \ifthenelse{\isequivalentto{\normalsize}{#1}}{\setlength{\@lc@colonheight}{0.08ex}}{%
+     \ifthenelse{\isequivalentto{\large}{#1}}{\setlength{\@lc@colonheight}{0.04ex}}{%
+      \ifthenelse{\isequivalentto{\Large}{#1}}{\setlength{\@lc@colonheight}{-0.01ex}}{%
+       \ifthenelse{\isequivalentto{\LARGE}{#1}}{\setlength{\@lc@colonheight}{-0.12ex}}{%
+        \ifthenelse{\isequivalentto{\huge}{#1}}{\setlength{\@lc@colonheight}{-0.25ex}}{%
+         \ifthenelse{\isequivalentto{\Huge}{#1}}{\setlength{\@lc@colonheight}{-0.40ex}}{%
+          \ifthenelse{\isequivalentto{\HUGE}{#1}}{\setlength{\@lc@colonheight}{-0.65ex}}{%
+           \ifthenelse{\isequivalentto{\small}{#1}}{\setlength{\@lc@colonheight}{0.13ex}}{%
+            \ifthenelse{\isequivalentto{\footnotesize}{#1}}{\setlength{\@lc@colonheight}{0.18ex}}{%
+             \ifthenelse{\isequivalentto{\scriptsize}{#1}}{\setlength{\@lc@colonheight}{0.23ex}}{%
+              \ifthenelse{\isequivalentto{\tiny}{#1}}{\setlength{\@lc@colonheight}{0.28ex}}{%
+               \ifthenelse{\isequivalentto{\miniscule}{#1}}{\setlength{\@lc@colonheight}{0.32ex}}{%
+                \setlength{\@lc@colonheight}{0.08ex}\@liecolon@unknown@warning % assume \normalsize
+               }}}}}}}}}}}}}}}
+\newlength{\@lc@hashheight}
+\setlength{\@lc@hashheight}{0.10ex}
+\newcommand*{\@lc@set@hashheight}[1][]{%
+ \ifthenelse{\isempty{#1}}{\setlength{\@lc@hashheight}{-0.18ex}}{%
+  \ifthenelse{\isundefined{#1}}{\setlength{\@lc@hashheight}{-0.18ex}%
+                                \@liecolon@unknown@warning}{% assume \normalsize
+    \ifthenelse{\isequivalentto{\normalsize}{#1}}{\setlength{\@lc@hashheight}{-0.18ex}}{%
+     \ifthenelse{\isequivalentto{\large}{#1}}{\setlength{\@lc@hashheight}{-0.25ex}}{%
+      \ifthenelse{\isequivalentto{\Large}{#1}}{\setlength{\@lc@hashheight}{-0.32ex}}{%
+       \ifthenelse{\isequivalentto{\LARGE}{#1}}{\setlength{\@lc@hashheight}{-0.51ex}}{%
+        \ifthenelse{\isequivalentto{\huge}{#1}}{\setlength{\@lc@hashheight}{-0.72ex}}{%
+         \ifthenelse{\isequivalentto{\Huge}{#1}}{\setlength{\@lc@hashheight}{-0.98ex}}{%
+          \ifthenelse{\isequivalentto{\HUGE}{#1}}{\setlength{\@lc@hashheight}{-1.28ex}}{%
+           \ifthenelse{\isequivalentto{\small}{#1}}{\setlength{\@lc@hashheight}{-0.11ex}}{%
+            \ifthenelse{\isequivalentto{\footnotesize}{#1}}{\setlength{\@lc@hashheight}{-0.03ex}}{%
+             \ifthenelse{\isequivalentto{\scriptsize}{#1}}{\setlength{\@lc@hashheight}{0.05ex}}{%
+              \ifthenelse{\isequivalentto{\tiny}{#1}}{\setlength{\@lc@hashheight}{0.13ex}}{%
+               \ifthenelse{\isequivalentto{\miniscule}{#1}}{\setlength{\@lc@hashheight}{0.20ex}}{%
+                \setlength{\@lc@hashheight}{-0.18ex}\@liecolon@unknown@warning % assume \normalsize
+               }}}}}}}}}}}}}}}
+\newcommand{\@liecolon@unknown@warning}{\PackageWarning{liecolon}{%
+  Given font size unknown! (Why?!?)\MessageBreak%
+  Assuming \string\normalsize}}
+%% new definitions of \liecolon and \liehash
+\newcommand*{\liecolon}[1][]{\@lc@set@colonheight[#1]\text{\raise\@lc@colonheight\hbox{#1{:}}}}
+\newcommand*{\liehash}[1][]{\@lc@set@hashheight[#1]\text{\raise\@lc@hashheight\hbox{#1{\#}}}}
+
+%% Define the Lie operator as delimited by colons, and do the
+%% same for the adjoint Lie operator delimited by hash marks (#).
+%% Both operators take a fontsize command (eg. \Large) as an
+%% optional argument to specify the size of the delimiters.
+\newcommand*{\lieop}[2][]{%
+  \mathop{\liecolon[#1]\mspace{1mu}{#2}\mspace{1mu}\liecolon[#1]}\nolimits}
+\newcommand*{\liead}[2][]{%
+  \mathop{\liehash[#1]\mspace{1mu}{#2}\mspace{1mu}\liehash[#1]}\nolimits}
+
+%% Large versions
+\newcommand*{\Lieop}[1]{\lieop[\Large]{#1}}
+\newcommand*{\LieOp}[1]{\lieop[\LARGE]{#1}}
+\newcommand*{\LieOP}[1]{\lieop[\huge]{#1}}
+
+\newcommand*{\Liead}[1]{\liead[\large]{#1}}
+\newcommand*{\LieAd}[1]{\liead[\Large]{#1}}
+\newcommand*{\LieAD}[1]{\liead[\LARGE]{#1}}
+
+% Thus \lieop{f} will produce ":f:" with appropriate spacing
+% around the colons. And \liead{f} will produce "#f#" with
+% appropriate spacing around the hash marks.
+
+
+% == Lie transformations ==
+%% Define different forms of the Lie transformation \exp{:f:}
+%% associated with dynamical function f.
+%% The first form, \lietr, produces 'e' with a superscript, while
+%% the remaining forms produce exp() with different size parentheses.
+%% All these forms take an optional argument which is typeset before
+%% the Lie operator.  Thus, for example, \Lietr{g} produces '\exp(:g:)',
+%% whereas \Lietr[-]{g} produces '\exp(-:g:)'.
+\newcommand*{\lietr}[2][\mspace{1.5mu}]{e^{#1\mspace{-1.5mu}\lieop{#2}}}
+\newcommand*{\Lietr}[2][]{\exp(#1\lieop{#2})}
+\newcommand*{\LieTr}[2][]{\exp\Bigl(#1\LieOp{#2}\Bigr)}
+\newcommand*{\LieTR}[2][]{\exp\left(#1\LieOP{#2}\right)}
+%% This last version uses \left and \right to scale the parentheses
+%% automatically. It takes two optional arguments: the first as for
+%% the above macros; the second must be a font size command to specify
+%% the size of the delimiting colons.
+\def\@LIEtr[#1][#2]#3{\exp\left(#1\lieop[#2]{#3}\right)}
+\newcommand*{\LIEtr}{%
+  \optparams{\@LIEtr}{[][]}%
+}
+
+\newcommand*{\adlietr}[2][\mspace{1.5mu}]{e^{#1\mspace{-1.5mu}\liead{#2}}}
+\newcommand*{\adLietr}[2][]{\exp(#1\liead{#2})}
+\newcommand*{\adLieTr}[2][]{\exp\Bigl(#1\LieAd{#2}\Bigr)}
+\newcommand*{\adLieTR}[2][]{\exp\left(#1\LieAD{#2}\right)}
+%% This last version uses \left and \right to scale the parentheses
+%% automatically. It takes two optional arguments: the first as for
+%% the above macros; the second must be a font size command to specify
+%% the size of the delimiting colons.
+\def\@adLIEtr[#1][#2]#3{\exp\left(#1\liead[#2]{#3}\right)}
+\newcommand*{\adLIEtr}{%
+  \optparams{\@adLIEtr}{[][]}%
+}
+
+\endinput
+%%
+%% End of file `liecolon.sty'.

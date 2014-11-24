@@ -1,0 +1,133 @@
+%!TEX root = ../PTC-LibUG.tex
+
+\cleardoublepage
+\chapter{Internal States}
+\label{app:states}
+
+\index{internal states!described}
+\index{global variable!\ptc{default}}
+\index{default@\ptc{default}!global variable}
+\index{flags!internal state}
+\index{flag!\ptc{totalpath}}
+\index{totalpath@\ptc{totalpath}!flag}
+\index{flag!\ptc{time}}
+\index{time@\ptc{time}!flag}
+\index{radiation!internal state}
+\index{flag!\ptc{radiation}}
+\index{radiation@\ptc{radiation}!flag}
+\index{RF cavity!internal state}
+\index{flag!\ptc{nocavity}}
+\index{nocavity@\ptc{nocavity}!flag}
+\index{fringe field!internal state}
+\index{flag!\ptc{fringe}}
+\index{fringe@\ptc{fringe}!flag}
+\index{misalignment!internal state}
+\index{flag!\ptc{exactmis}}
+\index{exactmis@\ptc{exactmis}!flag}
+%
+\PTC\ contains a series of flags held in the global variable \ptc{DEFAULT}.
+These \emph{internal-state} flags allow you to control certain aspects of \PTC's behavior
+based on the needs of your simulation. For example, you could run one simulation
+with the \ptc{RADIATION }flag off and another simulation with the flag on.
+By comparing the results, you would answer the question: ``How important is
+radiation to my simulation?''
+
+Here are six internal-state flags and the \PTC\ behavior each flag controls:
+
+\begin{enumerate}
+  \item TOTALPATH ensures a computation of the total path length
+or total time of flight.
+  \item TIME selects time of flight rather than path length (\emph{cT} to
+be precise).
+  \item RADIATION turns on classical radiation.
+  \item NOCAVITY forces the code to ignore RF cavities. It has also implications
+on the normal form if performed in three degrees of freedom.
+  \item FRINGE turns on quadrupole fringe fields based on the \emph{b$_{2}$}
+and \emph{a$_{2}$} components in the element.
+  \item EXACTMIS forces the misalignments to be treated exactly.
+\end{enumerate}
+
+\PTC\ has a special internal state called \ptc{DEFAULT }that selects path length
+rather than time of flight, does not ensure a computation of the total path length,
+turns off classical radiation, includes RF cavities, turns off quadrupole fringe fields,
+and does not treat misalignments exactly.
+
+\index{routine!\ptc{MAKE\_STATES}}
+\index{MAKE\_STATES@\ptc{MAKE\_STATES}!routine}
+\index{routine!\ptc{UPDATE\_STATES}}
+\index{UPDATE\_STATES@\ptc{UPDATE\_STATES}!routine}
+This example shows how to set the default internal-state environment described
+above:
+
+\begin{ptccode}
+CALL MAKE\_STATES(.FALSE.)\\
+EXACT\_MODEL=.TRUE.\\
+DEFAULT=DEFAULT\\
+CALL UPDATE\_STATES\\
+\end{ptccode}
+
+\ptc{MAKE\_STATES }is \ptc{TRUE }for electrons and \ptc{FALSE }for protons.
+When \ptc{EXACT\_MODEL }is  \ptc{TRUE}, \PTC\ uses the full square-root Hamiltonian.
+
+The next example shows how to set the default internal-state environment with the
+NOCAVITY and EXACTMIS flags:
+
+\begin{ptccode}
+CALL MAKE\_STATES(.FALSE.)\\
+EXACT\_MODEL=.TRUE.\\
+DEFAULT=DEFAULT+NOCAVITY+EXACTMIS\\
+CALL UPDATE\_STATES\\
+\end{ptccode}
+
+\index{knob!flag}
+\index{flag!\ptc{para\_in}}
+\index{para\_in@\ptc{para\_in}!flag}
+\index{phase space!flag}
+\index{normal form!phase-space dimensions}
+\index{flag!\ptc{only\_4d}}
+\index{only\_4d@\ptc{only\_4d}!flag}
+\index{energy!flag}
+\index{flag!\ptc{delta}}
+\index{delta@\ptc{delta}!flag}
+\index{spin!flag}
+\index{flag!\ptc{spin}}
+\index{spin@\ptc{spin}!flag}
+\index{flag!\ptc{spin\_only}}
+\index{spin\_only@\ptc{spin\_only}!flag}
+\index{flag!\ptc{spin\_dim}}
+\index{spin\_dim@\ptc{spin\_dim}!flag}
+The following six flags are strictly related to TPSA calculations:
+
+\begin{enumerate}
+  \item If PARA\_IN is specified, TPSA knobs are included in the calculation. It
+is activated by a unary + on a state, for example, \ptc{TRACK(PSR,Y,1,+DEFAULT)}.
+  \item If ONLY\_4D is specified, then neither path length nor time is a TPSA variable.
+This means that the phase-space dimension in the normal form will
+be 4 (\emph{X}, \emph{P}$_{x}$, \emph{Y}, \emph{P}$_{y}$). Also X(5) will not be
+TPSA unless DELTA is also specified (see next the item). This flag has no effect on
+\PTC\ tracking. \PTC\ always tracks six phase-space variables.
+  \item If DELTA is specified, then ONLY\_4D is also true. However, in this case,
+X(5) is the fifth TPSA variable:  \emph{X}, \emph{P}$_{x}$, \emph{Y}, \emph{P}$_{y}$ plus
+Energy as the fifth variable. The phase-space dimension in the normal
+form will also be 4; momentum compaction cannot be computed.
+  \item SPIN
+  \item SPIN\_ONLY
+  \item SPIN\_DIM
+\end{enumerate}
+
+This example shows how to set the default internal-state environment with a
+four-dimensional phase space in the normal form:
+
+\begin{ptccode}
+DEFAULT=DEFAULT+ONLY\_4D\\
+\end{ptccode}
+
+The next example shows how to set the default internal-state environment with a
+four-dimensional phase space in the normal form and with energy as the fifth-dimension
+TPSA variable:
+
+\begin{ptccode}
+DEFAULT=DEFAULT+DELTA\\
+\end{ptccode}
+
+\endinput
