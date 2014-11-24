@@ -1,0 +1,296 @@
+%!TEX root = ../PTC-LibUG.tex
+
+%\cleardoublepage
+\chapter{Glossary}
+
+\begin{description}
+  \item[accelerator topology]
+A description in spatial terms of the magnets in an accelerator and
+how they interact with particles.
+
+  \item[affine space]
+An abstract space that generalizes Euclidean space's affine-geometric properties.
+In affine space, unlike Euclidean space, no distinguished point serves as an origin.
+\fxnote{Al: I reworded the Wikipedia version of this definition and
+added ``affine transformation'' below. My definitions need to be reviewed for accuracy.}
+
+  \item[affine transformation]
+A transformation between two affine spaces that consists of a linear transformation
+followed by a translation.
+
+  \item[anharmonicity]
+``The deviation of a system from being a harmonic oscillator. An
+oscillator that is not oscillating in simple harmonic motion is known
+as an anharmonic oscillator where the system can be approximated to
+a harmonic oscillator and the anharmonicity can be calculated using
+perturbation theory. If the anharmonicity is large then other numerical
+techniques have to be used.'' From Wikipedia. Anharmonicity is a
+global property of an accelerator.
+
+  \item[atlas]
+A collection of charts.
+
+  \item[beam line]
+1) In a particle accelerator, the line that a beam of particles travels
+through an ordered sequence of elements. 2) In \PTC, a \emph{layout
+}\textendash{} a linked list of containers called fibres. 3) In \PTC,
+a \emph{node layout }\textendash{} an \emph{expanded }beam line \textendash{}
+a linked list of integration nodes.
+
+  \item[beta function]
+The scale of particle motion at a point. The beta function is a local property of an accelerator.
+
+  \item[cavity]
+In \PTC, either a standard pill-box cavity or a traveling wave cavity.
+
+  \item[{\textls[50]{CEBAF}}]
+See \emph{Continuous Electron Beam Accelerator Facility.}
+
+  \item[chart]
+A data type containing a frame of reference that locates a fibre (and the beamline element
+the fibre points to) within the lattice's three-dimensional space.
+
+  \item[chromaticity]
+A parameter that describes how the tunes change with particle energy. Chromaticity
+is a global property of an accelerator.
+
+  \item[closed orbit]
+An orbit of a particle around a recirculating accelerator that begins
+and ends at exactly the same position and momentum.
+
+  \item[Continuous Electron Beam Accelerator Facility]
+A recirculating linear electron accelerator operated by Thomas Jefferson
+National Laboratory (JLab).
+
+  \item[dispersion]
+To be provided. Local property.
+
+  \item[{\textls[50]{DNA}}]
+A database of \emph{\textls[50]{DNA} sequences}.
+The database contains all the beamline elements in the lattice.
+
+  \item[DNA sequence]
+A layout in which all the elements appear only once. A DNA sequence
+is not used for tracking; it provides a database.
+See \textls[50]{\emph{DNA}}.
+
+  \item[dynamical Euclidean group]
+An operation that combines elements in a group.
+
+  \item[element]
+1) A component of a beam line, for example, a magnet, a drift, or
+an RF cavity. 2) In \PTC, a data type representing a beamline
+element.
+
+  \item[{\textls[50]{FFAG}}]
+See \emph{fixed-field alternating gradient synchrotron.}
+
+  \item[Fixed-field alternating gradient synchrotron]
+``An alternative technology for accelerating charged particles,
+including protons. It could provide a cheaper and more compact alternative
+to existing accelerator and synchrotron technologies.''
+From: \url{http://www.neutrons.cclrc.ac.uk/Report/glossary.aspx}.
+
+  \item[{\textls[50]{FPP}}]
+See \emph{Fully Polymorphic Package}.
+
+  \item[fibre]
+A data type containing a pointer to a beamline element as well as pointers
+to the fibres that precede and follow it in the particle path.
+When linked together, fibres follow the particle trajectory and define
+the beam line. Multiple fibres can point to the same beamline element.  A
+fibre also contains a pointer to a \emph{chart} that locates the element within
+the global frame of reference for the lattice, pointers to sets of \emph{patches}
+that connect the elements of successive fibres geometrically, energetically,
+and temporally, and the direction of propagation through the element.
+
+  \item[fringe field]
+The magnetic field at each end of a magnet, where the magnetic force
+stops being constant and falls to zero.
+
+  \item[Fully Polymorphic Package]
+A package of polymorphic types and tools to extract a Poincar\'e map
+from \PTC\ (or another symplectic integrator) and analyze the map. The
+most common analysis tool is the normal form. \FPP\ creates a Taylor-Real
+polymorphic type which changes shape at execution time. \FPP\ replaces
+the real variable ``real(8)'' with a new type called REAL 8 to
+produce Taylor series for analysis.
+
+  \item[girder]
+A collection of siamese and regular elements that can be moved as
+a group.
+
+  \item[integration node]
+A data type that tracks particles as they move through a fibre. The
+integration node is the basic unit of \PTC\ tracking. Each fibre points to
+N+4 integration nodes: entrance patch (and misalignment, if any),
+entrance fringe field, body of element (which has any number N of
+integration nodes), exit fringe field, and exit patch.
+
+  \item[integration step]
+A step that tracks a particle or a polymorph as it moves through an
+integration node in the body of an element. If the body of an element
+has one integration node, \PTC\ performs one integration step. If the body
+of an element has been split into four integration nodes, \PTC\ performs four
+integration steps. The integration nodes for the entrance patch, entrance
+fringe field, exit fringe field, and exit patch do not require integration steps.
+Depending on the integration method, \PTC\ may apply one kick or
+multiple kicks per integration step.
+
+  \item[kicker]
+A fictitious magnet used to make magnets line up. \PTC\ does not use
+kickers.
+
+   \item[knob]
+A polymorph that turns itself into a simple Taylor series when used. Knobs
+let users set up parameters that can be changed without having to recompile.
+
+  \item[Large Hadron Collider]
+A particle accelerator and hadron collider with two intersecting rings,
+currently under construction at CERN.
+
+  \item[layout]
+A data type that represents a beam line as a doubly-linked list of
+fibres. The layout follows the particle path by specifying the order
+of the fibres, which point to an actual element in a beam line.
+
+  \item[LEGO\ block]
+An interlocking plastic block or brick in sets of building toys manufactured
+by the LEGO Group, a company in Denmark.  Beamline elements in \PTC\
+resemble LEGO blocks. They are self-contained units with three \emph{reference
+frames}, one on the face where  particles enter the LEGO-block element, one
+in the middle of the block, and one on the face where particles exit the block.
+
+  \item[lens]
+A synonym for magnet.
+
+  \item[{\textls[50]{LHC}}]
+See \emph{Large Hadron Collider.}
+
+  \item[{\textls[50]{MAD}}]
+Methodical Accelerator Design.
+
+  \item[misalignment]
+In \PTC, a mechanism for tracking from a beamline element positioned
+where we want it to be in the lattice to the same beamline element
+when it is out of alignment, that is, not positioned where we want
+it to be.
+
+  \item[node layout]
+A data type containing a linked list of integration nodes, which
+represents an expanded beam line.
+
+  \item[normal form]
+A formal statement concerning the stability properties of an accelerator ring.
+
+  \item[one-turn map]
+A map that tracks particles through one complete turn around a recirculating
+accelerator. \PTC\ separates the creation of the one-turn map from the
+analysis of the one-turn map.
+
+  \item[patch]
+A data type that connects the exit reference frame of one beamline
+element to the entrance reference frame of another element when both
+elements are positioned where we want them to be in the lattice.
+
+  \item[phase-space variable]
+``Within the context of a model system in classical mechanics,
+the phase space coordinates of the system at any given time are composed
+of all of the system's dynamical variables. Because of this, it is
+possible to calculate the state of the system at any given time in
+the future or the past, through integration of Hamilton's or Lagrange's
+equations of motion.'' From Wikipedia.
+
+   \item[polymorph]
+A \Fninety\ type, \ptc{real\_8}, that can be a real number, a Taylor series,
+or a special type of Taylor series called a \emph{knob}. \PTC's tracking routines track
+polymorphs (thus the name Polymorphic Tracking Code).
+
+  \item[polymorphic block]
+To be provided.
+
+  \item[probe]
+A data type that holds information about the location of a particle.
+
+  \item[\PTC]
+See \emph{Polymorphic Tracking Code.}
+
+  \item[Polymorphic Tracking Code]
+A library of magnet routines programmed in \Fninety\ that makes use
+of \FPP\ (Fully Polymorphic Package). \PTC\ implements symplectic
+integration and provides structures for the description of a beam line.
+
+  \item[reference frame]
+A local coordinate system that \PTC\ uses to track the orientation and
+phase space as particles enter and exit a beamline element. Each
+element has three reference frames: one on the face where particles
+enter the element, one in the middle of the element, and one on the face
+where particles exit the element.
+
+  \item[reference orbit]
+See \emph{reference trajectory.}
+
+  \item[reference trajectory]
+A trajectory or orbit that describes the ideal path of a particle through
+an ideal accelerator. Because ideal accelerators do not exist and a 
+reference trajectory fails to account for misalignments and other errors
+in an actual machine, \PTC\ does not use a reference trajectory.
+
+  \item[Relativistic Heavy Ion Collider]
+A heavy-ion collider operated by Brookhaven National Laboratory.
+
+  \item[{\textls[50]{RHIC}}]
+See \emph{Relativistic Heavy Ion Collider.}
+
+  \item[resonance]
+My memory jogger: ``repetitive 'kicking' caused by instability
+in an accelerator''.
+
+  \item[$s$-based tracking]
+Tracking particles using the $s$-variable in a cylindrical coordinate system
+(the $z$-variable in a Cartesian coordinate system) as the independent variable.
+Also called \emph{magnet}-based tracking.
+
+  \item[siamese]
+Beamline elements that are joined and can be moved as a group.
+
+  \item[source file]
+The \PTC\ file in which a user defines an accelerator model, tracks
+it to locate the beam line, and calculates global and local information.
+
+  \item[state variable]
+See \emph{phase-space variable.}
+
+  \item[survey mode]
+In \PTC, a command that locates the accelerator's complete beam line
+by automatically tracking element by element through the beam line.
+
+  \item[temporal beam]
+To be provided.
+
+  \item[temporal probe]
+A data type that holds a probe and also information relevant to time-based tracking.
+
+  \item[thin lens]
+See \emph{integration node.}
+
+  \item[thin layout]
+See \emph{node layout.}
+
+  \item[topology]
+See \emph{accelerator topology.}
+
+  \item[{\textls[50]{TPSA}}]
+Truncated Power Series Algebra.
+
+  \item[tune]
+The number of times that a particle oscillates in one trip around
+an accelerator. For example, a tune might be 7.14 oscillations. A tune
+is associated with the x-axis (going sideways), and another tune is
+associated with the y-axis (going up and down).
+
+  \item[Twiss parameters]
+To be provided. Local property.
+\end{description}
+
+\endinput

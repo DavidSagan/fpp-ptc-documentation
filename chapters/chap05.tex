@@ -1,0 +1,451 @@
+%!TEX root = ../PTC-LibUG.tex
+\makeusother
+\linenumberfrequency{5}
+
+\chapter{Taylor Polymorphism and Knobs}
+\label{cha:polymorphs.knobs}
+
+\fxnote{Review underscore (\_\,) characters in index entries.}
+\fxnote{Review percent (\%\,) characters in index entries.}
+
+\index{Taylor polymorphism!described}
+\index{Taylor map!derived from integrator}
+\index{integrator!Taylor map}
+\index{FPP!defined}
+\index{FPP!documentation}
+%
+\PTC\ supports the full usage of Taylor maps derived from the integrator for the computation of lattice functions. \PTC\ uses \FPP, a package of polymorphic types and tools to extract and analyze the Taylor maps.
+Information explaining \FPP%
+\footnote{The CERN folder is called \ptc{PTC_proper} to distinguish it from the information on \MadX. Most of the information in the \ptc{PTC_proper} folder is about \FPP.}
+is at \url{http://mad.web.cern.ch/mad/PTC\_proper/}
+
+
+\section{Polymorphs}
+
+\index{polymorph!defined}
+%
+A \emph{polymorph} is the \Fninety\ type \ptctyp{real_8}:
+
+\linenumberfrequency{0}
+\begin{ptccode}
+type real_8
+  type (taylor) :: T   ! active if Taylor
+  real(dp) :: r        ! active if real or knob
+  integer :: kind      ! 1=real,2=Taylor,3=Taylor knob,0=special
+  integer :: i         ! used for knobs
+  real(dp) :: s        ! scaling for knobs
+  logical(lp) :: alloc ! is Taylor is allocated in DA-package?
+end type real_8
+\end{ptccode}
+
+Polymorphs allow the computation of parameter-dependent maps.
+
+
+\subsection{States of a Polymorph}
+
+\index{polymorph!states}
+%
+A polymorph \ptc{Y} can be
+real (\ptc{Y\%kind = 1}),
+Taylor (\ptc{Y\%kind = 2}),
+or a special Taylor called a \emph{knob} (\ptc{Y\%kind = 3}).
+
+
+\subsection{Computing a Taylor Map}
+
+\index{Taylor map!computing}
+%
+Suppose we have a closed orbit at position 1 given by six real numbers \ptc{fix(1:6)}. We can construct the following array of six polymorphs:
+
+\begin{ptccode}
+type(real_8) :: Y(6)
+type(damap) :: id
+
+call init(state, NO, 0)
+call alloc(Y)
+call alloc(id)
+
+id = 1
+Y = fix + id
+\end{ptccode}
+
+The variable \ptc{state} describes internal states of \PTC.
+
+The variable \ptc{id} is a differential algebra map (\ptc{damap}), and \ptc{id = 1} constructs the identity map.
+
+\makeussubscript
+Then \ptc{Y = fix + id} creates the polymorphic component \ptc{Y(i)} given by \ptc{Y(i) = fix(i) + $x_i$}, where $x_i$ denotes the $i$-th component of the identity map \ptc{id}.
+\makeusother
+
+\index{one-turn map!computing}
+\index{TRACK@\ptc{TRACK}!routine}
+\index{routine!\ptc{TRACK}}
+%
+To compute a one-turn map, for example, we track \ptc{Y} around the
+machine (here \ptc{R}) as if it were six real numbers:
+
+\begin{ptccode}
+call track(R, Y, 1, state)
+\end{ptccode}
+
+\index{internal states!setting}
+\index{state!internal}
+%
+\makeussubscript
+At the end, \ptc{Y} contains the Taylor map, to order \ptc{NO}, about the closed orbit \ptc{fix}. The internal state variable \ptc{state} determines the exact nature of the map:
+\begin{enumerate}
+  \item \ptc{state = default0} specifies a 6-D map with cavities;
+  \item \ptc{state = default0 + nocavity0} specifies a 6-D map with cavities skipped;
+  \item \ptc{state = default0 + only\_4d0} specifies a 4-D phase space $(X, P_X, Y, P_Y)$;
+  \item \ptc{state = default0 + delta0} specifies a 4-D phase
+space $(X, P_X, Y, P_Y)$, plus energy as the fifth variable; cavities are skipped.
+\end{enumerate}
+\makeusother
+
+For more information about states, see \Aref{states}.
+
+
+\section{Knobs}
+
+\index{knob!defined}
+\index{polymorph!knob}
+%
+A \emph{knob} is a polymorph that turns itself into a simple Taylor
+series when used. A knob cannot be on the left side of an equal sign.
+
+Knobs let users set up parameters that can be changed without having to recompile.
+
+
+\subsection{Using Knobs}
+
+\index{knob!using}
+%
+Example: The \ptc{bn(2)} (quadrupole component) of a magnet is
+made into the first knob:
+
+\begin{ptccode}
+bn(2)%kind = 3
+bn(2)%i = 1
+bn(2)%s = 1
+\end{ptccode}
+
+At execution time, during an operation involving \ptc{bn(2)}, the
+knob becomes the following Taylor map:
+
+\begin{ptccode}
+bn(2)= bn(2)%r + bn(2)%s * X_j
+\end{ptccode}
+
+In the map above, \ptc{j= npara_fpp + bn(2)\%i}.
+
+The integer \ptc{npara_fpp} depends on the state: It equals
+the minimal number of variables compatible with the state selected.
+In the four \ptc{state} examples above:
+\begin{enumerate}
+  \item \ptc{npara_fpp = 6} $\Rightarrow$ \ptc{j = 7}
+  \item \ptc{npara_fpp = 6} $\Rightarrow$ \ptc{j = 7}
+  \item \ptc{npara_fpp = 4} $\Rightarrow$ \ptc{j = 5}
+  \item \ptc{npara_fpp = 5} $\Rightarrow$ \ptc{j = 6}
+\end{enumerate}
+
+
+\subsection{Creating Knobs}
+
+\index{knob!creating}
+%
+While \FPP\ has a routine to help users make a knob, \PTC\ has tailored
+routines to put knobs into a layout and remove knobs from a layout.
+%
+\index{scan\_for\_polymorphs@\ptc{scan\_for\_polymorphs}!routine}
+\index{routine!\ptc{scan\_for\_polymorphs}}
+%
+The types, subroutines, and routines are
+\begin{itemize}
+  \item \ptc{type pol_block};
+  \item subroutine \ptc{scan_for_polymorphs(R,B)} or \ptc{R = B};
+  \item unary \ptc{+}, as in \ptc{+state}, to activate knobs in a \ptc{track} routine;
+  \item \ptc{TPSAfit(1:lnv)} array;
+  \item \ptc{set_TPSAfit} and \ptc{set_element} logicals;
+  \item subroutine \ptc{kill_para_L(R)}.
+\end{itemize}
+For more information about the unary \ptc{+} used to activate knobs in
+a \ptc{track} routine, see \TAref*{states}.
+
+
+\subsection{Polymorphic Blocks}
+
+\index{polymorphic block!described}
+\index{block|see{LEGO block \emph{or} polymorphic block}}
+%
+This section discusses type \ptc{pol\_block}, setting values for
+polymorphic blocks, and removing polymorphic blocks from layouts.
+
+
+\subsubsection{Type \ptc{pol_block}}
+
+\index{pol\_block@\ptc{pol\_block}!data type}
+\index{data type!\ptc{pol\_block}}
+%
+This data type creates an object to be compared with an actual layout. It identities families or single elements using the name, part of the name, or the \ptc{vorname} (first name) of an element to make certain variables knobs. (The last name is the family, for example: \ptc{QF}.)
+
+\begin{ptccode}
+type pol_block
+  character(nlp) name
+  integer :: n_name
+  character(vp) vorname
+
+  ! types for setting magnet using global array TPSAfit
+  real(dp), dimension(:), pointer :: TPSAfit
+  logical(lp), pointer :: set_TPSAfit
+  logical(lp), pointer :: set_element
+
+  ! types for parameter dependence
+  integer :: npara ! should not be used anymore
+
+  ! knob index
+  integer ::  ian(nmax), ibn(nmax)
+  real(dp) :: san(nmax), sbn(nmax)
+  integer :: ivolt, ifreq, iphas
+  integer :: ib_sol
+
+  ! scales for knobs
+  real(dp) :: svolt, sfreq, sphas
+  real(dp) :: sb_sol
+
+  ! user defined functions
+  type(pol_block_sagan) :: SAGAN
+end type pol_block
+\end{ptccode}
+
+Consider the following \ptc{pol\_block qf}:
+\begin{ptccode}
+qf = 0         ! initialize the pol_block qf
+qf%name = 'QF' ! specify a family name
+qf%ibn(2) = 1  ! set normal quad strength as first parameter
+\end{ptccode}
+%
+\index{scan\_for\_polymorphs@\ptc{scan\_for\_polymorphs}!routine}
+\index{routine!\ptc{scan\_for\_polymorphs}}
+%
+If we call the routine \ptc{scan_for_polymorphs(R, qf)} or \ptc{R = qf}, then the \DNA\ layout \ptc{R} is scanned. If a polymorphic magnet on any fibre of the layout \ptc{R} is named \ptc{'QF'}, then \ptc{bn(2)} becomes a knob. In our example:
+\begin{verbatim}
+  bn(2) = bn(2%r + qf%sbn(2) * X(fpp_npara) + qf%ibn(2)
+  bn(2) = bn(2)%r + X(fpp_npara) + 1
+\end{verbatim}
+The index \ptc{fpp_npara} depends on the state as explained above.
+
+One may also specify an integer \ptc{qf\%n_name}. If, for example, \ptc{qf\%n_name = 2}, then a polymorph is set if the magnet name matches \ptc{'QFxxxxxxxxxxxxxxx'}, where \ptc{x} denotes any character.
+
+Once the knobs are set on the lattice using the routine \ptc{scan\_for\_polymorphs}, tracking routines can be invoked after the DA-package has been initialized.
+
+
+\subsubsection{Setting Values using Polymorphic Blocks}
+
+\index{polymorphic block!setting values}
+%
+Polymorphs allow for the computation of parameter-dependent maps. These maps can be analyzed by various methods including normal forms. From these maps one may attempt to fit certain computed quantities by modifying the parameters of the polymorphs on the ring.
+
+\index{scan\_for\_polymorphs@\ptc{scan\_for\_polymorphs}!routine}
+\index{routine!\ptc{scan\_for\_polymorphs}}
+\index{SET\_TPSAFIT@\ptc{SET\_TPSAFIT}!routine}
+\index{routine!\ptc{SET\_TPSAFIT}}
+\index{SET\_ELEMENT@\ptc{SET\_ELEMENT}!routine}
+\index{routine!\ptc{SET\_ELEMENT}}
+%
+This is done as follows with \ptc{scan_for_polymorphs} or the
+= sign assignment. The global parameter \ptc{set_TPSAfit} turns
+the \ptc{scan_for_polymorphs} routine into a routine that inputs
+the array \ptc{TPSAfit(1:C_\%np_pol)} into variables that the
+\ptc{pol_block}s make into knobs. Note that the knobs exist only
+in the polymorphic version of the magnet located at \ptc{fibre\%magp}.
+The polymorphic version is copied into the real magnet \ptc{fibre\%mag} if \ptc{set_element} is true.
+
+\begin{ptccode}
+set_TPSAfit = .true.
+set_element = .true.
+Col1%DNA(1)%L = qf(1)
+Col1%DNA(1)%L = qd(1)
+Col1%DNA(2)%L = qf(2)
+Col1%DNA(2)%L = qd(2)
+set_element = .false.
+set_TPSAfit = .false.
+\end{ptccode}
+
+
+\subsubsection{Removing Polymorphic Blocks from Layouts}
+
+\index{polymorphic block!removing from layout}
+\index{KILL\_PARA@\ptc{KILL\_PARA}!routine}
+\index{routine!\ptc{KILL\_PARA}}
+%
+To remove a polymorphic block from a layout use the subroutines
+\begin{ptccode}
+call kill_para(Col1%DNA(1)%L)
+call kill_para(Col1%DNA(2)%L)
+\end{ptccode}
+
+
+\section{Tutorial Example}
+\linenumberfrequency{5}
+
+\index{PTC!source file}
+\index{source file!polymorphs and knobs tutorial}
+\index{polymorph!tutorial source file}
+\index{knob!tutorial source file}
+\index{z\_ptc\_geometry.f90@\ptc{z\_ptc\_geometry.f90}!geometry tutorial source file}
+%
+The example code in this chapter is from the \PTC\ geometry tutorial source file, \ptc{ptc_geometry.f90}, which is given in \Aref{geom.tutorial}. The line numbers of the code in the examples refer to the line numbers of the code in the appendix.
+
+This tutorial example shows how to create a map for the collider with polymorphs and knobs.
+
+The first six lines of code initialize the polymorphic block for the
+focusing quadrupoles (\ptc{qf}) in \ptc{Col1} and \ptc{Col2},
+give the quadrupoles the family name \ptc{'QF'}, and set
+their normal strength as the first parameter in the Taylor series. The following six lines do the same for the defocusing quadrupoles (\ptc{'QD'}).
+
+\setptclinenums{313}{5}
+\begin{ptccode}
+qf(1) = 0
+qf(1)%name = 'qf'
+qf(1)%ibn(2) = 1
+qf(2) = 0
+qf(2)%name = 'qf'
+qf(2)%ibn(2) = 3
+qd(1) = 0
+qd(1)%name = 'qd'
+qd(1)%ibn(2) = 2
+qd(2) = 0
+qd(2)%name = 'qd'
+qd(2)%ibn(2) = 4
+\end{ptccode}
+
+\index{scan\_for\_polymorphs@\ptc{scan\_for\_polymorphs}!routine}
+\index{routine!\ptc{scan\_for\_polymorphs}}
+%
+The next four lines of code declare \ptc{qf} and \ptc{qd} as independent in \DNA\ layouts \ptc{L5} and \ptc{L6}. They perform the same function as calls to the subroutine \ptc{scan_for_polymorphs}. If a polymorphic magnet on any fibre of the DNA layouts \ptc{L5} and \ptc{L6} is named \ptc{'QF'} or \ptc{'QD'}, then \ptc{ibn(2)} becomes a knob.
+
+\begin{ptccode}
+Col1%dna(1)%L = qf(1)
+Col1%dna(1)%L = qd(1)
+CoL1%dna(2)%L = qf(2)
+CoL1%dna(2)%L = qd(2)
+\end{ptccode}
+
+Once the knobs are set on the lattice using the \ptc{scan\_for\_polymorphs} routine (or equivalent), we can invoke tracking routines after the
+DA-package has been initialized.
+
+The following lines of code define the closed orbit if not 0.
+
+\setptclinenums{330}{5}
+\begin{ptccode}
+101 continue
+state = default0 + only_4d0
+
+fix1 = 0.d0
+fix2 = 0.d0;
+call init(state, 2, c_%np_pol) ! c_%np_pol is automatically computed
+\end{ptccode}
+
+The \ptc{2} is automatically computed above---counting the number of
+\DNA\ variables (1-4). This means the Taylor series now has eight variables.
+
+\index{FIND\_ORBIT@\ptc{FIND\_ORBIT}!routine}
+\index{routine!\ptc{FIND\_ORBIT}}
+%
+\begin{ptccode}
+call find_orbit(CoL1, fix1, 1, state, 1.d-6)
+call find_orbit(Col2, fix2, 1, state, 1.d-6)
+call alloc(y1)
+call alloc(y2)
+call alloc(id)
+call alloc(n1)
+call alloc(n2)
+call alloc(eq);
+id=1 ! identity damap
+y1 = id + fix1 ! this is permitted in ptc only (not fpp)
+y2 = id + fix2 ! closed orbit added to map
+\end{ptccode}
+
+The plus sign in the next two lines of code activates the knobs.
+If we remove the plus sign, \PTC\ will ignore the knobs.
+
+\index{TRACK@\ptc{TRACK}!routine}
+\index{routine!\ptc{TRACK}}
+%
+\begin{ptccode}
+call track(Col1, y1, 1, +state) ! unary + activates knobs
+call track(Col2, y2, 1, +state)
+\end{ptccode}
+
+\index{normal form!computing}
+\index{tune!computing}
+%
+After accounting for knobs, the code computes the tunes (with and
+without knobs). Equations 1 and 2 compute the tunes for \ptc{col1};
+equations 3 and 4 compute the tunes for \ptc{col2}.
+
+The first number is the difference between the goal and what we have
+obtained, which should be as close to 0 as possible.
+
+\begin{ptccode}
+n1 = y1 ! normal forms: abused of language permitted by ptc
+n2 = y2 ! normally one should do => damap=y; normalform=damap
+write(6,*) " tunes 1 "
+write(6,*) n1%tune(1:2)
+write(6,*) " tunes 2 "
+write(6,*) n2%tune(1:2)
+eq(1) = n1%dhdj%v(1) - 0.254d0
+eq(2) = n1%dhdj%v(2) - 0.255d0
+eq(3) = n2%dhdj%v(1) - 0.130d0
+eq(4) = n2%dhdj%v(2) - 0.360d0
+do i = 1, 4
+  eq(i) = eq(i) <= c_%npara
+end do
+
+call kanalnummer(mf,"eq.txt")
+do i=1,4
+  call daprint(eq(i), mf)
+end do
+close(mf)
+
+call kill(y1)
+call kill(y2)
+call kill(id)
+call kill(n1)
+call kill(n2)
+call kill(eq)
+call init(1,4)
+call alloc(g,4)
+call kanalnummer(mf,"eq.txt")
+do i = 1, 4
+  call read(g%v(i), mf)
+end do
+close(mf)
+
+g = g.oo.(-1)
+tpsafit(1:4) = g
+set_tpsafit = .true.
+set_element = .true.
+Col1%dna(1)%L = qf(1)
+Col1%dna(1)%L = qd(1)
+Col1%dna(2)%L = qf(2)
+Col1%dna(2)%L = qd(2)
+set_tpsafit = .false.
+set_element = .false.
+call kill(g)
+\end{ptccode}
+
+We need to kill the knobs after we compute them: the two calls to
+\ptc{kill_para} kill the knobs in \DNA\ layouts \ptc{L5} and
+\ptc{L6}.
+
+\begin{ptccode}
+write(6,*) " more "
+read(5,*) i
+if(i == 1) goto 101
+call kill_para(Col1%dna(1)%l)
+call kill_para(Col1%dna(2)%l)
+\end{ptccode}
+
+\makeussubscript
+\endinput
