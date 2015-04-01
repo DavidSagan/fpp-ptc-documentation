@@ -260,7 +260,7 @@ WRITE(6,*) QD%MAG%NAME,QD%MAG%P%METHOD,QD%MAG%P%NST
 
 \tref[c]{Results-Example-1} shows the results.
 
-\begin{table}[htdp]
+\begin{table}[htbp]
 \caption{Results of Example 1.}
 \label{tbl:Results-Example-1}
 \begin{center}
@@ -326,7 +326,7 @@ is 24. \ptc{KD/THIN}, which is about 19.7, is less than \ptc{lim(2)}. Both are g
 than \ptc{lim(1)}.
 
 \tref[c]{Results-Example-2} shows the results.
-\begin{table}[htdp]
+\begin{table}[htbp]
 \caption{Results of Example 2.}
 \label{tbl:Results-Example-2}
 \begin{center}
@@ -409,7 +409,7 @@ seven kicks per integration step.
 
 \tref[c]{Results-Example-3} and the list below show the results for Part 1A of Example 3.
 
-\begin{table}[htdp]
+\begin{table}[htbp]
 \caption{Results of Example 3 for Part 1A.}
 \label{tbl:Results-Example-3}
 \begin{center}
@@ -597,7 +597,7 @@ at the beginning of the fibre. \ptc{TM} points to the center if it exists.
 when the number of steps is odd; there is no center of the magnet,
 and by default \ptc{TM} points to \ptc{T1}.
 
-\begin{table}[htdp]
+\begin{table}[htbp]
 \caption{Results of Example 6 when \ptc{even} is not specified.}
 \label{tbl:Results-Example-6-NONE}
 \begin{center}
@@ -614,7 +614,7 @@ The data in \tref{Results-Example-6-EVEN} shows that when
 we use \ptc{EVEN=true}, \ptc{TM} is always different from \ptc{T1}. \ptc{TM}
 points directly at the center of the magnet.
 
-\begin{table}[htdp]
+\begin{table}[htbp]
 \caption{Results of Example 6 when \ptc{even=.true.}}
 \label{tbl:Results-Example-6-EVEN}
 \begin{center}
@@ -757,7 +757,7 @@ drifts will be split on the basis of \ptc{LMAX0=0.005D0}.
 
 \tref[c]{Results-Example-9-TRUE} shows the results.
 
-\begin{table}[htdp]
+\begin{table}[htbp]
 \caption{Results of Example 9 when \ptc{useknob=.true.}}
 \label{tbl:Results-Example-9-TRUE}
 \begin{center}
@@ -783,7 +783,7 @@ CALL THIN_LENS_RESPLIT(R1,THIN,EVEN=.TRUE.,LMAX0=0.005D0,XBEND=1.D-4,
 
 \tref[c]{Results-Example-9-FALSE} shows the results.
 
-\begin{table}[htdp]
+\begin{table}[htbp]
 \caption{Results of Example 9 when \ptc{useknob=.false.}}
 \label{tbl:Results-Example-9-FALSE}
 \begin{center}
