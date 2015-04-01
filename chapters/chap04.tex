@@ -45,18 +45,18 @@ same or different layouts. The elements in a siamese are often
 parallel, as in a collider; but they may be in different arcs of
 a recirculator---arcs, for example, that share common cryogenics.
 
-\begin{marginfigure}[3\baselineskip]\forcerectofloat
+\begin{MarginFigure}[3\baselineskip]\forcerectofloat
   \includegraphics{SiameseGirders/siamgird-01}
   \caption{A pair of elements linked together as a siamese.}
   \label{fig:ll.siamese}
-\end{marginfigure}
+\end{MarginFigure}
 
-\begin{marginfigure}
+\begin{MarginFigure}
   \includegraphics{SiameseGirders/siamgird-02}\quad
   \includegraphics{SiameseGirders/siamgird-03}
   \caption{Incorrect and correct rotations of a siamese.}
   \label{fig:siamese.rot}
-\end{marginfigure}
+\end{MarginFigure}
 
 To create a siamese, we build a circular linked list containing
 the several elements we wish to tie together. See \fref{ll.siamese}.
@@ -106,12 +106,12 @@ the misalignment, \PTC\ easily returns the girder to its original
 position in the lattice. We discuss geometric operations applied
 to girders later in this chapter. See also \TPref*{sec:ops.girders}.
 
-\begin{marginfigure}[-21\baselineskip]\forceversofloat
+\begin{MarginFigure}[-21\baselineskip]\forceversofloat
   \includegraphics{SiameseGirders/siamgird-04}
   \caption{A trio of elements linked together as a girder that
            has its own reference frame.}
   \label{fig:ll.girder}
-\end{marginfigure}
+\end{MarginFigure}
 
 Do note that linking together a group of elements on a girder does not mean those elements may no longer move with respect to one another. It is only the geometric operations that apply specifically to girders that will preserve the geometric relations between the girder elements. A similar comment applies for the siamese.
 
@@ -137,12 +137,12 @@ of the code in that appendix.
 
 \section{Building Siamese, Girders, and their Reference Frames}
 
-\begin{marginfigure}[2\baselineskip]\forceversofloat
+\begin{MarginFigure}[2\baselineskip]\forceversofloat
   \includegraphics[]{Layouts/models-08}
   \caption{Collider interaction region. The numbers show the indices
            of a few of the fibres within the corresponding layout.}
   \label{fig:col.intxn}
-\end{marginfigure}
+\end{MarginFigure}
 
 \index{move\_to@\ptc{move\_to}!routine}
 \index{routine!\ptc{move\_to}}
@@ -276,12 +276,12 @@ and \ptc{girder_frame\%exi}, leaving \ptc{girder_frame\%a} and
 \ptc{girder_frame\%ent} to record the design location and
 orientation of our girder.
 
-\begin{marginfigure}[2\baselineskip]
+\begin{MarginFigure}[2\baselineskip]
   \includegraphics{Layouts/models-09}
   \caption{Collider interaction region. The small cross-hairs
            indicate the frame location for each siamese.}
   \label{fig:col.siamfr}
-\end{marginfigure}
+\end{MarginFigure}
 
 \index{siamese\_frame@\ptc{siamese\_frame}}
 %
@@ -355,11 +355,11 @@ probably only somewhat self-explanatory. Nevertheless, we present
 it here for you to look at and mull over, with only a little in the
 way of comments. A detailed explanation is given in \CTref*{geometry}.
 
-\begin{marginfigure}[5\baselineskip]\forcerectofloat
+\begin{MarginFigure}[5\baselineskip]\forcerectofloat
   \includegraphics{SiameseGirders/siamgird-mma-0}
   \caption{No misalignment.}
   \label{fig:col.nomis}
-\end{marginfigure}
+\end{MarginFigure}
 
 Concerning \lref{moveto.b7}, note that bend~7 (\ie\ the bend contained
 in fibre~7 of layout \ptc{Col2}) is present in both the girder and the
@@ -407,7 +407,7 @@ elseif(example == 5) then        \textcolor{DarkRed}{\textsl{! Example 5}}
   call misalign_girder(p2, mis)
 \end{ptccode}
 
-\begin{marginfigure}[-13.1cm]\forcerectofloat
+\begin{MarginFigure}[-13.1cm]\forcerectofloat
   \includegraphics{SiameseGirders/siamgird-mma-1}%
   \makebox[0pt]{\textcolor{DarkRed}{1}}\\[14pt]\noindent
   \includegraphics{SiameseGirders/siamgird-mma-2}%
@@ -419,7 +419,7 @@ elseif(example == 5) then        \textcolor{DarkRed}{\textsl{! Example 5}}
   \includegraphics{SiameseGirders/siamgird-mma-5}%
   \makebox[0pt]{\textcolor{DarkRed}{5}}
   \caption{Examples 1 (top) through 5 (bottom).}
-\end{marginfigure}
+\end{MarginFigure}
 
 The examples above all misalign only the girder. In the following examples, we apply a misalignment also to one of the siamese. Note that the difference between examples 7 and 8 is solely to the optional argument \ptc{add} in \lref[s]{mis.x7} and \lref*{mis.x8}.
 %
@@ -472,7 +472,7 @@ elseif(example == 11) then       \textcolor{DarkRed}{\textsl{! Example 11}}
 end if
 \end{ptccode}
 
-\begin{marginfigure}[-17.3cm]\forceversofloat
+\begin{MarginFigure}[-17.3cm]\forceversofloat
   \makebox[0pt][l]{\textcolor{DarkRed}{6}}%
   \includegraphics{SiameseGirders/siamgird-mma-6}\\[24pt]\noindent
   \makebox[0pt][l]{\textcolor{DarkRed}{7}}%
@@ -486,7 +486,7 @@ end if
   \makebox[0pt][l]{\textcolor{DarkRed}{11}}%
   \includegraphics{SiameseGirders/siamgird-mma-11}
   \caption{Examples 6 (top) through 11 (bottom).}
-\end{marginfigure}
+\end{MarginFigure}
 
 
 \makeussubscript

@@ -924,7 +924,6 @@
 %% acknowledgements
 \include{front/ackn}
 
-
 %:main matter
 \mainmatter
 \include{chapters/chap00} % internal title page
@@ -951,7 +950,6 @@
 \include{appends/appenE} % geometry tutorial
 \include{appends/appenF} % splitting tutorial
 
-
 %:back matter
 \backmatter
 %\include{chapters/gloss}
@@ -973,7 +971,6 @@
 %\renewcommand{\memgloterm}[1]{\addperiod{\texttt{#1}}}
 %\printglossary[ptccmds]
 
-
 %:bibliography
 %\cleardoublepage
 \label{bib}
@@ -986,10 +983,11 @@
         Forest:1998:BeamDyn,%
         Forest:2006:GeomIntegPA}
 
-\bibliographystyle{PTC-LibUG}
+%%\bibliographystyle{PTC-LibUG}  %% Causes memory overflow
 %\bibliographystyle{plainnat}
 %\bibliographystyle{abbrvnat}
 %\bibliographystyle{unsrtnat}
+
 \bibliography{PTCbibliography}
 
 %:index
