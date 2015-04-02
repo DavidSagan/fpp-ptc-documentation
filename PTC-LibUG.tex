@@ -15,8 +15,8 @@
 %:----- preamble -----
 
 %:draft or final?
-\newcommand*{\dfFix}{draft} % fixme
-\newcommand*{\dfKey}{draft} % showkeys
+\providecommand*{\dfFix}{draft} % fixme
+\providecommand*{\dfKey}{final} % showkeys
 
 %:draft, version, year
 \newcommand{\PTCDocDraft}{sixth}
@@ -660,6 +660,7 @@
 %% environment for Desmond to add comments
 \newenvironment{Desmond}{\color{MediumBlue}\textit{Desmond}:}{}
 
+
 %:show latex labels
 %% use option 'draft' to show, 'final' to suppress
 \RequirePackage[color,\dfKey]{showkeys}
@@ -909,14 +910,13 @@
 \listoftables
 
 %% list of FiXmes
-%% comment out for final version
 \clearpage
 \pagestyle{loxhead}
 \thispagestyle{empty}
 \listoffixmes
-%\listofFiXmes
 \clearpage
 \pagestyle{fwhead}
+
 
 %% preface
 \include{front/preface}
