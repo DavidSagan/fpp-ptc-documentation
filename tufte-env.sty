@@ -858,19 +858,31 @@
   \@tufte@reset@par%
   }
 
+%%
+% \newcommand has its cousin \providecommand
+% here define the corresponding cousin to \newenvironment
+% see http://tex.stackexchange.com/questions/20687/
+\def\provideenvironment{\@star@or@long\provide@environment}
+\def\provide@environment#1{%
+      \@ifundefined{#1}%
+          {\def\reserved@a{\newenvironment{#1}}}%
+          {\def\reserved@a{\renewenvironment{dummy@environ}}}%
+      \reserved@a
+}
+\def\dummy@environ{}
 
 %%
 % Margin figure environment
-%%\newenvironment{marginfigure}[1][-1.2ex]%
-%%  {\begin{@tufte@margin@float}[#1]{figure}}
-%%  {\end{@tufte@margin@float}}
+\provideenvironment{marginfigure}[1][-1.2ex]%
+  {\begin{@tufte@margin@float}[#1]{figure}}
+  {\end{@tufte@margin@float}}
 
 
 %%
 % Margin table environment
-%%\newenvironment{margintable}[1][-1.2ex]%
-%%  {\begin{@tufte@margin@float}[#1]{table}}
-%%  {\end{@tufte@margin@float}}
+\provideenvironment{margintable}[1][-1.2ex]%
+  {\begin{@tufte@margin@float}[#1]{table}}
+  {\end{@tufte@margin@float}}
 
 
 %%
