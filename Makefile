@@ -59,6 +59,24 @@ default: $(texfiles) $(cfgfiles) $(bibfiles)
 	pdflatex PTC-LibUG
 	pdflatex PTC-LibUG
 
+draft: $(texfiles) $(cfgfiles) $(bibfiles)
+	pdflatex "\def\dfKey{draft} \input{PTC-LibUG}"
+	bibtex PTC-LibUG
+	makeindex -s PTC-LibUG.ist -t PTC-LibUG.ilg -o PTC-LibUG.ind PTC-LibUG.idx
+	makeindex -s PTC-LibUG.gst -t PTC-LibUG.glg -o PTC-LibUG.gls PTC-LibUG.glo
+	makeindex -s ptccmds.gst -t ptccmds.glg -o ptccmds.gls ptccmds.glo
+	pdflatex "\def\dfKey{draft} \input{PTC-LibUG}"
+	pdflatex "\def\dfKey{draft} \input{PTC-LibUG}"
+
+final: $(texfiles) $(cfgfiles) $(bibfiles)
+	pdflatex "\def\dfFix{final} \input{PTC-LibUG}"
+	bibtex PTC-LibUG
+	makeindex -s PTC-LibUG.ist -t PTC-LibUG.ilg -o PTC-LibUG.ind PTC-LibUG.idx
+	makeindex -s PTC-LibUG.gst -t PTC-LibUG.glg -o PTC-LibUG.gls PTC-LibUG.glo
+	makeindex -s ptccmds.gst -t ptccmds.glg -o ptccmds.gls ptccmds.glo
+	pdflatex "\def\dfFix{final} \input{PTC-LibUG}"
+	pdflatex "\def\dfFix{final} \input{PTC-LibUG}"
+
 clean:
 	rm -f *~ *.blg *.glg *.ilg *.log *.out
 	rm -f front/*~ chapters/*~ appends/*~
