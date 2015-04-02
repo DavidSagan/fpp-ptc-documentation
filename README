@@ -1,0 +1,9 @@
+The created manual file is:
+	PTC-LibUG.pdf
+
+Command list:
+	make          # Creates PTC-LibUG.pdf with draft "fixme" notes.
+	make draft    # Creates PTC-LibUG.pdf with draft "fixme" and label notes.
+	make final    # Creates PTC-LibUG.pdf without any draft notes.
+  make clean    # Deletes some intermediate files. See the Makefile file for details.
+	make cleanall # Deletes all intermediate files.
