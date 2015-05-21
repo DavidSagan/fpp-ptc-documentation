@@ -1,0 +1,161 @@
+%!TEX root = ../PTC-LibUG.tex
+\makeusother
+
+\chapter{Solving Maxwell's Equation in the body of a sector bend in \PTC\  }
+\label{app:max}
+
+\index{PTC!source file}
+
+%
+%This appendix contains the complete \Fninety\ listing for the
+%\PTC\ example \ptcprg{ptc_splitting}. This example is discussed
+%in \TCref*{symplectic.integ}.
+
+\resetptclinenumber
+\linenumberfrequency{5}
+\setptclinenums{1}{5}
+
+
+\section{Magnetic field}
+
+
+We will say that a bend has sector geometry if magnetic field and/or the electric field is invariant as we travel on a circle of radius $r$ down the center of the
+element. The symmetry would be perfect if the entire element was a cyclotron; so here we neglect fringe fields at both ends.
+
+In the case of a magnetic field, the vector potential $a_s$ must obey the equation:
+%
+%
+%]|Expr|[#b @`b___}):# b'4" Chicago^: ;bP8&c0!*,^<c!(A($$^"!Symbol^:!&c0  /1|
+%|^->^""*|:"&c0!*2,M<2^h(#1,Khx}}<2(&:!&c0  .V"#Helvetica|:#&c0!*-<|
+%|hphantom-[:"x:#-]}(":!&c0  .V:"&c0!*x}}}}F:#,F,]0"$Monaco^:$ |
+%| where  :#F,]<c!$1(#:"r,Kx}}$^:#a^s_:$ and "%Times|:%h,]<2^1^|
+%|r}: ;8/<:";bP8eq,Zmaxb: ;8/=;bP8,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}\left\{{{\nabla }_{\perp }^{2}-{h \over 1+hx}{\partial \hphantom{x} \over \partial x}}\right\}F&=0~~{\rm w}{\rm h}{\rm e}{\rm r}{\rm e}~~F=\left({r+x}\right){a}_{s}~{\rm a}{\rm n}{\rm d} ~h=
+{1 \over r}\label{eq:maxb}\end{eqnarray}
+%
+%
+%
+%]|Expr|[#b @`b___})## b'4" Helvetica|: ;bP8&c0!*,D$^"!Symbol^:!&c0  /1|
+%|^->^""*|:"&c0!*2: ,D}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+${\nabla }_{\perp }^{2}$
+is the transverse Laplacian %
+%]|Expr|[#b @`b___})%# b'4" Helvetica|: ;bP8&c0!*,D<2(&$^"!Symbol^:!&c0  .V|
+%|_^""*|:"&c0!*2: -<hphantom-[:"x: -]}^$(":!&c0  .V:"&c0!*x}_^2}|
+%|,K<2(&$^:!&c0  .V_^:"&c0!*2: -<hphantom-[:"x: -]}^$(":!&c0  .V|
+%|:"&c0!*y}_^2}: ,D}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+${{\partial }^{2}\hphantom{x} \over {\partial x}^{2}}+{{\partial }^{2}\hphantom{x} \over {\partial y}^{2}}$.
+
+In a straight element, where %
+%]|Expr|[#b @`b___})%# b'4" Helvetica|: ;bP8&c0!*,D"!*|:!r,]""Symbol^:"&c0  .E|
+%|: &c0!*,D}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+$r=
+\infty $,
+the solutions if \eq{eq:maxb} used in PTC, are just:
+%
+%]|Expr|[#b @`b___})3# b'4" Chicago^: ;bP8&c0!*,^$^"!*|:!F^n(#|
+%|h,]0}""Helvetica|:",F,],M<2^$^b^n_^n}Re<c!(A^$^<c!$1(#x,Kiy}}|
+%|_^n},K<2^$^a^n_^n}Im<c!(A^$^<c!$1(#x,Kiy}}_^n}  : ;8/<:!;bP8eq|
+%|,Zhsol: ;8/=:";bP8 : ,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{F}_{n}^{h=
+0}&=-{{b}_{n} \over n}Re\left\{{{\left({x+iy}\right)}^{n}}\right\}+{{a}_{n} \over n}Im\left\{{{\left({x+iy}\right)}^{n}}\right\}  \label{eq:hsol} \end{eqnarray}
+%
+%
+These solutions have the property that, in the midplane $y=0$,  the magnetic field is given by:
+%
+%]|Expr|[#b @`b___})7# b'4" Chicago^: ;bP8&c0!*,^$^"!*|:!b^y_,]|
+%|<c%#D("$^b^n_$^x_(#n,M1}}("""Helvetica|:"-<sum}^:!n_}"#Monaco^:# |
+%|  and   $^:!b^x_,]<c%#D("$^a^n_$^x_(#n,M1}}(":"-<sum}^:!n_}:" |
+%|: ;8/<:!;bP8eq,Zst,Zanbn: ;8/=;bP8,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{b}_{y}=
+\sum\limits_{n}^{} {b}_{n}{x}^{n-1}~~~{\rm a}{\rm n}{\rm d} ~~~{b}_{x}=
+\sum\limits_{n}^{} {a}_{n}{x}^{n-1} \label{eq:st:anbn}\end{eqnarray}
+%
+%
+Of course the full solution is given by an infinite sum:
+%
+%]|Expr|[#b @`b___}),# b'4" Chicago^: ;bP8&c0!*,^$^"!*|:!F^n^h|
+%|""Symbol^:" "#Helvetica|:#,F:!,]:#,F:" <c%#D)!# b'4$^&c0  D^:!&c0!*n|
+%|^k}& b!( b"0 b#8 b$@ b%H b&P!WW}(":#-<sum}(%:!k,]0,L:"&c0  .E}|
+%|_}: ;8&c0!*/<:!;bP8fnk: ;8/=;bP8,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{F}_{n}^{h} &=
+& \sum\limits_{k=
+0,\infty }^{} {\Delta }_{n}^{k}\label{fnk}\end{eqnarray}
+%
+%
+The idea is to set up a recursive relation to solve for the $F_n^k$ while continuously respecting \eqs{eq:maxb} and \eqe{eq:st:anbn}. Let us see how that works at order $k$. 
+%
+%]|Expr|[#b @`b___})5# b'4" Chicago^: ;bP8&c0!*,^$^"!Symbol^:!&c0  D|
+%|^""*|:"&c0!*n(#k,K1}:! "#Helvetica|:#,F:",]:#,F$^:!&c0  /1^->|
+%|(":"&c0!*,M2}<c%#D)## b'4<2^h(#1,Khx}}<2(&:!&c0  .V:#&c0!*-<hphantom|
+%|-[:"x:#-]}(":!&c0  .V:"&c0!*x}}$^:!&c0  D^:"&c0!*n^:!&c0  a|
+%|}& b!( b"0 b#8 b$@ b%H b&P!WW}(":#&c0!*-<sum}(%:!&c0  a:"&c0!*,]|
+%|0,Lk}_},K$^C(#k,K1}_$^F(#n,Kk}^0  : ;8/<:";bP8eq,Zsol,Zanbn: ;8/=|
+%|;bP8,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{\Delta }_{n}^{k+1} &=
+&{\nabla }_{\perp }^{-2}\sum\limits_{\alpha =
+0,k}^{} {h \over 1+hx}{\partial \hphantom{x} \over \partial x}{\Delta }_{n}^{\alpha }+{C}_{k+1}{F}_{n+k}^{0}\ \ \label{eq:sol:anbn}\end{eqnarray}
+%
+%
+To solve this equation, one first initializes it at $k=0$ with 
+%
+%]|Expr|[#b @`b___})## b'4" Helvetica|: ;bP8&c0!*,D$^"!*|:!F^n|
+%|(#h,]0}: ,D}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+${F}_{n}^{h=
+0}$
+of \eq{eq:hsol}. The operator %
+${\nabla }_{\perp }^{-2}$ of \eq{eq:sol:anbn} find a solution for the inverse Laplacian. In phasors variable 
+%
+%]|Expr|[#b @`b___})%# b'4" Helvetica|: ;bP8&c0!*,D<c$%!^"!*|:!u}|
+%|,]<c!$1('x,Kiy,Lx,Miy}}: ,D}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+$\vec{u}=
+\left({x+iy,x-iy}\right)$
+the inverse Laplacian is   given by 
+%
+%]|Expr|[#b @`b___})=# b'4" Chicago^: ;bP8&c0!*,^$^"!Symbol^:!&c0  /1|
+%|^->("""*|:"&c0!*,M2}f,H<c$%!^u},I"#Helvetica|:#,F,]<c" #^<c" #|
+%|(&f du d<c$%A^u}}_^<c$%A^u}}_^u} ,K C $^f_^0"$Monaco^:$  where|
+%|  $^:!&c0  /1^->^:"&c0!*2$^:#f_^0,]0: ;8/<:#eq,Z;bP8inv: ;8/=|
+%|;bP8,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{\nabla }_{\perp }^{-2}f(\vec{u})&=\int_{}^{u}\int_{}^{\overline{u}}f du d\overline{u} + C {f}^{0}~~{\rm w}{\rm h}{\rm e}{\rm r}{\rm e}~~{\nabla }_{\perp }^{2}{f}^{0}=0\label{eq:inv}\end{eqnarray}
+%
+
+in \eq{eq:inv} the first term is an antiderivative with with respect to $u$ and $ \overline{u}$. The additive term is an harmonic solution of the type of \eq{eq:hsol}. 
+
+To obtain the solution to the order of truncation on iterates \eq{eq:sol:anbn} starting with the harmonic solution %
+%]|Expr|[#b @`b___})%# b'4" Helvetica|: ;bP8&c0!*,D$^"!Symbol^:!&c0  D|
+%|^""*|:"&c0!*n(#k,]0},]$^F^n^0: ,D}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+${\Delta }_{n}^{k=
+0}=
+{F}_{n}^{0}$.
+
+The only issue is how does one set the constant ${C}_{k+1}$? One notices that the harmonic solution  ${F}_{n}^{0}$ already obeys \eq{eq:st:anbn}. Therefore it suffices to  choose ${C}_{k+1}$ so as to remove leading order terms of the form $C x^{n+k+1}$  in ${\Delta }_{n}^{k+1}$ by adding a term proportional to ${F}_{n}^{k+1}$. Higher order terms which violate \eq{eq:st:anbn} while be handled at the next iterations.
+
+
+\section{Electric Field}
+
+The electric field should also obey Maxwell's equation. If we represent it by a potential $F$, its Laplacian must vanish. In cylindrical coordinates, it is given by the equation:
+%
+%]|Expr|[#b @`b___}):# b'4" Chicago^: ;bP8&c0!*,^$^"!Symbol^:!&c0  /1|
+%|^->^""*|:"&c0!*2F:! "#Helvetica|:#,F:",]:#,F:! <c!(A)&# b'4<2|
+%|^:"1(#1,Khx}}<2(&:!&c0  .V:#&c0!*-<hphantom-[:"x:#-]}(":!&c0  .V|
+%|:"&c0!*x}}<c!$1(#1,Khx}}<2(&:!&c0  .V:#&c0!*-<hphantom-[:"x:#-]}|
+%|(":!&c0  .V:"&c0!*x}},K<2(&$^:!&c0  .V_^:"&c0!*2:#-<hphantom-[|
+%|:"x:#-]}^$(":!&c0  .V:"&c0!*y}_^2}}& b!( b"0 b#8 b$@ b%H b&P!WW}}|
+%|F: ;bP;/":#;bP8 :! :#,F:",]:#,F:! <c!(A($$^&c0  /1^->^:"&c0!*2|
+%|,K<2^h(#1,Khx}}<2(&:!&c0  .V:#&c0!*-<hphantom-[:"x:#-]}(":!&c0  .V|
+%|:"&c0!*x}}}}F : ;8/<:#;bP8eq,Zelec: ;8/=;bP8,\|
+%|}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{\nabla }_{\perp }^{2}F &=
+& \left\{{{1 \over 1+hx}{\partial \hphantom{x} \over \partial x}\left({1+hx}\right){\partial \hphantom{x} \over \partial x}+{{\partial }^{2}\hphantom{x} \over {\partial y}^{2}}}\right\}F\nonumber \\
+  &=
+& \left\{{{\nabla }_{\perp }^{2}+{h \over 1+hx}{\partial \hphantom{x} \over \partial x}}\right\}F\ \label{eq:elec}\end{eqnarray}
+%
+
+
+
+
+
+
+
+\makeussubscript
+\endinput

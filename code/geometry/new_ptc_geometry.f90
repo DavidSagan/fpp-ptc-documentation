@@ -1,21 +1,21 @@
-program ptc_geometry
+program new_ptc_geometry
 use madx_ptc_module
 use pointer_lattice
 implicit none
 
 logical(lp) :: doit
-integer :: i, j, mf, pos, example
+integer :: i, j, mf, pos, example,poss
 real(dp) :: b0
 real(dp), dimension(3) :: a, d
 real(dp), dimension(6) :: fix1, fix2, mis, x
 type(real_8), dimension(6) :: y1, y2
 type(layout), pointer :: L1, L2, L3, L4, L5, L6
 type(layout), pointer :: PSR1, PSR2, Fig8, Col1, Col2
-type(fibre), pointer :: p1, p2, p3, pf, b, f
+type(fibre), pointer :: p1, p2, b, f
 type(internal_state) :: state
-
+type(fibre_appearance), pointer :: next_doko
 ! some simple fitting objects for the fake collider complex
-type(pol_block) :: qf(2), qd(2) 
+type(pol_block) :: qf(2), qd(2)
 type(normalform) :: n1, n2
 type(damap) :: id
 type(taylor) :: eq(4)
@@ -29,30 +29,30 @@ type(gmap) :: g
          implicit none
          type(layout), target :: PSR
        end subroutine build_PSR
-       subroutine build_PSR_minus(PSR)
-         use madx_ptc_module
-         use pointer_lattice
-         implicit none
-         type(layout), target :: PSR
-       end subroutine build_PSR_minus
        subroutine build_Quad_for_Bend(PSR)
          use madx_ptc_module
          use pointer_lattice
          implicit none
          type(layout), target :: PSR
        end subroutine build_Quad_for_Bend
+       subroutine build_PSR_minus(PSR)
+         use madx_ptc_module
+         use pointer_lattice
+         implicit none
+         type(layout), target :: PSR
+       end subroutine build_PSR_minus
     end interface
-!
 
 call ptc_ini_no_append
+write(6,*) "Do you want to read an accelerator complex ? yes=1 "
+read(5,*) poss
+if(poss==1) then
+ call read_universe_database(m_u,'m_u.txt',arpent=my_false)
+ call read_universe_pointed(M_u,M_t,'m_t.txt')
+ call create_dna(M_u,m_t); col2=>m_t%end; ! col2 pointed needed
+ goto 999
+end if
 
-!
-!
-!
-!
-!
-!
-!
 
 !==========================!
 !== set up DNA sequences ==!
@@ -91,9 +91,9 @@ call build_PSR(L6); L6%name="L6";
 !== create "trackable" layouts ==!
 !================================!
 
-!== PSR1 : forward ring  (layout 7)
-call append_empty_layout(m_u)
-PSR1 => m_u%end
+!== PSR1 : forward ring  (layout 1 of m_t)
+call append_empty_layout(m_t)
+PSR1 => m_t%end
 
 p1 => L1%start
 p2 => L2%start
@@ -126,9 +126,9 @@ PSR1%name = "PSR 1"
 PSR1%closed = .true.
 call ring_L(PSR1, .true.) ! make it a ring topologically
 
-!== PSR2 : backward ring (layout 8)
-call append_empty_layout(m_u)
-PSR2 => m_u%end
+!== PSR2 : backward ring (layout 2 of m_t)
+call append_empty_layout(m_t)
+PSR2 => m_t%end
 
 p1 => L1%end
 p2 => L2%end
@@ -159,7 +159,7 @@ PSR2%closed = .true.
 call ring_l(PSR2, .true.) ! make it a ring topologically
 
 
-!== Fig8 : figure-eight lattice (layout 9)
+!== Fig8 : figure-eight lattice (layout 3 of m_t)
 d = zero
 d(3) = -40.d0
 call translate(L4, d)
@@ -170,8 +170,8 @@ call move_to(L4, p1, "B", pos)
 d = p1%chart%f%a - L3%end%chart%f%b
 call translate(L3, d)
 
-call append_empty_layout(m_u)
-Fig8 => m_u%end
+call append_empty_layout(m_t)
+Fig8 => m_t%end
 p1 => L4%start
 do i = 1, L4%n
   call append_point(Fig8, p1)
@@ -210,8 +210,8 @@ do i = 1, Fig8%n
   p1 => p1%next
 end do
 
-!== Col1 : lower collider ring (layout 10)
-!== Col2 : upper collider ring (layout 11)
+!== Col1 : lower collider ring (m_t layout 4)
+!== Col2 : upper collider ring (m_t layout 5)
 d = zero
 d(3) = 40.d0
 call translate(L6, d)
@@ -222,8 +222,8 @@ call move_to(L6, p1, "B", pos)
 d = p1%chart%f%a - L5%end%chart%f%b
 call translate(L5, d)
 
-call append_empty_layout(m_u)
-Col1 => m_u%end
+call append_empty_layout(m_t)
+Col1 => m_t%end
 p1 => L6%start
 do i = 1, L6%n
   call append_point(Col1, p1)
@@ -234,8 +234,8 @@ Col1%name = "Collider 1"
 Col1%closed = .true.
 call ring_l(Col1, .true.) ! make it a ring topologically
 
-call append_empty_layout(m_u)
-Col2 => m_u%end
+call append_empty_layout(m_t)
+Col2 => m_t%end
 p1 => L6%start%next%next
 do i = 1, 6
   call append_point(Col2, p1)
@@ -385,7 +385,6 @@ if(i == 1) goto 101
 call kill_para(Col1%dna(1)%l)
 call kill_para(Col1%dna(2)%l)
 
-
 !===============================!
 !== set up Siamese and Girder ==!
 !===============================!
@@ -400,7 +399,7 @@ p1%mag%siamese => p2%mag
 p2%mag%siamese => p1%mag
 
 call move_to(Col1, p1, 68)
-pf => p1  ! remember start of girder linked-list
+f => p1  ! remember start of girder linked-list
 do i = 2, 7
   p2 => p1%next
   p1%mag%girders => p2%mag
@@ -413,7 +412,7 @@ p2%mag%girders => p2%mag%siamese
 call move_to(Col1, p1, 67)
 call move_to(Col2, p2, 14)
 p1%mag%girders => p2%mag
-p2%mag%girders => pf%mag
+p2%mag%girders => f%mag
 
 call move_to(Col1, p1, 1)
 call alloc_af(p1%mag%girder_frame, girder = .true.)
@@ -424,26 +423,27 @@ p1%mag%girder_frame%b   = p1%mag%parent_fibre%chart%f%a
 
 a = p1%mag%girder_frame%a
 a(3) = a(3) - 5.d0
-call move_to(Col1, p3, 67)
-call alloc_af(p3%mag%siamese_frame)
-call find_patch(p3%mag%p%f%a, p3%mag%p%f%ent, &
+call move_to(Col1, b, 67)
+call alloc_af(b%mag%siamese_frame)
+call find_patch(b%mag%p%f%a, b%mag%p%f%ent, &
                 a, p1%mag%girder_frame%ent, &
-                p3%mag%siamese_frame%d, p3%mag%siamese_frame%angle)
+                b%mag%siamese_frame%d, b%mag%siamese_frame%angle)
 a = p1%mag%girder_frame%a
 a(3) = a(3) + 5.d0
-call move_to(Col1, p3, 4)
-call alloc_af(p3%mag%siamese_frame)
-call find_patch(p3%mag%p%f%a, p3%mag%p%f%ent, &
+call move_to(Col1, b, 4)
+call alloc_af(b%mag%siamese_frame)
+call find_patch(b%mag%p%f%a, b%mag%p%f%ent, &
                 a, p1%mag%girder_frame%ent, &
-                p3%mag%siamese_frame%d, p3%mag%siamese_frame%angle)
+                b%mag%siamese_frame%d, b%mag%siamese_frame%angle)
 
 
 !===========================!
 !== example misalignments ==!
 !===========================!
 
+999 continue
 write(6,*) "Example # (from the manual) 1--11 ?"
-write(6,*) "Input 0 and then nothing is done! ?"
+write(6,*) "Input 0 and then nothing is done!"
 read(5,*) example
 
 call move_to(Col2, p2, 7)
@@ -521,11 +521,33 @@ elseif(example == 11) then
                         preserve_girder = .true.)
 end if
 
+call kanalnummer(mf,"doko.txt")
+call TIE_MAD_UNIVERSE(m_u)
+p1=>m_u%start%start
+do i=1,m_u%nf
+ write(mf,'(i4,1x,a16)') i,p1%mag%name
+ next_doko=>p1%mag%doko
+  do while(associated(next_doko))
+   write(mf,'(a120)') next_doko%parent_fibre%parent_layout%name 
+   p2=>next_doko%parent_fibre
+   next_doko=>next_doko%next
+ enddo
+ p1=>p1%n
+end do
+close(mf)
+ 
+l1=>m_t%start
+do i=1, m_t%n
+ write(6,*) l1%name
+ do j=1,size(l1%dna)
+  write(6,*) i,l1%dna(j)%l%name
+ enddo
+ l1=>l1%next
+enddo
 
 call ptc_end(graphics_maybe=2,flat_file=.true.)
 
-end program ptc_geometry
-
+end program new_ptc_geometry
 
 
 !=================================================================
@@ -607,42 +629,66 @@ PSR = .ring.PSR
 call survey(PSR)
 end subroutine build_PSR_minus
 
-
 !=================================================================
+
 subroutine  build_Quad_for_Bend(PSR)
 use madx_ptc_module
 use pointer_lattice
 implicit none
+    type(keywords) key
 
 type(layout),target :: PSR
-
+integer code,EXCEPTION,ik
+logical(lp) doneit
 real(dp) :: ang, ang2, brho, b1, Larc, Lq
 type(fibre) :: b
 !-----------------------------------
 
 call make_states(.false.)
 exact_model = .true.
+default = default + nocavity  
+call update_states
 madlength = .false.
 
 ang = (twopi * 36.d0 / 360.d0)
 Larc = 2.54948d0
 brho = 1.2d0 * (Larc / ang)
-call set_mad(brho = brho, method = 6, step = 10)
 madkind2 = drift_kick_drift
-
 ang2 = ang / two
 b1 = ang / Larc
 Lq = Larc * sin(ang2) / ang2
 
-b = quadrupole("B_QUAD", Lq, 0.d0);
-call add(b, 1, 0, b1)
-b%mag%p%permfringe = 1
-b%magp%p%permfringe = 1
-b%mag%p%bend_fringe = .true.
-b%magp%p%bend_fringe = .true.
+    CALL SET_MADx(brho=brho,METHOD=6,STEP=10)
 
-PSR = 10 * b
-PSR = .ring.PSR
+code=2
+    do ik=1,10
+    call zero_key(key)
+    call append_empty(psr)
+    
+    key%list%name="B_QUAD"
+    key%list%l=Lq
+
+    select case(code)
+    case(2)
+       key%magnet="quadrupole"
+       key%list%k(2)=0.d0
+       key%list%ks(2)=0.d0
+       key%list%k(1)=b1
+       key%list%ks(1)=0.d0
+       key%list%BEND_FRINGE=.true.
+       key%list%PERMFRINGE=.true.
+       key%model= "DRIFT_KICK       "
+
+    end select
+    
+        call create_fibre(psr%end,key,EXCEPTION)
+
+    enddo
+   
+    psr%closed=.true.
+
+    doneit=.true.
+    call ring_l(psr,doneit)
 
 call survey(PSR)
 end subroutine build_Quad_for_Bend

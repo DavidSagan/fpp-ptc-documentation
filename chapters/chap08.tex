@@ -1104,22 +1104,22 @@ and R$_{y}$ are drifts in polar coordinates and are therefore nonlinear.
 For example, the rotation R$_{y}$ is a pole face rotation, dubbed
 ``prot'' by Dragt in the code MARYLIE. The formula is given by:
 
-\begin{align*}
+\begin{align}
   \overline{x} &=
     \frac{x}{\cos\alpha\left(1-\frac{p_x}{p_z}\tan\alpha\right)},
     \text{ where }
     p_z = \sqrt{\left(1-\frac{2}{\beta_0}p_t + p_t^2\right)
-                - p_x^2 - p_y^2} \\
-  \overline{p}_x &= p_x\cos\alpha + p_z\sin\alpha \\
+                - p_x^2 - p_y^2}  \nonumber \\
+  \overline{p}_x &= p_x\cos\alpha + p_z\sin\alpha   \nonumber \\
   \overline{y} &= y
     + \frac{x p_y\tan\alpha}%
-           {p_z\left(1-\frac{p_x}{p_z}\tan\alpha\right)} \\
-  \overline{p}_y &= p_y\\
+           {p_z\left(1-\frac{p_x}{p_z}\tan\alpha\right)}  \nonumber    \\
+  \overline{p}_y &= p_y  \label{eq:prot}  \\
   \overline{t} &=  t
     + \frac{x\left(\frac{1}{\beta_0}-p_t\right)\tan\alpha}%
-           {p_z\left(1-\frac{p_x}{p_z}\tan\alpha\right)} \\
-  \overline{p}_t &= p_t
-\end{align*}
+           {p_z\left(1-\frac{p_x}{p_z}\tan\alpha\right)}  \nonumber \\
+  \overline{p}_t &= p_t  \nonumber
+\end{align}
 
 Here $(t,p_t)$ form a canonical pair.  In \PTC\ $(-p_t,t)$ form a canonical pair.
 

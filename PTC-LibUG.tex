@@ -30,6 +30,16 @@
 \newcommand{\hlblue}[1]{\textcolor{DarkBlue}{#1}}% prints in blue
 \newcommand{\redcolor}{\color{Maroon}}% prints in red
 
+\definecolor{etcol}{rgb}{0.345,.1,.6}
+
+%\newcommand{\et}[1]{ \noindent
+%{\color{etcol} \rule{\linewidth}{0.5mm}  #1 
+%
+%\noindent
+%\rule{\linewidth}{0.5mm}  } }
+
+
+\newcommand{\et}[1]{  {\color{etcol}  #1   } }
 
 %:fonts
 %% memoir provides sizes tiny, scriptsize, footnotesize, small,
@@ -937,7 +947,7 @@
 \include{chapters/chap07} % tracking routines
 \include{chapters/chap08} % geometry routines
 \include{chapters/chap09} % symplectic integration and splitting
-\include{chapters/chap10} % spin dynamics
+\include{chapters/chap10}
 %\include{chapters/chap11} % space-charge computation
 %\include{chapters/chap12} % PTC structure and libraries
 
@@ -949,8 +959,10 @@
 %\include{appends/appenC} % input to PTC from other codes
 %\include{appends/appenD} % flat files
 \include{appends/appenE} % geometry tutorial
-\include{appends/appenF} % splitting tutorial
+\include{appends/appenEb} % geometry tutorial
 
+\include{appends/appenF} % splitting tutorial
+\include{appends/appenG} % Solving Maxwell
 
 %:back matter
 \backmatter

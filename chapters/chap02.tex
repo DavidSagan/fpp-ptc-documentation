@@ -53,7 +53,7 @@ of modules referred to collectively as the Full Polymorphic Package
 (\FPP).%
 \cite{Forest:2006:FPP.PTC,Forest:2006:FPPDoc}
 These routines extend the capabilities of \PTC, making it possible
-not only to track particles, but also to propagate maps. \PTC\ uses
+not only to track particles, but also to propagate Taylor maps. \PTC\ uses
 \FPP\ to compute the maps one may analyze for accelerator properties
 of interest to us: lattice functions and the like.
 \TSref{analyze.accel.prop} discusses this topic.
@@ -757,7 +757,7 @@ positioned, repositioned, or misaligned \emph{as a whole}. At the
 same time, \PTC\ provides the capability for one to look inside the
 element to see, for example, details of a particle trajectory. One
 should therefore \emph{never} feel compelled to split an element in
-half.
+half. \et{In \PTC\ one can simply choose an even number of integrations steps; the code automatically sets up a pointer called tm that points to the center of the magnet. }
 
 In addition to information about the element itself, the data type
 \ptctyp{element} includes information about which \ptctyp{fibre}s
