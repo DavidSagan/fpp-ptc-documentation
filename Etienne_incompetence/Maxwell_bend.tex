@@ -7,7 +7,7 @@
 \documentclass[11pt]{article} % use larger type; default would be 10pt
 
 \usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
-
+\usepackage[strings]{underscore}    % to use "_" in text
 %%% Examples of Article customizations
 % These packages are optional, depending whether you want the features they provide.
 % See the LaTeX Companion or other references for full information.
@@ -99,8 +99,89 @@
 \begin{document}
 \maketitle
 
-\section{Magnetic field}
+\section{Useful formulae}
+%
+%
+%]|Expr|[#b @`b___})2# b'4" Chicago^: ;bP8&c0!*,^"!Symbol^:!&c0  /1|
+%|.T""*|:"&c0!*u"#Helvetica|:#,F:",]:#,F:! <c!$1(&$^&c0  .V^:"&c0!*y|
+%|_$^u^:!&c0  f_:"&c0!*,M<2^1^r}$^:!&c0  .V^f_$^:"&c0!*u^y_}}<c$5Q|
+%|^r},K<2^1^r}<c!$1(&$^:!&c0  .V^f_$^:"&c0!*u^r_,M$^:!&c0  .V^:"&c0!*r|
+%|_r$^u^:!&c0  f_}}<c$5Q^:"&c0!*y},K<c!$1(%$^:!&c0  .V^:"&c0!*r|
+%|_$^u^y_,M$^:!&c0  .V^:"&c0!*y_$^u^r_}}<c$5Q^:!&c0  f}: &c0!*,\|
+%|}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}\nabla \times u&=
+& \left({{\partial }_{y}{u}_{\phi }-{1 \over r}{\partial }_{\phi }{u}_{y}}\right)\widehat{r}+{1 \over r}\left({{\partial }_{\phi }{u}_{r}-{\partial }_{r}r{u}_{\phi }}\right)\widehat{y}+\left({{\partial }_{r}{u}_{y}-{\partial }_{y}{u}_{r}}\right)\widehat{\phi }\end{eqnarray}
+%
+%
+%]|Expr|[#b @`b___}):# b'4" Chicago^: ;bP8&c0!*,^"!Symbol^:!&c0  /1|
+%|""*|:"&c0!*f:! "#Helvetica|:#,F:",]:#,F:! $^&c0  .V^:"&c0!*r_|
+%|f <c$5Q^r} ,K $^:!&c0  .V^:"&c0!*y_f <c$5Q^y} ,K <2^1^r}$^:!&c0  .V|
+%|^f_:"&c0!*f: ,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}\nabla f &=
+& {\partial }_{r}f\ \widehat{r}\ +\ {\partial }_{y}f\ \widehat{y}\ +\ {1 \over r}{\partial }_{\phi }f\end{eqnarray}
+%
+%
+%]|Expr|[#b @`b___})6# b'4" Chicago^: ;bP8&c0!*,^"!Symbol^:!&c0  /1|
+%|/7""*|:"&c0!*u"#Helvetica|:#,F:",]:#,F:! <2^:"1^r}$^:!&c0  .V|
+%|^:"&c0!*r_r$^u^r_ ,K$^:!&c0  .V^:"&c0!*y_$^u^y_,K<2^1^r}$^:!&c0  .V|
+%|^f_$^:"&c0!*u^:!&c0  f_:"&c0!*: ,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}\nabla \cdot u&=
+& {1 \over r}{\partial }_{r}r{u}_{r}\ +{\partial }_{y}{u}_{y}+{1 \over r}{\partial }_{\phi }{u}_{\phi }\end{eqnarray}
+%
 
+If we use the more convenient $(x,y,s)$ variable defined as
+%
+%]|Expr|[#b @`b___})=# b'4" Chicago^: ;bP8&c0!*,^"!*|:!h""Symbol^:" |
+%|"#Helvetica|:#,F:!,]:#,F:" <2^:!1^$^r^0_}: ;bP;/":#;bP8 1,Khx|
+%|:" :#,F:!,]:#,F:" :!hr: ;bP;/":#;bP8 hs:" :#,F:!,]:#,F:" &c0  f|
+%|: &c0!*,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}h &=
+& {1 \over {r}_{0}}\nonumber \\
+ 1+hx &=
+& hr\nonumber \\
+ hs &=
+& \phi \end{eqnarray}
+%
+Then the curl, gradient and divergence  can be rewritten:
+%
+%]|Expr|[#b @`b___})9# b'4" Chicago^: ;bP8&c0!*,^"!Symbol^:!&c0  /1|
+%|.T""*|:"&c0!*u "#Helvetica|:#,F:",]:#,F:! <c!$1(&$^&c0  .V^:"&c0!*y|
+%|_$^u^s_,M<2^1(#1,Khx}}$^:!&c0  .V^:"&c0!*s_$^u^y_}}<c$5Q^x}: ;bP;/"|
+%|:#;bP8 ,F,F:",K<2^1(#1,Khx}}<c!$1(/$^:!&c0  .V^:"&c0!*s_$^u^x|
+%|_,M:#-<vphantom-[<2^:"1(#1,Khx}}:#-]$^:!&c0  .V^:"&c0!*x_,H1,K|
+%|hx,I$^u^s_}}<c$5Q^y}: ;bP;/":#;bP8 ,F,F:",K<c!$1(*$^:!&c0  .V|
+%|^:"&c0!*x_$^u^y_,M:#-<vphantom-[<2^:"1(#1,Khx}}:#-]$^:!&c0  .V|
+%|^:"&c0!*y_$^u^x_}}<c$5Q^s}: ,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}\nabla \times u\ &=
+& \left({{\partial }_{y}{u}_{s}-{1 \over 1+hx}{\partial }_{s}{u}_{y}}\right)\widehat{x}\nonumber \\
+ &&+{1 \over 1+hx}\left({{\partial }_{s}{u}_{x}-\vphantom{{1 \over 1+hx}}{\partial }_{x}(1+hx){u}_{s}}\right)\widehat{y}\nonumber \\
+ &&+\left({{\partial }_{x}{u}_{y}-\vphantom{{1 \over 1+hx}}{\partial }_{y}{u}_{x}}\right)\widehat{s}\end{eqnarray}
+%
+%
+%]|Expr|[#b @`b___}):# b'4" Chicago^: ;bP8&c0!*,^"!Symbol^:!&c0  /1|
+%|""*|:"&c0!*f:! "#Helvetica|:#,F:",]:#,F:! $^&c0  .V^:"&c0!*x_|
+%|f <c$5Q^x} ,K $^:!&c0  .V^:"&c0!*y_f <c$5Q^y} ,K <2^1(#1,Khx}}|
+%|$^:!&c0  .V^:"&c0!*s_f: ,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}\nabla f &=
+& {\partial }_{x}f\ \widehat{x}\ +\ {\partial }_{y}f\ \widehat{y}\ +\ {1 \over 1+hx}{\partial }_{s}f\end{eqnarray}
+%
+%
+%]|Expr|[#b @`b___})6# b'4" Chicago^: ;bP8&c0!*,^"!Symbol^:!&c0  /1|
+%|/7""*|:"&c0!*u"#Helvetica|:#,F:",]:#,F:! <2^:"1(#1,Khx}}$^:!&c0  .V|
+%|^:"&c0!*x_<c!$1(#1,Khx}}$^u^r_ ,K$^:!&c0  .V^:"&c0!*y_$^u^y_,K|
+%|<2^1(#1,Khx}}$^:!&c0  .V^:"&c0!*s_$^u^s_: ,\|
+%|}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}\nabla \cdot u&=
+& {1 \over 1+hx}{\partial }_{x}\left({1+hx}\right){u}_{r}\ +{\partial }_{y}{u}_{y}+{1 \over 1+hx}{\partial }_{s}{u}_{s}\end{eqnarray}
+%
+
+
+
+
+
+
+
+\section{Magnetic field with vector potential: old way of PTC}
 
 We will say that a bend has sector geometry if magnetic field and/or the electric field is invariant as we travel on a circle of radius $r$ down the center of the
 element. The symmetry would be perfect if the entire element was a cyclotron; so here we neglect fringe fields at both ends.
@@ -194,17 +275,17 @@ $\vec{u}=
 \left({x+iy,x-iy}\right)$
 the inverse Laplacian is   given by 
 %
-%]|Expr|[#b @`b___})=# b'4" Chicago^: ;bP8&c0!*,^$^"!Symbol^:!&c0  /1|
-%|^->("""*|:"&c0!*,M2}f,H<c$%!^u},I"#Helvetica|:#,F,]<c" #^<c" #|
-%|(&f du d<c$%A^u}}_^<c$%A^u}}_^u} ,K C $^f_^0"$Monaco^:$  where|
-%|  $^:!&c0  /1^->^:"&c0!*2$^:#f_^0,]0: ;8/<:#eq,Z;bP8inv: ;8/=|
-%|;bP8,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
-\begin{eqnarray}{\nabla }_{\perp }^{-2}f(\vec{u})&=\int_{}^{u}\int_{}^{\overline{u}}f du d\overline{u} + C {f}^{0}~~{\rm w}{\rm h}{\rm e}{\rm r}{\rm e}~~{\nabla }_{\perp }^{2}{f}^{0}=0\label{eq:inv}\end{eqnarray}
+%]|Expr|[#b @`b___})># b'4" Chicago^: ;bP8&c0!*,^$^"!Symbol^:!&c0  /1|
+%|^->("""*|:"&c0!*,M2}f,H<c$%!^u},I"#Helvetica|:#,F,]<2^1^4}<c" #|
+%|^<c" #(&f du d<c$%A^u}}_^<c$%A^u}}_^u} ,K C $^f_^0"$Monaco^:$ |
+%| where  $^:!&c0  /1^->^:"&c0!*2$^:#f_^0,]0: ;8/<:#eq,Z;bP8inv|
+%|: ;8/=;bP8,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{\nabla }_{\perp }^{-2}f(\vec{u})&={1 \over 4}\int_{}^{u}\int_{}^{\overline{u}}f du d\overline{u} + C {f}^{0}~~{\rm w}{\rm h}{\rm e}{\rm r}{\rm e}~~{\nabla }_{\perp }^{2}{f}^{0}=0\label{eq:inv}\end{eqnarray}
 %
 
 in \eq{eq:inv} the first term is an antiderivative with with respect to $u$ and $ \overline{u}$. The additive term is an harmonic solution of the type of \eq{eq:hsol}. 
 
-To obtain the solution to the order of truncation on iterates \eq{eq:sol:anbn} starting with the harmonic solution %
+To obtain the solution to the order of truncation one iterates \eq{eq:sol:anbn} starting with the harmonic solution %
 %]|Expr|[#b @`b___})%# b'4" Helvetica|: ;bP8&c0!*,D$^"!Symbol^:!&c0  D|
 %|^""*|:"&c0!*n(#k,]0},]$^F^n^0: ,D}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
 ${\Delta }_{n}^{k=
@@ -214,7 +295,130 @@ ${\Delta }_{n}^{k=
 The only issue is how does one set the constant ${C}_{k+1}$? One notices that the harmonic solution  ${F}_{n}^{0}$ already obeys \eq{eq:st:anbn}. Therefore it suffices to  choose ${C}_{k+1}$ so as to remove leading order terms of the form $C x^{n+k+1}$  in ${\Delta }_{n}^{k+1}$ by adding a term proportional to ${F}_{n}^{k+1}$. Higher order terms which violate \eq{eq:st:anbn} while be handled at the next iterations.
 
 
+
+\section{Magnetic field with scalar potential: new way of PTC}
+
+\vskip 0.5cm
+{\tt \large \bf \it See routine get_bend_magnetic_potential in Se_status.f90}
+\vskip 0.5cm
+
+We will say that a bend has sector geometry if magnetic field and/or the electric field is invariant as we travel on a circle of radius $r$ down the center of the
+element. The symmetry would be perfect if the entire element was a cyclotron; so here we neglect fringe fields at both ends.
+
+In the case of a magnetic field, the scalar potential $V$ must obey the equation:
+%
+%]|Expr|[#b @`b___}),# b'4" Chicago^: ;bP8&c0!*,^<c!(A($$^"!Symbol^:!&c0  /1|
+%|^->^""*|:"&c0!*2,K<2^h(#1,Khx}}<2(&:!&c0  .V"#Helvetica|:#&c0!*-<|
+%|hphantom-[:"x:#-]}(":!&c0  .V:"&c0!*x}}}}V:#,F,]0"$Monaco^:$ |
+%|: ;8/<:";bP8eq,Zmaxbv: ;8/=;bP8,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}\left\{{{\nabla }_{\perp }^{2}+{h \over 1+hx}{\partial \hphantom{x} \over \partial x}}\right\}V&=0~\label{eq:maxbv}\end{eqnarray}
+%
+%
+%
+%
+%]|Expr|[#b @`b___})## b'4" Helvetica|: ;bP8&c0!*,D$^"!Symbol^:!&c0  /1|
+%|^->^""*|:"&c0!*2: ,D}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+${\nabla }_{\perp }^{2}$
+is the transverse Laplacian %
+%]|Expr|[#b @`b___})%# b'4" Helvetica|: ;bP8&c0!*,D<2(&$^"!Symbol^:!&c0  .V|
+%|_^""*|:"&c0!*2: -<hphantom-[:"x: -]}^$(":!&c0  .V:"&c0!*x}_^2}|
+%|,K<2(&$^:!&c0  .V_^:"&c0!*2: -<hphantom-[:"x: -]}^$(":!&c0  .V|
+%|:"&c0!*y}_^2}: ,D}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+${{\partial }^{2}\hphantom{x} \over {\partial x}^{2}}+{{\partial }^{2}\hphantom{x} \over {\partial y}^{2}}$.
+
+In a straight element, where %
+%]|Expr|[#b @`b___})%# b'4" Helvetica|: ;bP8&c0!*,D"!*|:!r,]""Symbol^:"&c0  .E|
+%|: &c0!*,D}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+$r=
+\infty $,
+the solutions if \eq{eq:maxbv} used in PTC, are just:
+%
+%]|Expr|[#b @`b___})3# b'4" Chicago^: ;bP8&c0!*,^$^"!*|:!F^n(#|
+%|h,]0}""Helvetica|:",F,]<2^$^b^n_^n}Re<c!(A^$("i<c!$1(#x,Kiy}}}|
+%|_^n},M<2^$^a^n_^n}Re<c!(A^$^<c!$1(#x,Kiy}}_^n}  : ;8/<:!;bP8eq|
+%|,Zhsolv: ;8/=:";bP8 : ,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{F}_{n}^{h=
+0}&={{b}_{n} \over n}Re\left\{{{i\left({x+iy}\right)}^{n}}\right\}-{{a}_{n} \over n}Re\left\{{{\left({x+iy}\right)}^{n}}\right\}  \label{eq:hsolv} \end{eqnarray}
+%
+%
+These solutions have the property that, in the midplane $y=0$,  the magnetic field is given by:
+%
+%]|Expr|[#b @`b___})7# b'4" Chicago^: ;bP8&c0!*,^$^"!*|:!b^y_,]|
+%|<c%#D("$^b^n_$^x_(#n,M1}}("""Helvetica|:"-<sum}^:!n_}"#Monaco^:# |
+%|  and   $^:!b^x_,]<c%#D("$^a^n_$^x_(#n,M1}}(":"-<sum}^:!n_}:" |
+%|: ;8/<:!;bP8eq,Zst,Zanbn: ;8/=;bP8,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{b}_{y}=
+\sum\limits_{n}^{} {b}_{n}{x}^{n-1}~~~{\rm a}{\rm n}{\rm d} ~~~{b}_{x}=
+\sum\limits_{n}^{} {a}_{n}{x}^{n-1} \label{eq:st:anbnv}\end{eqnarray}
+%
+%
+Of course the full solution is given by an infinite sum:
+%
+%]|Expr|[#b @`b___}),# b'4" Chicago^: ;bP8&c0!*,^$^"!*|:!F^n^h|
+%|""Symbol^:" "#Helvetica|:#,F:!,]:#,F:" <c%#D)!# b'4$^&c0  D^:!&c0!*n|
+%|^k}& b!( b"0 b#8 b$@ b%H b&P!WW}(":#-<sum}(%:!k,]0,L:"&c0  .E}|
+%|_}: ;8&c0!*/<:!;bP8fnk: ;8/=;bP8,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{F}_{n}^{h} &=
+& \sum\limits_{k=
+0,\infty }^{} {\Delta }_{n}^{k}\label{fnkv}\end{eqnarray}
+%
+%
+The idea is to set up a recursive relation to solve for the $F_n^k$ while continuously respecting \eqs{eq:maxbv} and \eqe{eq:st:anbnv}. Let us see how that works at order $k$. 
+%
+%]|Expr|[#b @`b___})5# b'4" Chicago^: ;bP8&c0!*,^$^"!Symbol^:!&c0  D|
+%|^""*|:"&c0!*n(#k,K1}:! "#Helvetica|:#,F:",]:#,F,M$^:!&c0  /1^|
+%|->(":"&c0!*,M2}<c%#D)## b'4<2^h(#1,Khx}}<2(&:!&c0  .V:#&c0!*-<|
+%|hphantom-[:"x:#-]}(":!&c0  .V:"&c0!*x}}$^:!&c0  D^:"&c0!*n^:!&c0  a|
+%|}& b!( b"0 b#8 b$@ b%H b&P!WW}(":#&c0!*-<sum}(%:!&c0  a:"&c0!*,]|
+%|0,Lk}_},K$^C(#k,K1}_$^F(#n,Kk}^0  : ;8/<:";bP8eq,Zsol,Zanbnv: ;8/=|
+%|;bP8,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{\Delta }_{n}^{k+1} &=
+&-{\nabla }_{\perp }^{-2}\sum\limits_{\alpha =
+0,k}^{} {h \over 1+hx}{\partial \hphantom{x} \over \partial x}{\Delta }_{n}^{\alpha }+{C}_{k+1}{F}_{n+k}^{0}\ \ \label{eq:sol:anbnv}\end{eqnarray}
+%
+%
+To solve this equation, one first initializes it at $k=0$ with 
+%
+%]|Expr|[#b @`b___})## b'4" Helvetica|: ;bP8&c0!*,D$^"!*|:!F^n|
+%|(#h,]0}: ,D}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+${F}_{n}^{h=
+0}$
+of \eq{eq:hsolv}. The operator %
+${\nabla }_{\perp }^{-2}$ of \eq{eq:sol:anbnv} find a solution for the inverse Laplacian. In phasors variable 
+%
+%]|Expr|[#b @`b___})%# b'4" Helvetica|: ;bP8&c0!*,D<c$%!^"!*|:!u}|
+%|,]<c!$1('x,Kiy,Lx,Miy}}: ,D}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+$\vec{u}=
+\left({x+iy,x-iy}\right)$
+the inverse Laplacian is   given by 
+%
+%]|Expr|[#b @`b___})># b'4" Chicago^: ;bP8&c0!*,^$^"!Symbol^:!&c0  /1|
+%|^->("""*|:"&c0!*,M2}f,H<c$%!^u},I"#Helvetica|:#,F,]<2^1^4}<c" #|
+%|^<c" #(&f du d<c$%A^u}}_^<c$%A^u}}_^u} ,K C $^f_^0"$Monaco^:$ |
+%| where  $^:!&c0  /1^->^:"&c0!*2$^:#f_^0,]0: ;8/<:#eq,Z;bP8invv|
+%|: ;8/=;bP8,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{\nabla }_{\perp }^{-2}f(\vec{u})&={1 \over 4}\int_{}^{u}\int_{}^{\overline{u}}f du d\overline{u} + C {f}^{0}~~{\rm w}{\rm h}{\rm e}{\rm r}{\rm e}~~{\nabla }_{\perp }^{2}{f}^{0}=0\label{eq:invv}\end{eqnarray}
+%
+
+%
+
+in \eq{eq:invv} the first term is an antiderivative with with respect to $u$ and $ \overline{u}$. The additive term is an harmonic solution of the type of \eq{eq:hsolv}. 
+
+To obtain the solution to the order of truncation one iterates \eq{eq:sol:anbnv} starting with the harmonic solution %
+%]|Expr|[#b @`b___})%# b'4" Helvetica|: ;bP8&c0!*,D$^"!Symbol^:!&c0  D|
+%|^""*|:"&c0!*n(#k,]0},]$^F^n^0: ,D}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+${\Delta }_{n}^{k=
+0}=
+{F}_{n}^{0}$.
+
+The only issue is how does one set the constant ${C}_{k+1}$? One notices that the harmonic solution  ${F}_{n}^{0}$ already obeys \eq{eq:st:anbnv}. Therefore it suffices to  choose ${C}_{k+1}$ so as to remove leading order terms of the form $C x^{n+k+1}$  in ${\Delta }_{n}^{k+1}$ by adding a term proportional to ${F}_{n}^{k+1}$. Higher order terms which violate \eq{eq:st:anbnv} while be handled at the next iterations.
+
+
 \section{Electric Field}
+
+\vskip 0.5cm
+{\tt \large \bf \it See routine    get_bend_electric_coeff in Se_status.f90}
+\vskip 0.5cm
 
 The electric field should also obey Maxwell's equation. If we represent it by a potential $F$, its Laplacian must vanish. In cylindrical coordinates, it is given by the equation:
 %
@@ -233,7 +437,355 @@ The electric field should also obey Maxwell's equation. If we represent it by a 
   &=
 & \left\{{{\nabla }_{\perp }^{2}+{h \over 1+hx}{\partial \hphantom{x} \over \partial x}}\right\}F\ \label{eq:elec}\end{eqnarray}
 %
+The zeroth order solution is:
+%
+%]|Expr|[#b @`b___})3# b'4" Chicago^: ;bP8&c0!*,^$^"!*|:!F^n(#|
+%|h,]0}""Helvetica|:",F,],M<2^$^b^n_^n}Re<c!(A^$^<c!$1(#x,Kiy}}|
+%|_^n},M<2^$^a^n_^n}Im<c!(A^$^<c!$1(#x,Kiy}}_^n}  : ;8/<:!;bP8eq|
+%|,Zhsolev: ;8/=:";bP8 : ,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{F}_{n}^{h=
+0}&=-{{b}_{n} \over n}Re\left\{{{\left({x+iy}\right)}^{n}}\right\}-{{a}_{n} \over n}Im\left\{{{\left({x+iy}\right)}^{n}}\right\}  \label{eq:hsolev} \end{eqnarray}
+%
+or equivalently
+%
+%]|Expr|[#b @`b___})3# b'4" Chicago^: ;bP8&c0!*,^$^"!*|:!F^n(#|
+%|h,]0}""Helvetica|:",F,],M<2^$^b^n_^n}Re<c!(A^$^<c!$1(#x,Kiy}}|
+%|_^n},K<2^$^a^n_^n}Re<c!(A^$("i<c!$1(#x,Kiy}}}_^n}  : ;8/<:!;bP8eq|
+%|,Zhsolevi: ;8/=:";bP8 : ,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{F}_{n}^{h=
+0}&=-{{b}_{n} \over n}Re\left\{{{\left({x+iy}\right)}^{n}}\right\}+{{a}_{n} \over n}Re\left\{{{i\left({x+iy}\right)}^{n}}\right\}  \label{eq:hsolevi} \end{eqnarray}
+%
+
+The electric field is defined as:
+%
+%]|Expr|[#b @`b___}),# b'4" Chicago^: ;bP8&c0!*,^<c$%!^"!*|:!E}|
+%|""Symbol^:" "#Helvetica|:#,F:!,]:#,F:" :!,M<c$%!^:"&c0  /1}:!&c0!*F|
+%|: ,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}\vec{E} &=
+& -\vec{\nabla }F\end{eqnarray}
+
+The electric coefficients $a_n$ and $b_n$ are determined by a relation similar to \eq{eq:st:anbnv}:
+%
+%]|Expr|[#b @`b___}).# b'4" Chicago^: ;bP8&c0!*,^$^"!*|:!E^x_,]|
+%|<c%#D("$^b^n_$^x_(#n,M1}}("""Helvetica|:"-<sum}^"#Symbol^:#&c0  a|
+%|_}"$Monaco^:$&c0!*  and   $^:!E^y_,]<c%#D("$^a^n_$^x_(#n,M1}}|
+%|(":"-<sum}^:#&c0  a_}: &c0!*,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{E}_{x}=
+\sum\limits_{\alpha }^{} {b}_{n}{x}^{n-1}~~{\rm a}{\rm n}{\rm d} ~~~{E}_{y}=
+\sum\limits_{\alpha }^{} {a}_{n}{x}^{n-1}\end{eqnarray}
+%
+%
+
+PTC has an electric septum. This is a straight dipole element producing a  vertical electric field. Remarkably, the body of that bend can be exactly solved.
+Of course a zero curvature electric sector bend should produce the same result. This is something we ought to check and document.
+
+The following piece of code checks most assertions of this document. Notice that PTC has two new parameters {\tt volt_c=1.e-3} and {\tt volt_i=1}. These are used to enforce megavolts in PTC. In reality the code uses gigavolts. Here by setting {\tt volt_c} to 1, I use gigavolts. {\tt volt_i}   is an input parameter. We can enforce megavolts in the code computations (deep in) or at the input level when we create the element. Anyway in this example, everything  is in gigavolts  {\tt volt_c=1} .
+
+\begin{verbatim}
+call GET_ONE(p0c=p0c)
+volt_c=1
+voltage=1.d-6*p0c
+solve_electric=my_true
+B  = SBEND("B", L=2.54948D0,ANGLE=0.d0) 
+CALL ADD(B,-1,1,voltage,electric=my_true)
+
+QF =ELSEPARATOR("BB", L=2.54948D0,E=voltage)
+!QF%MAG%phas=pi/2d0 ;QF%MAGp%phas=QF%MAG%phas;
+
+X=0.001D0
+call init(8,2)
+call alloc(y);call alloc(eb);call alloc(phi);call alloc(bf)
+y(1)=morph(1.0d0.mono.1);
+y(3)=morph(1.0d0.mono.2);
+call GETELECTRIC(B%mag%tp10,BFr,phir,EBR,x)
+
+WRITE(6,*) BFR
+WRITE(6,*) phir
+CALL GETELECTRIC(QF%MAG%SEP15,EBR,phir,X)
+WRITE(6,*) EBR
+WRITE(6,*) phir
+call GETELECTRIC(B%magp%tp10,BF,phi,EB,y)
+do i=1,3
+call print(bf(i),6)
+enddo
+call print(phi,6)
+b%dir=1
+x=0.001d0 
+call track(b,x,state)
+write(6,*)x
+x=0.001d0 
+call track(QF,x,state)
+write(6,*)x
+stop
+\end{verbatim}
+
+
+The result is:
+
+
+\begin{verbatim}
+  0.000000000000000E+000  1.000000000000000E-006  0.000000000000000E+000
+ -9.999999999999999E-010
+  0.000000000000000E+000  1.000000000000000E-006  0.000000000000000E+000
+ -1.000000000000000E-009
+
+ etall    1, NO =    8, NV =    2, INA =   40
+ *********************************************
+
+   ALL COMPONENTS ZERO
+      NO =     8      NV =     2
+    -1   0.000000000000000       0  0
+
+ etall    1, NO =    8, NV =    2, INA =   41
+ *********************************************
+
+    I  COEFFICIENT          ORDER   EXPONENTS
+      NO =     8      NV =     2
+   0  0.1000000000000000E-05   0  0
+    -1   0.000000000000000       0  0
+  0.000000000000000E+000
+
+ etall    1, NO =    8, NV =    2, INA =   30
+ *********************************************
+
+    I  COEFFICIENT          ORDER   EXPONENTS
+      NO =     8      NV =     2
+   1 -0.1000000000000000E-05   0  1
+    -1   0.000000000000000       0  0
+  3.546219861200883E-003  1.000000000000000E-003  3.550377891682065E-003
+  1.003266041983185E-003  1.000000000000000E-003 -6.323016230930416E-004
+  3.546219861200894E-003  1.000000000000000E-003  3.550377891682071E-003
+  1.003266041983188E-003  1.000000000000000E-003 -6.323016230926903E-004
+\end{verbatim}
+
+So all is fine: the electric septum produces a vertical kick,i.e., an $E_y$. The results agrees with the sector bend integration. Notice that the parameter {\tt solve_electric} is set to true before creating the element. This forces non-symplectic integration of a sector bend with electric and magnetic field.
+
+Now, I will produce an horizontal kick. For the septum, it is achieved using a rotation of $\pi /2$.
+
+\begin{verbatim}
+B  = SBEND("B", L=2.54948D0,ANGLE=0.d0)  
+CALL ADD(B,1,1,voltage,electric=my_true)
+
+QF =ELSEPARATOR("BB", L=2.54948D0,E=voltage)
+QF%MAG%phas=pi/2d0 ;QF%MAGp%phas=QF%MAG%phas;
+\end{verbatim}
+
+Tracking results  agrees.
+
+\section{Electric hard edge fringe effects}
+
+ %
+%]|Expr|[#>`b___})b B# b'4" Chicago^: ;bP8&c55*,^$^"!*~:!a^x_""Helvetica~:",F|
+%|:!,]:",F:!/0<2(!yU}(!Brho}}: ;bP;/":";bP8 $^:!a^y_:",F:!,]:",F|
+%|<2(!:!xU}(!Brho}}: ;bP;/":";bP8 :!U:",F:!,]:",F<c%#D^<2(&:!,H|
+%|/01$^,I_^n$^r_("2n}$^B^z^<c!=Q("2n}}}(%$^2_($2n,K1}n,A,Hn,K1,I,A}}|
+%|(":"-<sum}(#:!n,]0}^"#Symbol^:#.E}: ;bP;/":";bP8 $^:!B^z^<c!=Q|
+%|("2n}}:",F:!,]:",F<2^$^d_("2n}("d$^z_("2n}}}$^:!B^z_,H0,L0,Lz|
+%|,I,N: .O,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{a}_{x}&=
+&-{yU \over Brho}\nonumber \\
+ {a}_{y}&=
+&{xU \over Brho}\nonumber \\
+ U&=
+&\sum\limits_{n=
+0}^{\infty } {(-1{)}^{n}{r}^{2n}{B}_{z}^{\left[{2n}\right]} \over {2}^{2n+1}n!(n+1)!}\nonumber \\
+ {B}_{z}^{\left[{2n}\right]}&=
+&{{d}^{2n} \over d{z}^{2n}}{B}_{z}(0,0,z).\nonumber 
+\end{eqnarray}
+
+
+
+The scaled vector potential for this field is given by 
+%
+%]|Expr|[#>`b___})-# b'4" Chicago^: ;bP8&c55*,^$^"!*~:!a^z_""Helvetica~:",F|
+%|:!,]:",F:!/0x b,Hz,I,N: ,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{a}_{z}&=
+&-x\ b(z).\end{eqnarray}
+%
+It is easy to check that this vector potential does not obey Maxwell's\index{Maxwell's equations} equations---%
+%]|Expr|[#>`b___})&# b'4" Helvetica~: ;bP8&c55*,D"!Symbol^:!&c0  /1.T/1.T|
+%|<c!$1(+""*~:"&c55*0,L0,L/0x b,Hz,I}}:!&c0  .Y:"&c55*0: ,D}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+$\nabla \times \nabla \times \left({0,0,-x\ b(z)}\right)\ne 0$.
+However we can introduce an $x$-component to the vector potential of the form
+%
+%]|Expr|[#>`b___})(# b'4" Chicago^: ;bP8&c55*,^$^"!*~:!a^x_""Helvetica~:",F|
+%|:!,]:",F<c%#D(&$^a^x^n:!,Hz,I $^y_("2n}}(":"-<sum}(#:!n,]1}^"#Symbol^:#.E}|
+%|:!,L: ,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{a}_{x}&=
+&\sum\limits_{n=
+1}^{\infty } {a}_{x}^{n}(z)\ {y}^{2n},\end{eqnarray}
+%
+and require that 
+%
+%]|Expr|[#>`b___})## b'4" Helvetica~: ;bP8&c55*,D<c!$1(#$^"!*~:!a|
+%|^x_,L0,L$^a^z_}}: ,D}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+$\left({{a}_{x},0,{a}_{z}}\right)$
+be curl-free.  The solution is found  immediately to be 
+%
+%]|Expr|[#>`b___})+# b'4" Chicago^: ;bP8&c55*,^$^"!*~:!a^x_""Helvetica~:",F|
+%|:!,]:",F<c%#D("<2("$(!:!,H/01,I}_^n$^b^z^<c!=Q($2n/01}}}(%,H2|
+%|n,I,A}}$^y_("2n}}(":"-<sum}(#:!n,]1}^"#Symbol^:#.E}:!,N: ;8/<|
+%|:!;bP8bendax: ;8/=;bP8,\}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}{a}_{x}&=
+&\sum\limits_{n=
+1}^{\infty } {{(-1)}^{n}{b}_{z}^{\left[{2n-1}\right]} \over (2n)!}{y}^{2n}.\label{bendax}\end{eqnarray}
+%
+
+\section{Hamiltonian}
+%
+%]|Expr|[#b @`b___})=# b'4" Chicago^: ;bP8&c0!*,^"!*|:!K""Symbol^:" |
+%|"#Helvetica|:#,F:!,]:#,F:" :!,M<c!$1(#1,Khx}}<b R(*1,K2<2^:"&c0  D|
+%|^$^b^:!&c0!*0_},K$^:"&c0  D_^:!&c0!*2,M$^p^x^2,M$^p^y^2}_},MA|
+%|  "$Monaco^:$ where :"&c0  D:!&c0!*,]:"&c0  d:!&c0!*,M:"&c0  F|
+%|:!&c0!*   : ;8/<:!;bP8hamptc: ;8/=;bP8,\|
+%|}& b!( b"0 b#8 b$@ b%H b&P!WW}]|[
+\begin{eqnarray}K &=
+& -\left({1+hx}\right)\sqrt {1+2{\Delta  \over {\beta }_{0}}+{\Delta }^{2}-{p}_{x}^{2}-{p}_{y}^{2}}-A\ \ ~{\rm w}{\rm h}{\rm e}{\rm r}{\rm e}~\Delta =
+\delta -\Phi \ \ \ \label{hamptc}\end{eqnarray}
+%
 
 
 
 \end{document}
+
+ SUBROUTINE  get_bend_coeff(s_b0t,NO1,h00,verb)
+    implicit none
+    integer no,n,i,k,j(2),NO1,l,mf
+    type(taylor) x,y,h,df,ker,sol
+    type(complextaylor) z 
+    type(taylor) f,kick_x,kick_y
+    type(damap) y0
+    real(dp) h0,cker,cker0
+     TYPE(B_CYL), intent(inout) :: s_b0t
+    logical(lp),optional :: verb    
+      real(dp),optional :: h00   
+
+
+    if(present(verb)) call kanalnummer(mf,"internal_sol_mag.txt")
+    call init(no1,1,0,0)
+    no=sector_nmul
+
+    call alloc(x,y,kick_x,kick_y)
+    call alloc(z)
+    call alloc(f,h,df,ker,sol)
+    call alloc(y0)
+
+
+      x=1.d0.mono.1
+      y=1.d0.mono.2
+      y0=1
+      y0%v(2)=0
+ !    z=x-i_*y   
+      z=x+i_*y      
+!!!  
+
+
+    h0=1.d0
+    if(present(h00)) h0=h00
+
+    h=(1.d0+h0*x)
+    do k=1,no1
+    !  erect multipole
+    f=dreal(-z**K/K)
+    
+    df=f
+
+    do i=k,no-1 !k+1
+     df=h0*(df.d.1)/h
+     call  invert_laplace(df)
+      sol=f+df
+      sol=-(sol.d.1)/h
+      j=0
+      j(1)=i
+      cker=(sol.sub.j)
+      df=df-cker*dreal(-z**(I+1)/(I+1))
+      f=f+df
+       f=f.cut.(no+1)
+     enddo
+    if(present(verb)) then
+        write(mf,*) " Erect ",k
+        call clean_taylor(f,f,1.d-6)
+        call print(f,mf)
+         y=((f.d.1).d.1)+((f.d.2).d.2)-h0*(f.d.1)/h
+        y=y.cut.(no-1)
+    !    call print(y,6)
+        write(mf,*) full_abs(y)
+        kick_x=(f.d.1)
+        kick_y=(f.d.2)
+        call print(kick_x,mf)
+        call print(kick_Y,mf)
+       endif
+
+       kick_x=((f.d.2)/h).cut.no   !!!  magnetic fields instead of kicks
+       kick_y=-((f.d.1)/h).cut.no
+
+!       kick_x=(f.d.1)
+!       kick_y=(f.d.2)
+       call clean_taylor(kick_x,kick_x,1.d-6)
+       call clean_taylor(kick_y,kick_y,1.d-6)
+       do l=1,s_b0t%n_mono
+        j(1)=s_b0t%i(l)
+        j(2)=s_b0t%j(l)
+        s_b0t%b_x(k,l)=kick_x.sub.j
+        s_b0t%b_y(k,l)=kick_y.sub.j
+       enddo
+
+enddo    
+
+
+    do k=1,no1
+    !  Skew multipole 
+!   f=aimag(-z**K/K)
+    f=aimag(z**K/K)
+    df=f
+    do i=k,no-1 !k+1
+     df=h0*(df.d.1)/h
+     call  invert_laplace(df)
+      sol=f+df
+      sol=(sol.d.2)/h
+      j=0
+      j(1)=i
+      cker=(sol.sub.j)
+!      df=df-cker*aimag(-z**(I+1)/(I+1))
+      df=df-cker*aimag(z**(I+1)/(I+1))
+      f=f+df
+       f=f.cut.(no+1)
+     enddo
+    if(present(verb)) then
+        write(mf,*) " Skew ",k
+        call clean_taylor(f,f,1.d-6)
+        call print(f,mf)
+         y=((f.d.1).d.1)+((f.d.2).d.2)-h0*(f.d.1)/h
+        y=y.cut.(no-1)
+!        call print(y,6)
+        write(mf,*) full_abs(y)
+        kick_x=(f.d.1)
+        kick_y=(f.d.2)
+        call print(kick_x,mf)
+        call print(kick_Y,mf)
+       endif
+
+       kick_x=((f.d.2)/h).cut.no   !!!  magnetic fields instead of kicks
+       kick_y=-((f.d.1)/h).cut.no
+
+!       kick_x=(f.d.1)
+!       kick_y=(f.d.2)
+!       kick_x=(f.d.1)
+!       kick_y=(f.d.2)
+       call clean_taylor(kick_x,kick_x,1.d-6)
+       call clean_taylor(kick_y,kick_y,1.d-6)
+       do l=1,s_b0t%n_mono
+        j(1)=s_b0t%i(l)
+        j(2)=s_b0t%j(l)
+        s_b0t%a_x(k,l)=kick_x.sub.j
+        s_b0t%a_y(k,l)=kick_y.sub.j
+       enddo
+enddo    
+
+        if(present(verb)) close(mf)
+    call kill(x,y,kick_x,kick_y)
+    call kill(z)
+    call kill(f,h,df,ker,sol)
+    call kill(y0)
+
+    end subroutine get_bend_coeff
