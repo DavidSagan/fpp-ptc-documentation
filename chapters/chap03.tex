@@ -1,5 +1,4 @@
 %!TEX root = ../PTC-LibUG.tex
-\makeusother
 \linenumberfrequency{5}
 
 \chapter{Modeling an Accelerator with \PTC}
@@ -13,21 +12,53 @@
 \index{modeling!accelerator topologies}
 %
 
-\fbox{\vbox{
-\et{Nota Bene. This chapter has two parts. The original chapter, written mostly in 2011, makes use of a single ``mad_universe'' denoted by m_u in \PTC; it is a link list of layouts.
-\PTC\ stores  a ``lattice'' in an object called a layout; the layouts are stored in the link list of layouts m_u. Some layouts are simply collections of magnets--- databases for all the magnets of a given accelerator complex. Other layouts are ``trackable.'' The trackable layouts contain ``fibres'' which have pointers to the data base magnets. Generally the number of trackable layouts can be as large as one needs while the database layouts contain  a finite number of elements. All these layouts are stored in the  linked list  m_u.
+\fbox{\vbox{ \et{Nota Bene. This chapter has two parts. The original
+chapter, written mostly in 2011, makes use of a single
+``mad_universe'' denoted by m_u in \PTC; it is a link list of layouts.
+\PTC\ stores a ``lattice'' in an object called a layout; the layouts
+are stored in the link list of layouts m_u. Some layouts are simply
+collections of magnets--- databases for all the magnets of a given
+accelerator complex. Other layouts are ``trackable.'' The trackable
+layouts contain ``fibres'' which have pointers to the data base
+magnets. Generally the number of trackable layouts can be as large as
+one needs while the database layouts contain a finite number of
+elements. All these layouts are stored in the linked list m_u.
 
-Therefore, it was necessary to distinguish the trackable layouts from the database layouts. The database layouts were identified with something called the \DNA. Members of the \DNA\ are not necessarily ``trackable'' but are primarily a way of listing all the magnets of the accelerator complex.
+Therefore, it was necessary to distinguish the trackable layouts from
+the database layouts. The database layouts were identified with
+something called the \DNA. Members of the \DNA\ are not necessarily
+``trackable'' but are primarily a way of listing all the magnets of
+the accelerator complex.
 
-Circa 2013, Forest and Cornell's Sagan decided to attempt to bring more of \PTC\ inside the Cornell code BMAD.   The code BMAD is  far more comprehensive than \PTC\ and has a myriad of models and techniques. Initially it used \PTC\ simply as a Taylor map generator. Later it incorporated simple traditional layouts as MADX of CERN does. Finally Sagan decided to incorporate the complex topologies described in this chapter. For this purpose Forest decided to ``clean up'' \PTC's representation of complex topologies: colliders, recirculators, etc\ldots  
+Circa 2013, Forest and Cornell's Sagan decided to attempt to bring
+more of \PTC\ inside the Cornell code BMAD.  The code BMAD is far more
+comprehensive than \PTC\ and has a myriad of models and
+techniques. Initially it used \PTC\ simply as a Taylor map
+generator. Later it incorporated simple traditional layouts as MADX of
+CERN does. Finally Sagan decided to incorporate the complex topologies
+described in this chapter. For this purpose Forest decided to ``clean
+up'' \PTC's representation of complex topologies: colliders,
+recirculators, etc\ldots
 
-It was decided that database layouts should be in the mad_universe m_u while the trackable layout should be in a special mad_universe m_t.  All the magnets in m_u are part of the \DNA. All the layouts of m_t are trackable. There is no confusion. Forest introduced the concept of a ``tied'' universe. One can traverse the entire database universe with a pointer jumping from one magnet to the next; thus it becomes easy to scan the entire database. 
+It was decided that database layouts should be in the mad_universe m_u
+while the trackable layout should be in a special mad_universe m_t.
+All the magnets in m_u are part of the \DNA. All the layouts of m_t
+are trackable. There is no confusion. Forest introduced the concept of
+a ``tied'' universe. One can traverse the entire database universe
+with a pointer jumping from one magnet to the next; thus it becomes
+easy to scan the entire database.
 
-Additionally, these two universes can be printed out and read back. The reading process will include all the pointers and will reconstruct faithfully the accelerator complex including so-called ``siamese'' and ``girders'' that are described later in this document and allow the grouping of magnets. The Fortran file \ptc{ptc_geometry.f90} illustrates the old \DNA\ setup while \ptc{new_ptc_geometry.f90} constructs    the database universe m_u and the trackable universe m_t.
+Additionally, these two universes can be printed out and read
+back. The reading process will include all the pointers and will
+reconstruct faithfully the accelerator complex including so-called
+``siamese'' and ``girders'' that are described later in this document
+and allow the grouping of magnets. The Fortran file
+\ptc{ptc_geometry.f90} illustrates the old \DNA\ setup while
+\ptc{new_ptc_geometry.f90} constructs the database universe m_u and
+the trackable universe m_t.
  
-If none of this makes any sense to the reader, please read the chapter and come back to this later.
-}
-}}
+If none of this makes any sense to the reader, please read the chapter
+and come back to this later. } }}
 
 This chapter explains how to use \PTC\ to model the geometry for a
 range of accelerators. To that end, we introduce three accelerator
@@ -408,7 +439,6 @@ Use \ptc{.true.} to make \PTC\ use the chord length. \et{The line \ptc{madkind2 
 \index{integration nodes!specifying number of}
 \index{energy!specifying}
 %
-\makeussubscript
 \label{set.mad}
 The call, in \lref{psr.setmad}, to \ptc{set\_mad} defines (via
 \ptc{brho}) the scale momentum $p_o$ for the fibres in the
@@ -416,7 +446,6 @@ layout returned by this subroutine. It also specifies the type
 (\ptc{method = 2}) and number (\ptc{STEP = 10}) of integration steps
 in the body of each element. We then define the five fibres needed
 for our basic cell:
-\makeusother
 \begin{itemize}
   \item Fibres \ptc{d1} and \ptc{d2} denote the long and short drifts.
   \item Fibres \ptc{qf} and \ptc{qd} denote the focusing and defocusing
@@ -1473,19 +1502,28 @@ do i = 2, 2
 end do
 \end{ptccode}
 
-{
-\color{etcol} 
-
 \section{Modeling Complex Accelerator Topologies with two ``MAD universes''}
 \label{sec:model.topo2s}
 
+The program \ptc{new_ptc_geometry.f90} is very similar to the program
+we just examined. \DNA\ or databased layouts are created in the same
+manner; trackable layouts are also created identically as far as the
+process is concerned. The main difference is in the storage of these
+objects. The database layouts are stored in the database universe
+\ptc{m_u}. The trackable layout are stored in the trackable universe
+\ptc{m_t}. With this setup we could dispense with the \DNA\ pointers
+described in the previous section, although they might still be very
+useful.
 
+To explain this process, we created a new program
+\ptc{new_ptc_geometry.f90} that contains purposely some empty lines so
+that the line numbers align perfectly with \ptc{ptc_geometry.f90}. In
+doing so, we facilitate comparison. The \DNA\ pointers are left in the
+code since they are used in the fitting example.t
 
-The program \ptc{new_ptc_geometry.f90} is very similar to the program we just examined. \DNA\ or databased layouts are created in the same manner; trackable layouts are also created identically as far as the process is concerned. The main difference is in the storage of these objects. The database layouts are stored in the database universe \ptc{m_u}. The trackable layout are stored in the trackable universe \ptc{m_t}. With this setup we could dispense with the \DNA\ pointers described in the previous section, although they might still be very useful.
-
-To explain this process, we created a new program \ptc{new_ptc_geometry.f90} that contains purposely some empty lines so that the line numbers align perfectly with \ptc{ptc_geometry.f90}. In doing so, we facilitate comparison. The \DNA\ pointers are left in the code since they are used in the fitting example.t
-
-As we will see, the database universe \ptc{m_u} contains all the necessary information and can be scanned as a single linked list irrespective of the number of layouts it happens to contain.
+As we will see, the database universe \ptc{m_u} contains all the
+necessary information and can be scanned as a single linked list
+irrespective of the number of layouts it happens to contain.
 
 \setptclinenums{1}{5}
 \begin{ptccode}[
@@ -1709,22 +1747,65 @@ Finally, it is worth pointing out that in a more realistic lattice with one inte
 \section{The flat files}
 \label{sec:model.flat}
 
-A flat file is a description of the full lattice including girders and siamese. In the case of a standard lattice, without girders and siamese, \PTC\ can simply give the initial location in space and a sequential list of all its elements.  The code \PTC, in that case, behaves like any standard code. Fibres and elements (magnets), are in one to one correspondence and can be confused. The relative positions of the magnets can be computed using the \ptc{survey} command. The absolute position can be computed either by giving an initial input to the \ptc{survey} command or by moving the entire layout using a rotation and/or a translation.  
+A flat file is a description of the full lattice including girders and
+siamese. In the case of a standard lattice, without girders and
+siamese, \PTC\ can simply give the initial location in space and a
+sequential list of all its elements.  The code \PTC, in that case,
+behaves like any standard code. Fibres and elements (magnets), are in
+one to one correspondence and can be confused. The relative positions
+of the magnets can be computed using the \ptc{survey} command. The
+absolute position can be computed either by giving an initial input to
+the \ptc{survey} command or by moving the entire layout using a
+rotation and/or a translation.
 
-Additionally a standard lattice can have patches. The statements of the previous paragraph apply \emph{in toto}. Although this is a novel aspect of \PTC\ it is hardly revolutionary and still assumes that magnets and fibres are interchangeable. For example, \PTC\ uses the MAD8 convention for the survey. SAD, the KEK code, treats vertical magnets differently as far as frame of references are concerned. Therefore the survey command of SAD may produce a different lattice than that of MAD8 or \PTC\ even on a standard lattice without patches. In \PTC\ the translation between the two codes is handled by an additional patch at the vertical bends that ensures that \PTC\ is really modeling a SAD lattice.
+Additionally a standard lattice can have patches. The statements of
+the previous paragraph apply \emph{in toto}. Although this is a novel
+aspect of \PTC\ it is hardly revolutionary and still assumes that
+magnets and fibres are interchangeable. For example, \PTC\ uses the
+MAD8 convention for the survey. SAD, the KEK code, treats vertical
+magnets differently as far as frame of references are
+concerned. Therefore the survey command of SAD may produce a different
+lattice than that of MAD8 or \PTC\ even on a standard lattice without
+patches. In \PTC\ the translation between the two codes is handled by
+an additional patch at the vertical bends that ensures that \PTC\ is
+really modeling a SAD lattice.
 
 
-The real power of \PTC\ is to be found in the modeling of colliders, dogbones, figure eight and other strange contraptions where magnets are visited more than once from different angles or, as in a collider, belong to different lattices.  We have shown with the simple examples of  \ptc{ptc_geometry.f90} or, equivalently, with \ptc{new_ptc_geometry.f90} how \PTC\ can create these complex topologies. 
+The real power of \PTC\ is to be found in the modeling of colliders,
+dogbones, figure eight and other strange contraptions where magnets
+are visited more than once from different angles or, as in a collider,
+belong to different lattices.  We have shown with the simple examples
+of \ptc{ptc_geometry.f90} or, equivalently, with
+\ptc{new_ptc_geometry.f90} how \PTC\ can create these complex
+topologies.
 
-Once these systems are created, either purely by \PTC\, or through the intermediate use of a code like BMAD or with a CAD program, can one save them and re-use them? The answer is yes if the creation mechanism is based on the database universe \ptc{m_u} and trackable universe \ptc{m_t} as described in  \ptc{new_ptc_geometry.f90}. Would it be possible to print and store the lattices created in \ptc{ptc_geometry.f90}? Of course, since the physics is identical, the answer must be ``yes.'' However Forest does not support this option. One could theoretically translate the single universe representation of \ptc{ptc_geometry.f90} into the double universe of \ptc{new_ptc_geometry.f90} and print the accelerator complex. However we simply advice the user of \PTC\
-to use the double universe from the very start as the code BMAD does when it  constructs a complex topology and sends it to \PTC .
+Once these systems are created, either purely by \PTC\, or through the
+intermediate use of a code like BMAD or with a CAD program, can one
+save them and re-use them? The answer is yes if the creation mechanism
+is based on the database universe \ptc{m_u} and trackable universe
+\ptc{m_t} as described in \ptc{new_ptc_geometry.f90}. Would it be
+possible to print and store the lattices created in
+\ptc{ptc_geometry.f90}? Of course, since the physics is identical, the
+answer must be ``yes.'' However Forest does not support this
+option. One could theoretically translate the single universe
+representation of \ptc{ptc_geometry.f90} into the double universe of
+\ptc{new_ptc_geometry.f90} and print the accelerator complex. However
+we simply advice the user of \PTC\ to use the double universe from the
+very start as the code BMAD does when it constructs a complex topology
+and sends it to \PTC .
 
 \subsection{Printing the database universe}
 %\label{sec:m_u.flat}
 
-The file containing the database universe, \ptc{m_u.txt} in our example, is made of two basic parts. First the \DNA\ layouts are listed sequentially. In the example of this chapter, these are \ptc{L1}, \ptc{L2}, \ptc{L3}, \ptc{L4}, \ptc{L5} and \ptc{L6}. Finally the siamese magnets, which are magnets closely joined to each other, are listed. And finally the girders are listed. Girders are assemblies on which magnets and siamese can be attached. This permits \PTC\ to have various level of misalignment errors in a lattice. 
-
-{ 
+The file containing the database universe, \ptc{m_u.txt} in our
+example, is made of two basic parts. First the \DNA\ layouts are
+listed sequentially. In the example of this chapter, these are
+\ptc{L1}, \ptc{L2}, \ptc{L3}, \ptc{L4}, \ptc{L5} and \ptc{L6}. Finally
+the siamese magnets, which are magnets closely joined to each other,
+are listed. And finally the girders are listed. Girders are assemblies
+on which magnets and siamese can be attached. This permits \PTC\ to
+have various level of misalignment errors in a lattice.
+ 
 \setptclinenums{1}{5} 
 \begin{ptccode}
 L1                                                                                                                      
@@ -1988,7 +2069,6 @@ It is important to realize that this patch is computed with pure geometrical cal
 
 
 
-\makeussubscript
 \endinput
 
 

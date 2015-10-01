@@ -1,5 +1,4 @@
 %!TEX root = ../PTC-LibUG.tex
-\makeusother
 
 \chapter{Data Types}
 
@@ -77,7 +76,7 @@ The pointer T points to the layout's its associated \ptc{NODE_LAYOUT}.
 This pointer is normally grounded because \PTC\ does not systematically
 create node layouts or \emph{thin layouts}. When not grounded, the pointer
 contains the expanded representation displayed on the left side of
-\fref{TYPE-INTEGRATION_NODE}.
+\fref{TYPE.INTEGRATION.NODE}.
 
 \fxnote{Al: Am I correct that node layout and thin layout are synonyms? If not, the above description must be changed.}
 
@@ -180,7 +179,7 @@ GAMBET, and MASS have replaced P0C.}
 
 \ptc{T1} and \ptc{T2} are pointers to the first and last integration-node children.
 The integer \ptc{POS} locates the fibre in the node layout. See
-\fref{TYPE-INTEGRATION_NODE}.
+\fref{TYPE.INTEGRATION.NODE}.
 
 
 \subsection{Chart}
@@ -375,13 +374,13 @@ Each integration node is either
   \item the exit patch/misalignment/tilt of its parent fibre (integration_node\%cas=-2).
 \end{enumerate}
 
-See \fref{TYPE-INTEGRATION_NODE}.
+See \fref{TYPE.INTEGRATION.NODE}.
 
 \begin{figure}[ht]\forcerectofloat
   \centering
   \includegraphics[width=\textwidth]{illustrations/integration-node-and-fibre}
   \caption{Type \ptc{integration\_node} and type \ptc{fibre}.}
-  \label{fig:TYPE-INTEGRATION_NODE}
+  \label{fig:TYPE.INTEGRATION.NODE}
 \end{figure}
 
 \ptc{NEXT} and \ptc{PREVIOUS} are the pointers necessary to create the \ptc{NODE_LAYOUT},
@@ -642,5 +641,4 @@ In the ``additionally'' paragraph, the third sentence originally read as follows
 ``The node is located using the pointer \ptc{POS(N)\%Node} and the distance
 is located in \ptc{X(N,7)}.''
 
-\makeussubscript
 \endinput

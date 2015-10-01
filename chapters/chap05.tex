@@ -1,5 +1,4 @@
 %!TEX root = ../PTC-LibUG.tex
-\makeusother
 \linenumberfrequency{5}
 
 \chapter{Taylor Polymorphism and Knobs}
@@ -73,9 +72,7 @@ The variable \ptc{state} describes internal states of \PTC.
 
 The variable \ptc{id} is a differential algebra map (\ptc{damap}), and \ptc{id = 1} constructs the identity map.
 
-\makeussubscript
 Then \ptc{Y = fix + id} creates the polymorphic component \ptc{Y(i)} given by \ptc{Y(i) = fix(i) + $x_i$}, where $x_i$ denotes the $i$-th component of the identity map \ptc{id}.
-\makeusother
 
 \index{one-turn map!computing}
 \index{TRACK@\ptc{TRACK}!routine}
@@ -91,7 +88,6 @@ call track(R, Y, 1, state)
 \index{internal states!setting}
 \index{state!internal}
 %
-\makeussubscript
 At the end, \ptc{Y} contains the Taylor map, to order \ptc{NO}, about the closed orbit \ptc{fix}. The internal state variable \ptc{state} determines the exact nature of the map:
 \begin{enumerate}
   \item \ptc{state = default0} specifies a 6-D map with cavities;
@@ -100,7 +96,6 @@ At the end, \ptc{Y} contains the Taylor map, to order \ptc{NO}, about the closed
   \item \ptc{state = default0 + delta0} specifies a 4-D phase
 space $(X, P_X, Y, P_Y)$, plus energy as the fifth variable; cavities are skipped.
 \end{enumerate}
-\makeusother
 
 For more information about states, see \Aref{states}.
 
@@ -447,5 +442,4 @@ call kill_para(Col1%dna(1)%l)
 call kill_para(Col1%dna(2)%l)
 \end{ptccode}
 
-\makeussubscript
 \endinput

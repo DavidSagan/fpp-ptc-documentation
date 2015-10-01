@@ -1303,11 +1303,10 @@ self-interacting particles.%
 \sidenote{Overlapping fringe fields also violate the principle
 of magnet independence; and in that case, too, one must exercise care.}
 
-\makeusother
 In the rest of this section, we discuss some of the data
 types useful for including particle interactions:
-\ptctyp{integration_node}, \ptctyp{node_layout}, \ptctyp{probe},
-and \ptctyp{temporal_probe}. We also describe the basic idea
+\ptctyp{integration\_node}, \ptctyp{node\_layout}, \ptctyp{probe},
+and \ptctyp{temporal\_probe}. We also describe the basic idea
 behind the time-based tracking capability of \PTC.
 
 
@@ -1397,8 +1396,8 @@ the fibres (\eg, misalignments) to the integration nodes.
 \ptctyp{node\_layout} inserting a bunch of additional reference
 frames.}
 %
-The data type \ptctyp{node_layout} represents a beamline as a
-linked list of \ptctyp{integration_node}s. It includes pointers
+The data type \ptctyp{node\_layout} represents a beamline as a
+linked list of \ptctyp{integration\_node}s. It includes pointers
 to the first and last integration nodes in the beamline, as well
 as a pointer to the parent \ptctyp{layout}. To access the
 integration nodes of a particular fibre, one may step through
@@ -1406,7 +1405,7 @@ them, making use the fact that the data type \ptctyp{fibre}
 includes pointers to the first, last, and middle integration nodes
 for the corresponding element.
 
-A \ptctyp{node_layout} is not created automatically when you
+A \ptctyp{node\_layout} is not created automatically when you
 create a \ptctyp{layout}: You must ask \PTC\ to create it and
 populate the associated reference frames.
 \fxnote{Add reference to example(s).}
@@ -1421,18 +1420,17 @@ The data type \ptctyp{probe} represents a particle. In particular,
 it contains, for a given particle, both the orbital phase-space data
 and a \ptctyp{spinor} for the spin data. Should the particle become
 lost, the \ptctyp{probe} contains a \ptctyp{logical} in which to
-record this fact, as well a pointer to the \ptctyp{integration_node}
+record this fact, as well a pointer to the \ptctyp{integration\_node}
 in which the particle loss occured.
 
 \index{temporal probe!defined}
 \index{data type!\ptc{TEMPORAL\_PROBE}}
 \index{probe|see{\emph{also} temporal probe}}
 %
-The data type \ptctyp{temporal_probe} contains a \ptctyp{probe}
+The data type \ptctyp{temporal\_probe} contains a \ptctyp{probe}
 together with information relevant to the time-based tracking
 capability of \PTC. This includes a pointer to the
-\ptctyp{integration_node} that currently contains the particle.
-\makeussubscript
+\ptctyp{integration\_node} that currently contains the particle.
 
 
 \subsection{Time-based Tracking}

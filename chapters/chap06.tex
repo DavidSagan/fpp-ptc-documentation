@@ -24,7 +24,6 @@ they are the same at any point on the closed orbit.
 
 \subsection{Tunes}
 
-\makeusother
 \begin{ptccode}
 x = zero
 x(5) = delta
@@ -39,30 +38,24 @@ call track(lattice, y, 1, istate)
 normal = y
 write(6,'(a,3(2x,f9.6))') 'tunes:', normal%tune
 \end{ptccode}
-\makeussubscript
 
 
 \subsection{Chromaticity}
 
-%\makeusother
 %\begin{ptccode}
 %\end{ptccode}
-%\makeussubscript
 
 
 \subsection{Anharmonicity}
 
-%\makeusother
 %\begin{ptccode}
 %\end{ptccode}
-%\makeussubscript
 
 
 \section{s-Dependent Global Quantities}
 
 \subsection{Betatron Amplitude}
 
-\makeusother
 \begin{ptccode}
 x = zero
 x(5) = delta
@@ -88,20 +81,16 @@ do j = 1, lattice%n
   p => p%next
 end do
 \end{ptccode}
-\makeussubscript
 
 
 %\subsection{Twiss Parameter}
 
-%\makeusother
 %\begin{ptccode}
 %\end{ptccode}
-%\makeussubscript
 
 
 \subsection{Dispersion}
 
-\makeusother
 \begin{ptccode}
 x = zero
 x(5) = delta
@@ -133,7 +122,6 @@ do j = 1, lattice%n
   write(6,'(a,2(2x,f9.6))') 'disp_x, disp_y: ', dispx, dispy
 end do
 \end{ptccode}
-\makeussubscript
 
 
 \subsection{Phase Advance}
@@ -154,7 +142,6 @@ end do
 
 See caveat at end of \Sref{analyze.accel.prop}!
 
-\makeusother
 \begin{ptccode}
 x = zero
 x(5) = delta
@@ -191,16 +178,13 @@ do j = 1, lattice%n
   p => p%next
 end do
 \end{ptccode}
-\makeussubscript
 
 
 \subsection{Beam Envelope}
 
 Text and example code here.
-%\makeusother
 %\begin{ptccode}
 %\end{ptccode}
-%\makeussubscript
 
 
 \section{Local Quantities}

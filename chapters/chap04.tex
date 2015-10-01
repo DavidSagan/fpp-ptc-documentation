@@ -1,5 +1,4 @@
 %!TEX root = ../PTC-LibUG.tex
-\makeusother
 
 \chapter{Linking Magnets Together and Moving Them as a Group}
 \label{cha:girders}
@@ -201,13 +200,13 @@ do i = 2, 7                 \label{lin:blp.grdr}
   p1 => p1%next
 end do                      \label{lin:elp.grdr}
 call move_to(Col2, p2,  7)
-p1%mag%girders => p1%mag%siamese  \label{lin:grdr.4_70}
-p1%mag%siamese%girders => p2%mag  \label{lin:grdr.70_7}
-p2%mag%girders => p2%mag%siamese  \label{lin:grdr.7_67}
+p1%mag%girders => p1%mag%siamese  \label{lin:grdr.4.70}
+p1%mag%siamese%girders => p2%mag  \label{lin:grdr.70.7}
+p2%mag%girders => p2%mag%siamese  \label{lin:grdr.7.67}
 call move_to(Col1, p1, 67)
 call move_to(Col2, p2, 14)
-p1%mag%girders => p2%mag          \label{lin:grdr.67_14}
-p2%mag%girders => pf%mag           \label{lin:grdr.14_68}
+p1%mag%girders => p2%mag          \label{lin:grdr.67.14}
+p2%mag%girders => pf%mag           \label{lin:grdr.14.68}
 \end{ptccode}
 %
 In the rest of this block of code, we link in the remaining four
@@ -216,15 +215,15 @@ bends we want on our girder: the ones labeled 7, 14, and 70 from
 distinct, we
 simplify the following description: instead of saying, for example,
 ``the bend in fibre~4 of \ptc{Col1}'', we shall say simply ``bend~4''.)
-First, we move \ptc{p2} to bend~7. \lref[c]{grdr.4_70} then links
+First, we move \ptc{p2} to bend~7. \lref[c]{grdr.4.70} then links
 bend~4 to bend~70, because \ptc{p1\%mag\%siamese} already points to
-the latter. \lref[c]{grdr.70_7} links bend~70 to bend~7; and
-\lref{grdr.7_67} links bend~7 to bend~67, because \ptc{p2\%mag\%siamese}
+the latter. \lref[c]{grdr.70.7} links bend~70 to bend~7; and
+\lref{grdr.7.67} links bend~7 to bend~67, because \ptc{p2\%mag\%siamese}
 already points to the latter. It now remains for us to link in
 bend~14 and then close our linked list of girder elements. To do
 this, we first point \ptc{p1} to bend~67 and \ptc{p2} to bend~14.
-Then \lref{grdr.67_14} adds the girder link from one to the other
-of those two elements. Finally, \lref{grdr.14_68} closes the linked
+Then \lref{grdr.67.14} adds the girder link from one to the other
+of those two elements. Finally, \lref{grdr.14.68} closes the linked
 list.
 
 We now have a pair of siamese and a girder defined in our collider.
@@ -489,5 +488,4 @@ end if
 \end{marginfigure}
 
 
-\makeussubscript
 \endinput

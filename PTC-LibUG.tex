@@ -45,6 +45,7 @@
 %% memoir provides sizes tiny, scriptsize, footnotesize, small,
 %% normalsize, large, Large, LARGE, huge, and Huge.
 \RequirePackage[T1]{fontenc}
+
 %\RequirePackage[scaled=0.90]{helvet}   % san serif
 \RequirePackage[scaled=1.05]{libertine}             % san serif
 %\renewcommand*\sfdefault{uop}         % Optima (san serif)
@@ -699,6 +700,8 @@
 %% cribbed from the tufte-latex project
 \RequirePackage[symmetric,justified,raggedmargins]{tufte-env} % load after hyperref
 
+\def\cplabel{^X}                    % To get around conflict with underscore package and  \newpmemlabel (defined in memoir package)
+\usepackage[strings]{underscore}    % to use "_" in text
 
 %:PTC code
 %% use customised boxedverbatim (above) to create new environment 'ptccode'
@@ -736,14 +739,10 @@
 %% start line
 \linenumberfrequency{1}% use zero (0) to turn off line numbers
 
-%% PTC uses the underscore character (\_) frequently, so we define
-%% two macros to modify its category code (us := underscore)
-\newcommand*{\makeusother}{\catcode`\_=12}    % catcode for `other'
-\newcommand*{\makeussubscript}{\catcode`\_=8} % catcode for `subscript'
-
 %% PTC text
-%\newcommand{\ptc}[1]{\texttt{#1}} % doesn't work with \makeusother ... \makeussubscript
-\let\ptc\texttt                    % use this instead
+
+\newcommand{\ptc}[1]{\texttt{#1}}
+
 %% PTC arguments
 \newcommand{\ptcarg}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}
 \newcommand{\argb}{\ptcarg{bool}}
@@ -956,13 +955,13 @@
 \appendix
 \include{appends/appenA} % internal states
 \include{appends/appenB} % data types
+
 %\include{appends/appenC} % input to PTC from other codes
 %\include{appends/appenD} % flat files
 \include{appends/appenE} % geometry tutorial
 \include{appends/appenEb} % geometry tutorial
-
 \include{appends/appenF} % splitting tutorial
-\include{appends/appenG} % Solving Maxwell
+%\include{appends/appenG} % Solving Maxwell
 
 %:back matter
 \backmatter
