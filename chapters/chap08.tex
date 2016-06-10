@@ -135,14 +135,14 @@ both points of view.
 This section describes the affine routines on pure geometry.
 
 
-\subsubsection{GEO\_ROT}
+\subsubsection{GEO_ROT}
 
 \begin{ptccode}
 GEO_ROT(V(3, 3),W(3, 3),A(3),B(3),ANG(3)\textit{\textcolor{red}{,BASIS(3,3)}})
 \end{ptccode}
 
-\index{routine!\ptc{GEO\_ROT}}
-\index{GEO\_ROT@\ptc{GEO\_ROT}!routine}
+\index{routine!\ptc{GEO_ROT}}
+\index{GEO_ROT@\ptc{GEO_ROT}!routine}
 %
 This routine exactly reproduces the theory in the previous section.
 
@@ -175,14 +175,14 @@ GEO_ROT(V(3, 3),ANG(3),I\textit{\textcolor{red}{,BASIS(3,3)}})
 This routine is the same as the previous routine without the \ptc{A} vector.
 
 
-\subsubsection{GEO\_TRA}
+\subsubsection{GEO_TRA}
 
 \begin{ptccode}
 GEO_TRA(A(3),V(3, 3) (3),D,I)
 \end{ptccode}
 
-\index{routine!\ptc{GEO\_TRA}}
-\index{GEO\_TRA@\ptc{GEO\_TRA}!routine}
+\index{routine!\ptc{GEO_TRA}}
+\index{GEO_TRA@\ptc{GEO_TRA}!routine}
 %
 \ptc{A} is translated by $\pm$ \ptc{D} expressed in the basis \ptc{V}; \ptc{I} = $\pm1$.
 \begin{equation*}
@@ -203,10 +203,10 @@ ROTATE_FRAME(F,OMEGA,ANG,ORDER\textit{\textcolor{red}{,BASIS(3,3)}})
 
 \index{translation routines!described}
 \index{rotation routines!described}
-\index{routine!\ptc{ROTATE\_FRAME}}
-\index{ROTATE\_FRAME@\ptc{ROTATE\_FRAME}!routine}
+\index{routine!\ptc{ROTATE_FRAME}}
+\index{ROTATE_FRAME@\ptc{ROTATE_FRAME}!routine}
 %
-\ptc{F} is of type \ptc{magnet\_frame} and contains three affine frames tied
+\ptc{F} is of type \ptc{magnet_frame} and contains three affine frames tied
 to the magnet.
 \begin{equation*}
 F = \lbrace ( F \% A(3), F \% ENT(3) ), ( F \% O(3), F \% MID(3) ), ( F \% B(3), F \% EXI(3) ) \rbrace
@@ -221,8 +221,8 @@ The entire content of \ptc{F} is rotated as shown in \fref{Rotating-and-translat
   \label{fig:Rotating-and-translating}
 \end{figure}
 
-\index{routine!\ptc{TRANSLATE\_FRAME}}
-\index{TRANSLATE\_FRAME@\ptc{TRANSLATE\_FRAME}!routine}
+\index{routine!\ptc{TRANSLATE_FRAME}}
+\index{TRANSLATE_FRAME@\ptc{TRANSLATE_FRAME}!routine}
 %
 \begin{ptccode}
 TRANSLATE_FRAME(F,D,ORDER\textit{\textcolor{red}{,BASIS(3,3)}})
@@ -238,10 +238,10 @@ The frame is simply translated by \ptc{D}. The translation \ptc{D} is expressed
 in \ptc{BASIS} if present.
 
 
-\subsubsection{CHANGE\_BASIS}
+\subsubsection{CHANGE_BASIS}
 
-\index{routine!\ptc{CHANGE\_BASIS}}
-\index{CHANGE\_BASIS@\ptc{CHANGE\_BASIS}!routine}
+\index{routine!\ptc{CHANGE_BASIS}}
+\index{CHANGE_BASIS@\ptc{CHANGE_BASIS}!routine}
 %
 \begin{ptccode}
 CHANGE_BASIS(A(3),V(3,3),B(3),W(3,3))
@@ -255,10 +255,10 @@ as \ptc{B} using basis \ptc{W}. \ptc{B} is the output of this subroutine.
 \end{equation*}
 
 
-\subsubsection{COMPUTE\_ENTRANCE\_ANGLE}
+\subsubsection{COMPUTE_ENTRANCE_ANGLE}
 
-\index{routine!\ptc{COMPUTE\_ENTRANCE\_ANGLE}}
-\index{COMPUTE\_ENTRANCE\_ANGLE@\ptc{COMPUTE\_ENTRANCE\_ANGLE}!routine}
+\index{routine!\ptc{COMPUTE_ENTRANCE_ANGLE}}
+\index{COMPUTE_ENTRANCE_ANGLE@\ptc{COMPUTE_ENTRANCE_ANGLE}!routine}
 %
 \begin{ptccode}
 COMPUTE_ENTRANCE_ANGLE(V(3,3),W(3,3),ANG(3))
@@ -272,14 +272,14 @@ $R$ in the standard \PTC\ order, that is,
 \begin{equation*}
   R = R_z (\ptc{ang(3)}) R_y (\ptc{ang(2)}) R_x (\ptc{ang(1)})
 \end{equation*}
-such that \ptc{V} is transformed into \ptc{W}. It is the reverse routine from \ptc{GEO\_ROT}.
+such that \ptc{V} is transformed into \ptc{W}. It is the reverse routine from \ptc{GEO_ROT}.
 
 
-\subsubsection{FIND\_PATCH\_B}
+\subsubsection{FIND_PATCH_B}
 
-\index{routine!FIND\_PATCH\_B@\ptc{FIND\_PATCH\_B}}
-\index{FIND\_PATCH\_B@\ptc{FIND\_PATCH\_B}!routine}
-\index{patching!FIND\_PATCH\_B@\ptc{FIND\_PATCH\_B} routine}
+\index{routine!FIND_PATCH_B@\ptc{FIND_PATCH_B}}
+\index{FIND_PATCH_B@\ptc{FIND_PATCH_B}!routine}
+\index{patching!FIND_PATCH_B@\ptc{FIND_PATCH_B} routine}
 \index{patch!inserting}
 %
 This routine connects the affine frame \ptc{A,V} to the affine frame \ptc{B,W}.
@@ -307,14 +307,14 @@ is expressed in the final frame $W$. This is normal if dynamical rotations
 precede the translations.
 
 
-\subsubsection{FIND\_INVERSE\_PATCH}
+\subsubsection{FIND_INVERSE_PATCH}
 
-\index{routine!\ptc{INVERSE\_FIND\_PATCH}}
-\index{INVERSE\_FIND\_PATCH@\ptc{INVERSE\_FIND\_PATCH}!routine}
-\index{patching!\ptc{INVERSE\_FIND\_PATCH} routine}
+\index{routine!\ptc{INVERSE_FIND_PATCH}}
+\index{INVERSE_FIND_PATCH@\ptc{INVERSE_FIND_PATCH}!routine}
+\index{patching!\ptc{INVERSE_FIND_PATCH} routine}
 \index{patch!inserting}
 %
-This routine is the precise inverse of the \ptc{FIND\_PATCH\_B} routine.
+This routine is the precise inverse of the \ptc{FIND_PATCH_B} routine.
 The affine frame \ptc{B,W} is the output.
 
 \begin{ptccode}
@@ -393,37 +393,37 @@ The central power of \PTC\ is its ability to place magnets in arbitrary
 positions. To do so, the concept of a fibre with a patch is necessary.
 
 
-\subsubsection*{FIND\_PATCH}
+\subsubsection*{FIND_PATCH}
 
-\index{routine!\ptc{FIND\_PATCH}}
-\index{FIND\_PATCH@\ptc{FIND\_PATCH}!routine}
-\index{patching!\ptc{FIND\_PATCH} routine}
+\index{routine!\ptc{FIND_PATCH}}
+\index{FIND_PATCH@\ptc{FIND_PATCH}!routine}
+\index{patching!\ptc{FIND_PATCH} routine}
 \index{patch!inserting}
 %
 \begin{ptccode}
 FIND_PATCH(EL1\textit{\textcolor{red}{,EL2_NEXT,NEXT,ENERGY_PATCH,PRECi}})
 \end{ptccode}
 
-\ptc{EL1} and \ptc{EL2\_NEXT}
+\ptc{EL1} and \ptc{EL2_NEXT}
 
 \index{patching!energy}
 \index{energy!patch}
 %
 \ptc{PREC} is a small \ptc{real(dp)} number.  If the norm of the geometric patch is
-smaller than \ptc{PREC}, then the patch is ignored. If \ptc{energy\_patch} is true,
+smaller than \ptc{PREC}, then the patch is ignored. If \ptc{energy_patch} is true,
 then it compares the design momenta of the magnets in both fibres. If the magnitude
 of difference is greater than \ptc{PREC}, then an energy patch is put on.
 
 
-\subsubsection*{CHECK\_NEED\_PATCH}
+\subsubsection*{CHECK_NEED_PATCH}
 
-\index{routine!\ptc{CHECK\_NEED\_PATCH}}
-\index{CHECK\_NEED\_PATCH@\ptc{CHECK\_NEED\_PATCH}!routine}
-\index{patching!\ptc{CHECK\_NEED\_PATCH} routine}
+\index{routine!\ptc{CHECK_NEED_PATCH}}
+\index{CHECK_NEED_PATCH@\ptc{CHECK_NEED_PATCH}!routine}
+\index{patching!\ptc{CHECK_NEED_PATCH} routine}
 \index{patch!checking whether needed}
 %
 This routine checks whether a patch is needed without actually applying
-it to the layout. The routine returns the integer \ptc{PATCH\_NEEDED}.
+it to the layout. The routine returns the integer \ptc{PATCH_NEEDED}.
 If zero, it is not needed.
 
 \begin{ptccode}
@@ -446,13 +446,13 @@ if they are present,
 
 \subsubsection{Subroutines Invoking the Magnet and Relying on the DNA}
 
-\index{data type!\ptc{MAD\_UNIVERSE}}
-\index{MAD\_UNIVERSE@\ptc{MAD\_UNIVERSE}!data type}
+\index{data type!\ptc{MAD_UNIVERSE}}
+\index{MAD_UNIVERSE@\ptc{MAD_UNIVERSE}!data type}
 %
 When complex structures are constructed in \PTC, it is preferable to follow
 a strict discipline. First various layouts with no ``cloning'' of magnets are created
-in a ``mad universe'' of data type \ptc{MAD\_UNIVERSE}. The code MAD-X calls this
-universe \ptc{M\_U}.
+in a ``mad universe'' of data type \ptc{MAD_UNIVERSE}. The code MAD-X calls this
+universe \ptc{M_U}.
 
 \index{DNA sequence!populating DNA database}
 \index{DNA database!populating}
@@ -460,24 +460,24 @@ universe \ptc{M\_U}.
 These no-clone layouts contain the actual magnet database of the accelerator
 complex. Therefore we refer to these layouts as the DNA of the complex.
 
-\index{routine!\ptc{APPEND\_POINT}}
-\index{APPEND\_POINT@\ptc{APPEND\_POINT}!routine}
-\index{routine!\ptc{APPEND\_EMPTY}}
-\index{APPEND\_EMPTY@\ptc{APPEND\_EMPTY}!routine}
-\index{routine!\ptc{APPEND\_FIBRE}}
-\index{APPEND\_FIBRE@\ptc{APPEND\_FIBRE}!routine}
+\index{routine!\ptc{APPEND_POINT}}
+\index{APPEND_POINT@\ptc{APPEND_POINT}!routine}
+\index{routine!\ptc{APPEND_EMPTY}}
+\index{APPEND_EMPTY@\ptc{APPEND_EMPTY}!routine}
+\index{routine!\ptc{APPEND_FIBRE}}
+\index{APPEND_FIBRE@\ptc{APPEND_FIBRE}!routine}
 %
 Then trackable structures are appended after the DNA. Since the magnets
 of these structures must be in the DNA, they are created with the
-\ptc{APPEND\_POINT} routine rather than the standard \ptc{APPEND\_EMPTY}
-or \ptc{APPEND\_FIBRE} used for the DNA production.
+\ptc{APPEND_POINT} routine rather than the standard \ptc{APPEND_EMPTY}
+or \ptc{APPEND_FIBRE} used for the DNA production.
 
-\index{data type!\ptc{FIBRE\_APPEARANCE}}
-\index{FIBRE\_APPEARANCE@\ptc{FIBRE\_APPEARANCE}!data type}
+\index{data type!\ptc{FIBRE_APPEARANCE}}
+\index{FIBRE_APPEARANCE@\ptc{FIBRE_APPEARANCE}!data type}
 %
-When the \ptc{APPEND\_POINT} routine is used, a magnet will automatically
+When the \ptc{APPEND_POINT} routine is used, a magnet will automatically
 retain memory of its various fibre appearances though a data type called
-\ptc{FIBRE\_APPEARANCE}.
+\ptc{FIBRE_APPEARANCE}.
 
 \begin{ptccode}
 TYPE FIBRE_APPEARANCE
@@ -498,7 +498,7 @@ TYPE(FIBRE_APPEARANCE), POINTER :: DOKO
 \end{ptccode}
 
 which constitutes a linked list storing all the appearances of this
-magnet in the pointer \ptc{parent\_fibre}. The linked list is terminated,
+magnet in the pointer \ptc{parent_fibre}. The linked list is terminated,
 or grounded, at the last fibre appearance. If more trackable structures
 are created, this linked list is extended for each magnet.
 
@@ -518,10 +518,10 @@ This section describes translation routines that do not automatically patch
 fibres together.
 
 
-\subsubsection*{TRANSLATE\_FIBRE}
+\subsubsection*{TRANSLATE_FIBRE}
 
-\index{routine!\ptc{TRANSLATE\_FIBRE}}
-\index{TRANSLATE\_FIBRE@\ptc{TRANSLATE\_FIBRE}!routine}
+\index{routine!\ptc{TRANSLATE_FIBRE}}
+\index{TRANSLATE_FIBRE@\ptc{TRANSLATE_FIBRE}!routine}
 %
 This routine uses the \ptc{DOKO} construct, if associated, to locate
 all the appearances of a magnet and rotate the frames on all integration
@@ -535,16 +535,16 @@ Here \ptc{R} is a fibre to be translated by \ptc{D}. \ptc{Dogirder=true} forces 
 translation of the girder frame if present.
 
 
-\subsubsection*{TRANSLATE\_LAYOUT}
+\subsubsection*{TRANSLATE_LAYOUT}
 
-\index{routine!\ptc{TRANSLATE\_LAYOUT}}
-\index{TRANSLATE\_LAYOUT@\ptc{TRANSLATE\_LAYOUT}!routine}
+\index{routine!\ptc{TRANSLATE_LAYOUT}}
+\index{TRANSLATE_LAYOUT@\ptc{TRANSLATE_LAYOUT}!routine}
 %
 This routine
 \begin{itemize}
   \item scans the layout \ptc{R} from position \ptc{I1} to \ptc{I2} inclusive if
 present. \ptc{I1} and \ptc{I2} are defaulted to $1$ and $R \% N$ respectively.
-  \item calls \ptc{TRANSLATE\_FIBRE} with \ptc{dogirder=true}
+  \item calls \ptc{TRANSLATE_FIBRE} with \ptc{dogirder=true}
 on each fibre.
   \item uses the \ptc{DOKO} construct, if associated, to locate all the appearances
 of a magnet and rotate the frames on all integration nodes if present.
@@ -563,26 +563,26 @@ This section describes rotation routines that do not automatically patch
 fibres together.
 
 
-\subsubsection*{ROTATE\_FIBRE}
+\subsubsection*{ROTATE_FIBRE}
 
-\index{routine!\ptc{ROTATE\_FIBRE}}
-\index{ROTATE\_FIBRE@\ptc{ROTATE\_FIBRE}!routine}
+\index{routine!\ptc{ROTATE_FIBRE}}
+\index{ROTATE_FIBRE@\ptc{ROTATE_FIBRE}!routine}
 %
-The comments that apply to \ptc{TRANSLATE\_FIBRE} also apply to
-\ptc{ROTATE\_FIBRE}.
+The comments that apply to \ptc{TRANSLATE_FIBRE} also apply to
+\ptc{ROTATE_FIBRE}.
 
 \begin{ptccode}
 ROTATE_FIBRE(R,OMEGA,ANG\textit{\textcolor{red}{,ORDER,BASIS,DOGIRDER}})
 \end{ptccode}
 
 
-\subsubsection*{ROTATE\_LAYOUT}
+\subsubsection*{ROTATE_LAYOUT}
 
-\index{routine!\ptc{ROTATE\_LAYOUT}}
-\index{ROTATE\_LAYOUT@\ptc{ROTATE\_LAYOUT}!routine}
+\index{routine!\ptc{ROTATE_LAYOUT}}
+\index{ROTATE_LAYOUT@\ptc{ROTATE_LAYOUT}!routine}
 %
-The comments that apply to \ptc{TRANSLATE\_LAYOUT} also apply to
-\ptc{ROTATE\_LAYOUT}.
+The comments that apply to \ptc{TRANSLATE_LAYOUT} also apply to
+\ptc{ROTATE_LAYOUT}.
 
 \begin{ptccode}
 ROTATE_LAYOUT(R,OMEGA,ANG\textit{\textcolor{red}{,I1,I2,ORDER,BASIS}})
@@ -597,16 +597,16 @@ This section describes rotation routines that automatically patch fibres togethe
 The routines have been designed to rotate magnets stored in the DNA database.
 
 
-\subsubsection*{ROTATE\_MAGNET}
+\subsubsection*{ROTATE_MAGNET}
 
-\index{routine!\ptc{ROTATE\_MAGNET}}
-\index{ROTATE\_MAGNET@\ptc{ROTATE\_MAGNET}!routine}
+\index{routine!\ptc{ROTATE_MAGNET}}
+\index{ROTATE_MAGNET@\ptc{ROTATE_MAGNET}!routine}
 %
 \begin{ptccode}
 ROTATE_MAGNET(R,ANG,OMEGA\textit{\textcolor{red}{,ORDER,BASIS,PATCH,PREC}})
 \end{ptccode}
 
-\ptc{R} is a magnet. The routine rotates \ptc{parent\_fibre}, which rotates
+\ptc{R} is a magnet. The routine rotates \ptc{parent_fibre}, which rotates
 all the frames of the magnet.
 
 If \ptc{patch=true}, then all the appearances of this magnet stored in
@@ -618,12 +618,12 @@ If there is no DNA, that is, if \PTC\ runs in pure compatibility mode
 with standard codes, then patches are on the parent fibre of the magnet.
 
 
-\subsubsection*{TRANSLATE\_MAGNET}
+\subsubsection*{TRANSLATE_MAGNET}
 
-\index{routine!\ptc{TRANSLATE\_MAGNET}}
-\index{TRANSLATE\_MAGNET@\ptc{TRANSLATE\_MAGNET}!routine}
+\index{routine!\ptc{TRANSLATE_MAGNET}}
+\index{TRANSLATE_MAGNET@\ptc{TRANSLATE_MAGNET}!routine}
 %
-This routine operates like \ptc{ROTATE\_MAGNET} described above.
+This routine operates like \ptc{ROTATE_MAGNET} described above.
 
 \begin{ptccode}
 TRANSLATE_MAGNET(R,D\textit{\textcolor{red}{,ORDER,BASIS,PATCH,PREC}})
@@ -660,13 +660,13 @@ f3%mag%siamese=>f1%mag
 \index{frame of reference!siamese}
 \index{siamese!affine frame}
 \index{affine frame!siamese}
-\index{routine!\ptc{ALLOC\_AF}}
-\index{ALLOC\_AF@\ptc{ALLOC\_AF}!routine}
-\index{routine!\ptc{FIND\_PATCH}}
-\index{FIND\_PATCH@\ptc{FIND\_PATCH}!routine}
+\index{routine!\ptc{ALLOC_AF}}
+\index{ALLOC_AF@\ptc{ALLOC_AF}!routine}
+\index{routine!\ptc{FIND_PATCH}}
+\index{FIND_PATCH@\ptc{FIND_PATCH}!routine}
 %
 Because a siamese does not have its own frame of reference, it is 
-advisable to set up a so-called \ptc{affine\_frame} on the siamese.
+advisable to set up a so-called \ptc{affine_frame} on the siamese.
 In the above example, one picks up any magnet of the siamese,
 for example \ptc{f1\%mag}, and calls the routine:
 
@@ -677,18 +677,18 @@ CALL FIND_PATCH(\textcolor{green}{F1%CHART%F%A,F1%CHART%F%ENT}\textcolor{red}{,A
 \end{ptccode}
 
 The siamese frame is located in relative coordinates from the entrance
-of the fibre that contains the magnet on which \ptc{siamese\_frame} is
+of the fibre that contains the magnet on which \ptc{siamese_frame} is
 attached (green objects above). Generally we may know the desired
 frame of reference in absolute coordinates given by the red \ptc{A(3)}
 and \ptc{ENT(3,3)} above. The relative translation and rotation can be
 computed, and the result is stored in the blue variables.
 
 
-\subsubsection*{ROTATE\_SIAMESE}
+\subsubsection*{ROTATE_SIAMESE}
 
 \index{siamese!rotating}
-\index{routine!\ptc{ROTATE\_SIAMESE}}
-\index{ROTATE\_SIAMESE@\ptc{ROTATE\_SIAMESE}!routine}
+\index{routine!\ptc{ROTATE_SIAMESE}}
+\index{ROTATE_SIAMESE@\ptc{ROTATE_SIAMESE}!routine}
 %
 This routine rotates the siamese by a set of angles \ptc{ang(1:3)} in the
 usual \PTC\ order.
@@ -736,13 +736,13 @@ This routine calls the equivalent ``magnet'' routines over the entire string
 of siamese, and this permits automatic patching.
 
 
-\subsubsection*{TRANSLATE\_SIAMESE}
+\subsubsection*{TRANSLATE_SIAMESE}
 
 \index{siamese!translating}
-\index{routine!\ptc{TRANSLATE\_SIAMESE}}
-\index{TRANSLATE\_SIAMESE@\ptc{TRANSLATE\_SIAMESE}!routine}
+\index{routine!\ptc{TRANSLATE_SIAMESE}}
+\index{TRANSLATE_SIAMESE@\ptc{TRANSLATE_SIAMESE}!routine}
 %
-This routine functions like the above \ptc{rotate\_siamese} with the same
+This routine functions like the above \ptc{rotate_siamese} with the same
 priorities concerning the optional variable \ptc{BASIS}.
 
 \begin{ptccode}
@@ -777,8 +777,8 @@ Four magnets are on the girder; three are in a siamese as well as on the girder.
 \index{frame of reference!girder}
 \index{girder!affine frame}
 \index{affine frame!girder}
-\index{routine!\ptc{ALLOC\_AF}}
-\index{ALLOC\_AF@\ptc{ALLOC\_AF}!routine}
+\index{routine!\ptc{ALLOC_AF}}
+\index{ALLOC_AF@\ptc{ALLOC_AF}!routine}
 %
 Unlike a siamese, a girder has a frame of reference. For example, we
 may elect to put the frame of reference on \ptc{f0}:
@@ -807,14 +807,14 @@ an existence independent of the fibres themselves. One can move fibres
 within a girder during its creation while keeping this frame fixed.
 
 
-\subsubsection*{ROTATE\_GIRDER and TRANSLATE\_GIRDER}
+\subsubsection*{ROTATE_GIRDER and TRANSLATE_GIRDER}
 
 \index{girder!rotating}
-\index{routine!\ptc{ROTATE\_GIRDER}}
-\index{ROTATE\_GIRDER@\ptc{ROTATE\_GIRDER}!routine}
+\index{routine!\ptc{ROTATE_GIRDER}}
+\index{ROTATE_GIRDER@\ptc{ROTATE_GIRDER}!routine}
 \index{girder!translating}
-\index{routine!\ptc{TRANSLATE\_GIRDER}}
-\index{TRANSLATE\_GIRDER@\ptc{TRANSLATE\_GIRDER}!routine}
+\index{routine!\ptc{TRANSLATE_GIRDER}}
+\index{TRANSLATE_GIRDER@\ptc{TRANSLATE_GIRDER}!routine}
 %
 The routines operate exactly as the siamese routines do and therefore
 do not require any special description. The routines describe ``design''
@@ -849,10 +849,10 @@ If one is not careful, a single magnet or a siamese misalignment may
 break the girder. To avoid this problem, we start with the girder misalignment.
 
 
-\subsubsection{MISALIGN\_GIRDER}
+\subsubsection{MISALIGN_GIRDER}
 
-\index{routine!\ptc{MISALIGN\_GIRDER}}
-\index{MISALIGN\_GIRDER@\ptc{MISALIGN\_GIRDER}!routine}
+\index{routine!\ptc{MISALIGN_GIRDER}}
+\index{MISALIGN_GIRDER@\ptc{MISALIGN_GIRDER}!routine}
 %
 \begin{ptccode}
 MISALIGN_GIRDER(S2,S1\textit{\textcolor{red}{,OMEGA,BASIS,ADD}})
@@ -865,7 +865,7 @@ and girders, we examine the following:
   \item example 1---girder after rotation and additive misalignment,
   \item example 2---misalign siamese followed by misalign girder,
   \item example 3---misalign girder followed by misalign siamese,
-  \item example 4---misalign siamese with \ptc{PRESERVE\_GIRDER=.true.}.
+  \item example 4---misalign siamese with \ptc{PRESERVE_GIRDER=.true.}.
 \end{itemize}
 
 In these examples, we assume that a girder frame of reference has been defined;
@@ -933,10 +933,10 @@ as shown in \fref{Example-1-2}.
 \end{figure}
 
 
-\subsubsection{MISALIGN\_SIAMESE}
+\subsubsection{MISALIGN_SIAMESE}
 
-\index{routine!\ptc{MISALIGN\_SIAMESE}}
-\index{MISALIGN\_SIAMESE@\ptc{MISALIGN\_SIAMESE}!routine}
+\index{routine!\ptc{MISALIGN_SIAMESE}}
+\index{MISALIGN_SIAMESE@\ptc{MISALIGN_SIAMESE}!routine}
 %
 \begin{ptccode}
 MISALIGN_SIAMESE(S2,S1\textit{\textcolor{red}{,OMEGA,BASIS,ADD,PRESERVE_GIRDER}})
@@ -1015,7 +1015,7 @@ CALL MISALIGN_SIAMESE(B,MIS,ADD=.FALSE.,PRESERVE_GIRDER=.TRUE.)
 \begin{figure}[ht]
   \centering
   \includegraphics[width=.9\textwidth]{illustrations/misalign-fig6}
-  \caption{Example 4: misalign siamese with \ptc{preserve\_girder=.true.}}
+  \caption{Example 4: misalign siamese with \ptc{preserve_girder=.true.}}
   \label{fig:Example-4}
 \end{figure}
 
@@ -1023,10 +1023,10 @@ The same command with \ptc{MIS=0.d0} in the siamese always returns the siamese
 to its girder position, not to fibre position.
 
 
-\subsubsection{MISALIGN\_FIBRE}
+\subsubsection{MISALIGN_FIBRE}
 
-\index{routine!\ptc{MISALIGN\_FIBRE}}
-\index{MISALIGN\_FIBRE@\ptc{MISALIGN\_FIBRE}!routine}
+\index{routine!\ptc{MISALIGN_FIBRE}}
+\index{MISALIGN_FIBRE@\ptc{MISALIGN_FIBRE}!routine}
 %
 This routine behaves like the siamese routine but acts on a single fibre.
 
@@ -1034,7 +1034,7 @@ This routine behaves like the siamese routine but acts on a single fibre.
 MISALIGN_FIBRE(S2,S1\textit{\textcolor{red}{,OMEGA,BASIS,ADD,PRESERVE_GIRDER}})
 \end{ptccode}
 
-Note: If the \ptc{MISALIGN\_FIBRE} routine is used on a siamese, it mildly
+Note: If the \ptc{MISALIGN_FIBRE} routine is used on a siamese, it mildly
 breaks the siamese. One can imagine very tiny errors internal to a
 siamese and bigger errors on the siamese and yet bigger errors on
 a girder containing siamese and individual elements.
@@ -1097,7 +1097,7 @@ geometric computations:
 
 This product of operators is in the usual matrix ordering. Therefore
 the rotation in the $x$-axis acts first, followed by the $y$-axis, etc.
-The rotations are computed using \ptc{COMPUTE\_ENTRANCE\_ANGLE}.
+The rotations are computed using \ptc{COMPUTE_ENTRANCE_ANGLE}.
 
 We factor the rotation in that manner because the operators R$_{x}$
 and R$_{y}$ are drifts in polar coordinates and are therefore nonlinear.
@@ -1167,7 +1167,7 @@ group is locally isomorphic.
 %
 \PTC\ provides for an emasculated pseudo-Euclidean group. The Lie operators
 are obtained by expanding the dynamical maps keeping the energy dependence
-exact. This is in tune with the \ptc{exact\_model=false} option.
+exact. This is in tune with the \ptc{exact_model=false} option.
 \begin{align*}
   \lieop{T_x} &= \lieop{p_x}, \\
   \lieop{T_y} &= \lieop{p_y}, \\
@@ -1190,7 +1190,7 @@ from the original algebra of the Euclidean group as follows:
 Why do we care about the approximate Euclidean group?
 
 The reason is speed: if a fast post-processor to \PTC\ is written. Let
-us assume that we have represented a (large) machine with \ptc{exact\_model=false}
+us assume that we have represented a (large) machine with \ptc{exact_model=false}
 and the drift-kick-drift option. \fref[c]{Pseudo-Euclidean-maps}
 schematically shows two magnets separated by a drift.
 

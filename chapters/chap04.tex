@@ -3,7 +3,7 @@
 \chapter{Linking Magnets Together and Moving Them as a Group}
 \label{cha:girders}
 
-\fxnote{Review underscore (\_\,) characters in index entries.}
+\fxnote{Review underscore (_\,) characters in index entries.}
 \fxnote{Review percent (\%\,) characters in index entries.}
 \fxnote{Review line numbers.}
 \fxnote{Say something re misalign v. translate or move. (Or do this in \Cref{geometry}.)}
@@ -86,7 +86,7 @@ its original location.
 \index{girder!misaligning}
 \index{misalignment!girder}
 \index{girder!frame of reference}
-\index{affine\_frame@\ptc{affine\_frame}}
+\index{affine_frame@\ptc{affine_frame}}
 %
 A \emph{girder} is a collection of siamese and regular elements
 tied to a substrate so that one can move them as a unit. Like a
@@ -117,7 +117,7 @@ Do note that linking together a group of elements on a girder does not mean thos
 \index{PTC!source file}
 \index{source file!geometry tutorial}
 \index{geometry!tutorial source file}
-\index{z\_ptc\_geometry.f90@\ptc{z\_ptc\_geometry.f90}!geometry tutorial source file}
+\index{z_ptc_geometry.f90@\ptc{z_ptc_geometry.f90}!geometry tutorial source file}
 \index{siamese!creating}
 \index{girder!creating}
 \index{siamese!misaligning}
@@ -143,8 +143,8 @@ of the code in that appendix.
   \label{fig:col.intxn}
 \end{marginfigure}
 
-\index{move\_to@\ptc{move\_to}!routine}
-\index{routine!\ptc{move\_to}}
+\index{move_to@\ptc{move_to}!routine}
+\index{routine!\ptc{move_to}}
 %
 At each end of the straight section shared by layouts \ptc{Col1}
 and \ptc{Col2}, see \fref{col.intxn}, is a pair of overlapping bend
@@ -234,15 +234,15 @@ of the first fibre in layout \ptc{Col1}, at the center of our collider's
 common straight section. We accomplish this in the next block of
 code.
 
-\index{allocate\_af@\ptc{allocate\_af}!routine}
-\index{routine!\ptc{allocate\_af}}
-\index{girder\_frame@\ptc{girder\_frame}}
+\index{allocate_af@\ptc{allocate_af}!routine}
+\index{routine!\ptc{allocate_af}}
+\index{girder_frame@\ptc{girder_frame}}
 %
 \enlargethispage{\baselineskip}
 After moving \ptc{p1} to the first fibre in layout \ptc{Col1}, we
 then, in \lref{alloc.gf}, allocate memory for the special dual
 reference frame needed by our girder, \ptc{p1\%mag\%girder_frame}.%
-\sidenote[][-7.5\baselineskip]{Read \ptc{alloc\_af} as ``allocate affine frame''.}
+\sidenote[][-7.5\baselineskip]{Read \ptc{alloc_af} as ``allocate affine frame''.}
 This has four pieces we need to define: \ptc{a} and \ptc{b} for
 the origins of the original and current (or misaligned) frames,
 and \ptc{ent} and \ptc{exi} for the bases of those two frames.%
@@ -282,7 +282,7 @@ orientation of our girder.
   \label{fig:col.siamfr}
 \end{marginfigure}
 
-\index{siamese\_frame@\ptc{siamese\_frame}}
+\index{siamese_frame@\ptc{siamese_frame}}
 %
 In the following block of code, we also define reference frames for
 the two siamese. In this case, we choose to locate the siamese frames
@@ -305,7 +305,7 @@ memory for the data \ptc{d} and \ptc{angle}, which specify not the
 frame itself, but rather how to get there (translation and angle)
 from the entrance frame of the local element. Our next step is
 therefore to compute \ptc{d} and \ptc{angle}. This we do in
-\lref{sf.patch} with a call to \ptc{find\_patch}. The first two
+\lref{sf.patch} with a call to \ptc{find_patch}. The first two
 arguments are respectively the origin and basis of bend~67's entrance
 frame. The second two arguments are the desired origin (\ptc{a}) and
 basis (same as for the girder). And the last two arguments are
@@ -368,10 +368,10 @@ the girder frame or the siamese frame. But it is \emph{in}directly
 associated: via the linked lists that define the girder and the
 siamese, \PTC\ can always find the appropriate girder or siamese frame.
 %
-\index{misalign\_siamese@\ptc{misalign\_siamese}!routine}
-\index{routine!\ptc{misalign\_siamese}}
-\index{misalign\_girder@\ptc{misalign\_girder}!routine}
-\index{routine!\ptc{misalign\_girder}}
+\index{misalign_siamese@\ptc{misalign_siamese}!routine}
+\index{routine!\ptc{misalign_siamese}}
+\index{misalign_girder@\ptc{misalign_girder}!routine}
+\index{routine!\ptc{misalign_girder}}
 %
 \begin{ptccode}
 write(6,*) "Example # (from the manual) 1--11 ?"

@@ -60,11 +60,11 @@ These routines do not support spin and radiation.
 track (R, X\textit{\textcolor{red}{, I1, I2}}, K)
 \end{ptccode}
 
-\ptc{X} is an array of six \ptc{real(dp)} or \ptc{REAL\_8}.
+\ptc{X} is an array of six \ptc{real(dp)} or \ptc{REAL_8}.
 
 \ptc{I1} and \ptc{I2} are the position of the fibres.
 
-\ptc{Result=TRACK\_FLAG (R,X,I1,I2,k)}
+\ptc{Result=TRACK_FLAG (R,X,I1,I2,k)}
 
 \ptc{Result=logical}; true indicates stable; false indicates unstable.
 
@@ -75,19 +75,19 @@ track (C, X, K\textit{\textcolor{red}{, CHARGE}})
 This routine tracks through the fibre \ptc{C}.
 
 
-\subsection{Find\_orbit}
+\subsection{Find_orbit}
 
-\index{find\_orbit@\ptc{find\_orbit}!routine}
-\index{routine!\ptc{find\_orbit}}
+\index{find_orbit@\ptc{find_orbit}!routine}
+\index{routine!\ptc{find_orbit}}
 %
 \begin{ptccode}
 find_orbit(R, FIX, LOC, STATE, eps\textit{\textcolor{red}{, TURNS}})
 \end{ptccode}
 
-The \ptc{find\_orbit} routine works in the same way as the
-subroutine \ptc{find\_orbit\_x} but on the fibre structure
+The \ptc{find_orbit} routine works in the same way as the
+subroutine \ptc{find_orbit_x} but on the fibre structure
 without radiation. For more information about the subroutine
-\ptc{find\_orbit\_x}, see \Tref{sub:Find-Orbit-X}.
+\ptc{find_orbit_x}, see \Tref{sub:Find-Orbit-X}.
 
 \ptc{LOC} is the integer location in the layout \ptc{R}.
 
@@ -105,18 +105,18 @@ without radiation. For more information about the subroutine
 These routines support spin and radiation.
 
 
-\subsection{Routines for Tracking either Probe or Probe\_8}
+\subsection{Routines for Tracking either Probe or Probe_8}
 
 \index{probe!tracking routines}
 %
-For the type definitions of \ptc{probe} and \ptc{probe\_8}, see
+For the type definitions of \ptc{probe} and \ptc{probe_8}, see
 \Tref{sub:Probe-B}.
 
 
-\subsubsection{TRACK\_PROBE2}
+\subsubsection{TRACK_PROBE2}
 
-\index{TRACK\_PROBE2@\ptc{TRACK\_PROBE2}!routine}
-\index{routine!\ptc{TRACK\_PROBE2}}
+\index{TRACK_PROBE2@\ptc{TRACK_PROBE2}!routine}
+\index{routine!\ptc{TRACK_PROBE2}}
 %
 \begin{ptccode}
 TRACK_PROBE2(R,XS,K\textit{\textcolor{red}{,I1,I2}})
@@ -129,10 +129,10 @@ TRACK_PROBE2(R,XS,K\textit{\textcolor{red}{,I1,I2}})
 \ptc{K=INTERNAL STATE}
 
 
-\subsubsection{TRACK\_PROBE}
+\subsubsection{TRACK_PROBE}
 
-\index{TRACK\_PROBE@\ptc{TRACK\_PROBE}!routine}
-\index{routine!\ptc{TRACK\_PROBE}}
+\index{TRACK_PROBE@\ptc{TRACK_PROBE}!routine}
+\index{routine!\ptc{TRACK_PROBE}}
 %
 \begin{ptccode}
 TRACK_PROBE (R,XS,K\textit{\textcolor{red}{,FIBRE1,FIBRE2,NODE1,NODE2}})
@@ -142,10 +142,10 @@ TRACK_PROBE (R,XS,K\textit{\textcolor{red}{,FIBRE1,FIBRE2,NODE1,NODE2}})
 fibre or the integration node.
 
 
-\subsubsection{TRACK\_NODE\_PROBE}
+\subsubsection{TRACK_NODE_PROBE}
 
-\index{TRACK\_NODE\_PROBE@\ptc{TRACK\_NODE\_PROBE}!routine}
-\index{routine!\ptc{TRACK\_NODE\_PROBE}}
+\index{TRACK_NODE_PROBE@\ptc{TRACK_NODE_PROBE}!routine}
+\index{routine!\ptc{TRACK_NODE_PROBE}}
 %
 \begin{ptccode}
 TRACK_NODE_PROBE(T,XS,K)
@@ -158,12 +158,12 @@ TRACK_NODE_PROBE(T,XS,K)
 
 \index{routines!object-oriented}
 \index{tracking routines!object-oriented}
-\index{TRACK\_PROBE2@\ptc{TRACK\_PROBE2}!routine}
-\index{routine!\ptc{TRACK\_PROBE2}}
-\index{TRACK\_PROBE@\ptc{TRACK\_PROBE}!routine}
-\index{routine!\ptc{TRACK\_PROBE}}
-\index{TRACK\_NODE\_PROBE@\ptc{TRACK\_NODE\_PROBE}!routine}
-\index{routine!\ptc{TRACK\_NODE\_PROBE}}
+\index{TRACK_PROBE2@\ptc{TRACK_PROBE2}!routine}
+\index{routine!\ptc{TRACK_PROBE2}}
+\index{TRACK_PROBE@\ptc{TRACK_PROBE}!routine}
+\index{routine!\ptc{TRACK_PROBE}}
+\index{TRACK_NODE_PROBE@\ptc{TRACK_NODE_PROBE}!routine}
+\index{routine!\ptc{TRACK_NODE_PROBE}}
 %
 \begin{ptccode}
 TRACK_PROBE2 (XS,K\textit{\textcolor{red}{,FIBRE1,FIBRE2,NODE1,NODE2}})
@@ -182,11 +182,11 @@ One turn can be done as follows:
 TRACK_PROBE (XS,K\textit{\textcolor{red}{,NODE1=T,NODE2=T%PREVIOUS}})
 \end{ptccode}
 
-\index{routine!\ptc{TRACK\_PROBE\_X}}
-\index{TRACK\_PROBE\_X@\ptc{TRACK\_PROBE\_X}!routine}
+\index{routine!\ptc{TRACK_PROBE_X}}
+\index{TRACK_PROBE_X@\ptc{TRACK_PROBE_X}!routine}
 %
-In the \ptc{TRACK\_PROBE\_X} routine, the fibres and the nodes are pointers to the objects.
-The routine wraps the \ptc{TRACK\_PROBE} routine shown above.
+In the \ptc{TRACK_PROBE_X} routine, the fibres and the nodes are pointers to the objects.
+The routine wraps the \ptc{TRACK_PROBE} routine shown above.
 
 \begin{ptccode}
 TRACK_PROBE_X (R,X,K,U,T\textit{\textcolor{red}{,FIBRE1,FIBRE2,NODE1,NODE2}})
@@ -195,25 +195,25 @@ TRACK_PROBE_X (R,X,K,U,T\textit{\textcolor{red}{,FIBRE1,FIBRE2,NODE1,NODE2}})
 \fxnote{Al: Is my rewording above correct? What does ``wrap'' mean? Will the meaning be clear to our audience?}
 
 
-\subsection{Routines for Tracking either Real or Real\_8}
+\subsection{Routines for Tracking either Real or Real_8}
 
 All these routines wrap the above routines and therefore support radiation,
 beam-beam and $s$-dependent apertures.
 
 
-\subsubsection{TRACK\_NODE\_X}
+\subsubsection{TRACK_NODE_X}
 
-\index{routine!\ptc{TRACK\_NODE\_X}}
-\index{TRACK\_NODE\_X@\ptc{TRACK\_NODE\_X}!routine}
+\index{routine!\ptc{TRACK_NODE_X}}
+\index{TRACK_NODE_X@\ptc{TRACK_NODE_X}!routine}
 %
 \begin{ptccode}
 TRACK_NODE_X(T,X,K)
 \end{ptccode}
 
-\subsubsection{TRACK\_PROBE\_X}
+\subsubsection{TRACK_PROBE_X}
 
-\index{routine!\ptc{TRACK\_PROBE\_X}}
-\index{TRACK\_PROBE\_X@\ptc{TRACK\_PROBE\_X}!routine}
+\index{routine!\ptc{TRACK_PROBE_X}}
+\index{TRACK_PROBE_X@\ptc{TRACK_PROBE_X}!routine}
 %
 \begin{ptccode}
 TRACK_PROBE_X(R,X,K\textit{\textcolor{red}{,U,T,FIBRE1,FIBRE2,NODE1,NODE2}})
@@ -224,10 +224,10 @@ TRACK_PROBE_X(R,X,K\textit{\textcolor{red}{,U,T,FIBRE1,FIBRE2,NODE1,NODE2}})
 \ptc{T} is a pointer to the fibre where the particle is lost (optional).
 
 
-\subsubsection{TRACK\_BEAM}
+\subsubsection{TRACK_BEAM}
 
-\index{routine!\ptc{TRACK\_BEAM}}
-\index{TRACK\_BEAM@\ptc{TRACK\_BEAM}!routine}
+\index{routine!\ptc{TRACK_BEAM}}
+\index{TRACK_BEAM@\ptc{TRACK_BEAM}!routine}
 \index{tracking routines!beam of particles}
 %
 This routine tracks a beam of particles.
@@ -249,12 +249,12 @@ For the type definition of \ptc{BEAM}, see Section~\ref{sub:Beam-B}.
 These routines track three-dimensional information through an integration node.
 
 
-\subsection{Track\_node\_v}
+\subsection{Track_node_v}
 
-\index{routine!\ptc{TRACK\_NODE\_V}}
-\index{TRACK\_NODE\_V@\ptc{TRACK\_NODE\_V}!routine}
+\index{routine!\ptc{TRACK_NODE_V}}
+\index{TRACK_NODE_V@\ptc{TRACK_NODE_V}!routine}
 %
-The \ptc{TRACK\_NODE\_V} routine tracks a trajectory and records its
+The \ptc{TRACK_NODE_V} routine tracks a trajectory and records its
 three-dimensional position for plotting at the beginning and the end of a node.
 
 \begin{ptccode}
@@ -263,23 +263,23 @@ TRACK_NODE_V (T,V,K,REF)
 
 \ptc{T} is an integration node.
 
-\ptc{V} is of type \ptc{THREE\_D\_INFO}. The type definition is given below.
+\ptc{V} is of type \ptc{THREE_D_INFO}. The type definition is given below.
 
-\index{routine!\ptc{TRACK\_FILL\_REF}}
-\index{TRACK\_FILL\_REF@\ptc{TRACK\_FILL\_REF}!routine}
+\index{routine!\ptc{TRACK_FILL_REF}}
+\index{TRACK_FILL_REF@\ptc{TRACK_FILL_REF}!routine}
 %
 \ptc{REF=TRUE} or \ptc{FALSE}. If \ptc{REF=TRUE}, then the results of the
-\ptc{TRACK\_FILL\_REF} routine are used. The ray is magnified by 
-\ptc{V\%SCALE} (see type \ptc{THREE\_D\_INFO} below) with respect to a
-trajectory computed and stored by the \ptc{TRACK\_FILL\_REF} routine,
+\ptc{TRACK_FILL_REF} routine are used. The ray is magnified by 
+\ptc{V\%SCALE} (see type \ptc{THREE_D_INFO} below) with respect to a
+trajectory computed and stored by the \ptc{TRACK_FILL_REF} routine,
 which tracks the ray \ptc{FIX} from fibre \ptc{I1} back to fibre \ptc{I1}.
 
 \begin{ptccode}
 TRACK_FILL_REF(R,FIX,I1,K))
 \end{ptccode}
 
-\index{data type!\ptc{THREE\_D\_INFO}}
-\index{THREE\_D\_INFO@\ptc{THREE\_D\_INFO}!data type}
+\index{data type!\ptc{THREE_D_INFO}}
+\index{THREE_D_INFO@\ptc{THREE_D_INFO}!data type}
 \index{three-dimensional information!data type}
 \index{3-D information|see{three-dimensional information}}
 %
@@ -308,29 +308,29 @@ END TYPE THREE_D_INFO
 These routines provide time-based tracking of temporal probes and temporal beams.
 
 
-\subsection{Track\_time}
+\subsection{Track_time}
 
-\index{routine!\ptc{TRACK\_TIME}}
-\index{TRACK\_TIME@\ptc{TRACK\_TIME}!routine}
+\index{routine!\ptc{TRACK_TIME}}
+\index{TRACK_TIME@\ptc{TRACK_TIME}!routine}
 %
 \begin{ptccode}
 TRACK_TIME(XT,DT,K)
 \end{ptccode}
 
-\ptc{XT} is a temporal probe. For the type definition of \ptc{TEMPORAL\_PROBE},
+\ptc{XT} is a temporal probe. For the type definition of \ptc{TEMPORAL_PROBE},
 see Section~\ref{sub:Temporal-Probe-B}.
 
 
-\subsection{Track\_temporal\_beam}
+\subsection{Track_temporal_beam}
 
-\index{routine!\ptc{TRACK\_TEMPORAL\_BEAM}}
-\index{TRACK\_TEMPORAL\_BEAM@\ptc{TRACK\_TEMPORAL\_BEAM}!routine}
+\index{routine!\ptc{TRACK_TEMPORAL_BEAM}}
+\index{TRACK_TEMPORAL_BEAM@\ptc{TRACK_TEMPORAL_BEAM}!routine}
 %
 \begin{ptccode}
 TRACK_TEMPORAL_BEAM(B,DT,STATE)
 \end{ptccode}
 
-\ptc{B} is a temporal beam. For the type definition of \ptc{TEMPORAL\_BEAM},
+\ptc{B} is a temporal beam. For the type definition of \ptc{TEMPORAL_BEAM},
 see Section~\ref{sub:Temporal-Beam-B}.
 
 
@@ -341,11 +341,11 @@ see Section~\ref{sub:Temporal-Beam-B}.
 This routine finds the closed orbit.
 
 
-\subsection{Find\_orbit\_x}
+\subsection{Find_orbit_x}
 \label{sub:Find-Orbit-X}
 
-\index{routine!\ptc{FIND\_ORBIT\_X}}
-\index{FIND\_ORBIT\_X@\ptc{FIND\_ORBIT\_X}!routine}
+\index{routine!\ptc{FIND_ORBIT_X}}
+\index{FIND_ORBIT_X@\ptc{FIND_ORBIT_X}!routine}
 %
 \begin{ptccode}
 FIND_ORBIT_X(R,FIX,STATE,eps\textcolor{red}{,TURNS,fibre1,node1})

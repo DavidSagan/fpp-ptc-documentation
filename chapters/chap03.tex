@@ -4,7 +4,6 @@
 \chapter{Modeling an Accelerator with \PTC}
 \label{cha:model.accel}
 
-\fxnote{Review underscore (\_\,) characters in index entries.}
 \fxnote{Review percent (\%\,) characters in index entries.}
 \fxnote{Review line numbers.}
 
@@ -31,7 +30,7 @@ something called the \DNA. Members of the \DNA\ are not necessarily
 the accelerator complex.
 
 Circa 2013, Forest and Cornell's Sagan decided to attempt to bring
-more of \PTC\ inside the Cornell code BMAD.  The code BMAD is far more
+more of \PTC\ inside the Cornell code Bmad.  The code Bmad is far more
 comprehensive than \PTC\ and has a myriad of models and
 techniques. Initially it used \PTC\ simply as a Taylor map
 generator. Later it incorporated simple traditional layouts as MADX of
@@ -80,7 +79,7 @@ some housekeeping
 \fxnote{Is there a better word than ``housekeeping''?}
 for our \DNA\ database.
 
-In \Sref{model.topo2s} and beyond we explain how to use two universes to describe the \DNA\ and the trackable layouts. This is the preferred approach used by  \PTC\ in the code BMAD.
+In \Sref{model.topo2s} and beyond we explain how to use two universes to describe the \DNA\ and the trackable layouts. This is the preferred approach used by  \PTC\ in the code Bmad.
 
 %The goal of this chapter is to explain how to model the geometry
 %of an accelerator in \PTC. This chapter introduces three accelerator
@@ -145,7 +144,7 @@ adjacent elements lie on top of one another. The cell with the
 ``straight'' bend, however, requires patching t because the adjacent drifts have frames that
 are rotated with repect to those of the ``straight'' bend.
 
-\index{build\_PSR@\ptc{build\_PSR}!basic ring}
+\index{build_PSR@\ptc{build_PSR}!basic ring}
 %
 The basic ring (see the \ptc{build_PSR} example in \fref{DNA.subrtns}
 on \pref{fig:DNA.subrtns}) has ten cells. It has 70~fibres, each pointing
@@ -182,7 +181,7 @@ accelerators.
 \index{PTC!source file}
 \index{source file!geometry tutorial}
 \index{geometry!tutorial source file}
-\index{ptc\_geometry.f90@\ptc{ptc\_geometry.f90}!geometry tutorial source file}
+\index{ptc_geometry.f90@\ptc{ptc_geometry.f90}!geometry tutorial source file}
 %
 The example code in this chapter is from the \PTC\ geometry tutorial
 source file, \ptc{ptc_geometry.f90}, which is given in
@@ -250,17 +249,17 @@ type(gmap) :: g
 call ptc_ini_no_append          \label{lin:init.layout}
 \end{ptccode}
 
-%\fxnote{What does \ptc{use\_info = .true.} do?!?}
+%\fxnote{What does \ptc{use_info = .true.} do?!?}
 
 \index{PTC!universe}
 \index{universe!PTC}
 \index{MAD universe|see{PTC universe}}
-\index{global variable!\ptc{m\_u}}
-\index{m\_u@\ptc{m\_u}!global variable}
-\index{DNA database!\ptc{m\_u} global variable}
-\index{module!\ptc{madx\_ptc\_module}}
-\index{madx\_ptc\_module@\ptc{madx\_ptc\_module}!module}
-\index{linked list!\ptc{m\_u} global variable}
+\index{global variable!\ptc{m_u}}
+\index{m_u@\ptc{m_u}!global variable}
+\index{DNA database!\ptc{m_u} global variable}
+\index{module!\ptc{madx_ptc_module}}
+\index{madx_ptc_module@\ptc{madx_ptc_module}!module}
+\index{linked list!\ptc{m_u} global variable}
 %
 \et{The module \ptc{madx_ptc_module}  defines the global variable}
 \ptc{m_u}.\label{mad.univ}%
@@ -321,7 +320,7 @@ These latter data types will be described in \CTref*{polymorphs.knobs}.
 \index{DNA sequence!example source code}
 \index{DNA database!example source code}
 %
-The end of the \ptc{ptc\_geometry.f90} source file contains three
+The end of the \ptc{ptc_geometry.f90} source file contains three
 subroutines we use to create the \DNA\ sequences---non-trackable
 layouts for our \DNA\ database. \fref[c]{DNA.subrtns} shows the
 layouts that the three subroutines create. In subsequent sections
@@ -338,10 +337,10 @@ or pieces of these layouts, to form the accelerator models of
 \end{figure}
 
 
-\subsection{build\_PSR}
+\subsection{build_PSR}
 \label{sec:build.psr}
 
-\index{build\_PSR@\ptc{build\_PSR}!example source code}
+\index{build_PSR@\ptc{build_PSR}!example source code}
 %
 The subroutine \ptc{build_PSR} creates the basic ten-cell ring
 lattice shown on the left in \fref{DNA.subrtns}.
@@ -389,19 +388,19 @@ end subroutine build_PSR
 
 \index{internal states!example source code}
 \index{state!internal}
-\index{make\_states@\ptc{make\_states}!routine}
-\index{routine!\ptc{make\_states}}
-\index{exact\_model@\ptc{exact\_model}!global parameter}
-\index{global parameter!\ptc{exact\_model}}
+\index{make_states@\ptc{make_states}!routine}
+\index{routine!\ptc{make_states}}
+\index{exact_model@\ptc{exact_model}!global parameter}
+\index{global parameter!\ptc{exact_model}}
 \index{madlength@\ptc{madlength}!flag}
 \index{flag!\ptc{madlength}}
 %
-\glossary[ptccmds](make\_states)%
-  {make\_states(<\textit{\normalfont{bool}}>)}%
+\glossary[ptccmds](make_states)%
+  {make_states(<\textit{\normalfont{bool}}>)}%
   {This subtoutine sets internal-state variables associated
    with the particle type.
-   In particular, use \ptc{call make\_states(true)} for electrons,
-   and \ptc{call make\_states(false)} for protons.}
+   In particular, use \ptc{call make_states(true)} for electrons,
+   and \ptc{call make_states(false)} for protons.}
 %
 The \lref[s]{bptc.psrstates}--\lref*{eptc.psrstates} set important
 internal state variables for tracking. In the call to
@@ -434,13 +433,13 @@ Use \ptc{.true.} to make \PTC\ use the chord length. \et{The line \ptc{madkind2 
 
 %\fxnote{Need to say something about \ptc{madkind2}.}
 
-\index{set\_mad@\ptc{set\_mad}!routine}
-\index{routine!\ptc{set\_mad}}
+\index{set_mad@\ptc{set_mad}!routine}
+\index{routine!\ptc{set_mad}}
 \index{integration nodes!specifying number of}
 \index{energy!specifying}
 %
 \label{set.mad}
-The call, in \lref{psr.setmad}, to \ptc{set\_mad} defines (via
+The call, in \lref{psr.setmad}, to \ptc{set_mad} defines (via
 \ptc{brho}) the scale momentum $p_o$ for the fibres in the
 layout returned by this subroutine. It also specifies the type
 (\ptc{method = 2}) and number (\ptc{STEP = 10}) of integration steps
@@ -529,10 +528,10 @@ Forest claimed that he could have chosen to be more ``Catholic than the Pope'' i
 Indeed one can place magnets ``manually'' and \PTC\ can then compute the necessary patches between them. This is the ``fundamentalist'' view of \PTC . With that philosophy, the survey command is useless.  
 
 
-Indeed most lattices, or pieces of lattices, come from standard codes. In standard codes the survey command places the magnets using the assumption that no patches are needed between the elements. Therefore a simple sequence like the BMAD sequence \ptc{CELL: LINE=( D1M,SD1,QD,D2,SD2,B,D2,SD2,QF,D1)} already assumes a relative placement of the magnets.
+Indeed most lattices, or pieces of lattices, come from standard codes. In standard codes the survey command places the magnets using the assumption that no patches are needed between the elements. Therefore a simple sequence like the Bmad sequence \ptc{CELL: LINE=( D1M,SD1,QD,D2,SD2,B,D2,SD2,QF,D1)} already assumes a relative placement of the magnets.
 
- The reader must realize that the locution ``assumes no patches'' is completely code dependent. \PTC\ and BMAD use the geometry described in the  MAD8
-manual from which a ``no patch'' lattice entails a certain relative placement. However, for lattices involving vertical bends, the result will differ from the code SAD of KEK. In the code SAD, the exit frame of a rotated bend will not be lined up with that of a vertically rotated bend in MAD8. Therefore the survey command of SAD will produce a different lattice from MAD, \PTC\ or BMAD. In MAD, the rotation that brings  a dipole off the mid-plane is undone at the exit. In SAD, it  is not so as SAD tries to ``parallel transport'' the frame of reference. 
+ The reader must realize that the locution ``assumes no patches'' is completely code dependent. \PTC\ and Bmad use the geometry described in the  MAD8
+manual from which a ``no patch'' lattice entails a certain relative placement. However, for lattices involving vertical bends, the result will differ from the code SAD of KEK. In the code SAD, the exit frame of a rotated bend will not be lined up with that of a vertically rotated bend in MAD8. Therefore the survey command of SAD will produce a different lattice from MAD, \PTC\ or Bmad. In MAD, the rotation that brings  a dipole off the mid-plane is undone at the exit. In SAD, it  is not so as SAD tries to ``parallel transport'' the frame of reference. 
 
 It is important to realize, in the lens frame work, that the frame of references are really arbitrary. No one can say that SAD is better than MAD or vice versa. \PTC\ adopted the MAD convention simply because Forest collaborated initially with the MAD team. Actually Forest emphasizes this point by stating that he often has the urge to rotate the exit frame of reference of all magnets by some arbitrary angle just to prove this point. 
 
@@ -543,9 +542,9 @@ Ultimately the survey command of \PTC\ has two minor purposes. First, from  pure
 But in summary, simply remember that \PTC\ can put the magnets in any arbitrary position and then track the beam. \PTC\ is ideally suited to be incorporated in a CAD program and produce ``instant'' tracking through a complex 3-d geometry.
 
 }
-\subsection{build\_PSR\_minus}
+\subsection{build_PSR_minus}
 
-\index{build\_PSR\_minus@\ptc{build\_PSR\_minus}!example source code}
+\index{build_PSR_minus@\ptc{build_PSR_minus}!example source code}
 %
 The subroutine \ptc{build_PSR_minus} defines the partial ring shown
 in the center of \fref{DNA.subrtns}. It begins with a bend, a short
@@ -557,7 +556,7 @@ and a short drift. The subroutine is a straightforward modification of
 that for \ptc{build_PSR}.
 %
 \fxnote{Actually, this code sets \ptc{method=6} in the call to
-\ptc{set\_mad}. Should we change this, or comment on it?}
+\ptc{set_mad}. Should we change this, or comment on it?}
 
 \linenumberfrequency{5}
 \setptclinenums{572}{5}
@@ -602,9 +601,9 @@ end subroutine build_PSR_minus
 \end{ptccode}
 
 
-\subsection{build\_Quad\_for\_Bend}
+\subsection{build_Quad_for_Bend}
 
-\index{build\_Quad\_for\_Bend@\ptc{build\_Quad\_for\_Bend}!example source code}
+\index{build_Quad_for_Bend@\ptc{build_Quad_for_Bend}!example source code}
 %
 The subroutine \ptc{build_Quad_for_Bend} defines the layout shown
 on the right in \fref{DNA.subrtns}. It has ten ``straight'' bends,
@@ -730,10 +729,10 @@ Query: As initially constructed (by \ptc{build_PSR}), layouts \ptc{L1},
 \etc--- the individual elements. We do not want changes made to
 \ptc{COL1}, for example, to appear in \ptc{Fig8}. \et{All the elements of the DNA are distinct magnets which must exist independently of each other.} }
 
-\index{append\_empty\_layout@\ptc{append\_empty\_layout}!routine}
-\index{routine!\ptc{append\_empty\_layout}}
-\index{global variable!\ptc{m\_u}}
-\index{m\_u@\ptc{m\_u}!global variable}
+\index{append_empty_layout@\ptc{append_empty_layout}!routine}
+\index{routine!\ptc{append_empty_layout}}
+\index{global variable!\ptc{m_u}}
+\index{m_u@\ptc{m_u}!global variable}
 %
 The following four lines create the first \DNA\ sequence:
 %
@@ -866,10 +865,10 @@ The final result will be a pair of layouts, \ptc{PSR1} and
 \ptc{PSR2}, each of which refer to fibres in two different
 \DNA\ sequences, \ptc{L1} and \ptc{L2}.
 
-\index{append\_empty\_layout@\ptc{append\_empty\_layout}!routine}
-\index{routine!\ptc{append\_empty\_layout}}
+\index{append_empty_layout@\ptc{append_empty_layout}!routine}
+\index{routine!\ptc{append_empty_layout}}
 %
-We begin by calling \ptc{append_empty_layout} on \ptc{m\_u} and then
+We begin by calling \ptc{append_empty_layout} on \ptc{m_u} and then
 setting the layout pointer \ptc{PSR1} to point to this new layout:
 %
 \setptclinenums{94}{2}
@@ -908,8 +907,8 @@ do i = 1, L1%n
 end do ! elements in PSR1 now in correct locations
 \end{ptccode}
 
-\index{append\_point@\ptc{append\_point}!routine}
-\index{routine!\ptc{append\_point}}
+\index{append_point@\ptc{append_point}!routine}
+\index{routine!\ptc{append_point}}
 %
 In the above block of code, we point \ptc{p1} and \ptc{p2}
 respectively to the starts of \DNA\ sequences \ptc{L1} and \ptc{L2}.
@@ -931,8 +930,8 @@ from \ptc{L2}, everything else from \ptc{L1}:
 
 \index{translate@\ptc{translate}!routine}
 \index{routine!\ptc{translate}}
-\index{compute\_entrance\_angle@\ptc{compute\_entrance\_angle}!routine}
-\index{routine!\ptc{compute\_entrance\_angle}}
+\index{compute_entrance_angle@\ptc{compute_entrance_angle}!routine}
+\index{routine!\ptc{compute_entrance_angle}}
 \index{rotate@\ptc{rotate}!routine}
 \index{routine!\ptc{rotate}}
 \index{global frame!used to compute local reference frame}
@@ -971,10 +970,10 @@ This happens in \lref[s]{psr1.bgeom} through \lref*{psr1.egeom}:
     element (\ptc{f\%chart\%f\%mid}).
 \end{enumerate}
 
-\index{find\_patch@\ptc{find\_patch}!routine}
-\index{routine!\ptc{find\_patch}}
+\index{find_patch@\ptc{find_patch}!routine}
+\index{routine!\ptc{find_patch}}
 \index{patch!inserting}
-\index{patching!find\_patch@\ptc{find\_patch} routine}
+\index{patching!find_patch@\ptc{find_patch} routine}
 %
 When the above \ptc{do} loop terminates, the beamline elements of
 \ptc{PSR1} are all in their correct locations. However (recall the
@@ -1154,8 +1153,8 @@ are all correctly located and oriented.
 
 
 
-\index{append\_empty\_layout@\ptc{append\_empty\_layout}!routine}
-\index{routine!\ptc{append\_empty\_layout}}
+\index{append_empty_layout@\ptc{append_empty_layout}!routine}
+\index{routine!\ptc{append_empty_layout}}
 %
 In the next block of code, we first call \ptc{append_empty_layout}
 on \ptc{m_u} and set the layout pointer \ptc{Fig8} to point to this
@@ -1180,8 +1179,8 @@ end do                         \label{lin:fig8.eapp.L4}
 \end{marginfigure}
 We now have the complete lower ring.
 
-\index{append\_point@\ptc{append\_point}!routine}
-\index{routine!\ptc{append\_point}}
+\index{append_point@\ptc{append_point}!routine}
+\index{routine!\ptc{append_point}}
 \index{doko!described}
 %
 In the next block of code, we start to include the upper ring by
@@ -1254,14 +1253,14 @@ p1 => p1%next
 call append_point(Fig8, p1)
 \end{ptccode}
 
-\index{check\_need\_patch@\ptc{check\_need\_patch}!routine}
-\index{routine!\ptc{check\_need\_patch}}
-\index{find\_patch@\ptc{find\_patch}!routine}
-\index{routine!\ptc{find\_patch}}
+\index{check_need_patch@\ptc{check_need_patch}!routine}
+\index{routine!\ptc{check_need_patch}}
+\index{find_patch@\ptc{find_patch}!routine}
+\index{routine!\ptc{find_patch}}
 \index{patch!inserting}
 \index{patch!checking whether needed}
-\index{patching!\ptc{find\_patch} routine}
-\index{patching!\ptc{check\_need\_patch} routine}
+\index{patching!\ptc{find_patch} routine}
+\index{patching!\ptc{check_need_patch} routine}
 %
 Finally, in the last block of code for \ptc{Fig8}, we give our new
 layout a formal name (\ptc{"Figure-Eight"}), ensure that it is
@@ -1360,10 +1359,10 @@ d = p1%chart%f%a - L5%end%chart%f%b
 call translate(L5, d)
 \end{ptccode}
 
-\index{append\_empty\_layout@\ptc{append\_empty\_layout}!routine}
-\index{routine!\ptc{append\_empty\_layout}}
-\index{append\_point@\ptc{append\_point}!routine}
-\index{routine!\ptc{append\_point}}
+\index{append_empty_layout@\ptc{append_empty_layout}!routine}
+\index{routine!\ptc{append_empty_layout}}
+\index{append_point@\ptc{append_point}!routine}
+\index{routine!\ptc{append_point}}
 %
 In the next block of code, we construct layout \ptc{Col1}: We
 call \ptc{append_empty_layout} on \ptc{m_u} and set the layout
@@ -1419,14 +1418,14 @@ do i = 1, L5%n
 end do                      \label{lin:col2.eapp.L5}
 \end{ptccode}
 
-\index{check\_need\_patch@\ptc{check\_need\_patch}!routine}
-\index{routine!\ptc{check\_need\_patch}}
-\index{find\_patch@\ptc{find\_patch}!routine}
-\index{routine!\ptc{find\_patch}}
+\index{check_need_patch@\ptc{check_need_patch}!routine}
+\index{routine!\ptc{check_need_patch}}
+\index{find_patch@\ptc{find_patch}!routine}
+\index{routine!\ptc{find_patch}}
 \index{patch!inserting}
 \index{patch!checking whether needed}
-\index{patching!\ptc{find\_patch} routine}
-\index{patching!\ptc{check\_need\_patch} routine}
+\index{patching!\ptc{find_patch} routine}
+\index{patching!\ptc{check_need_patch} routine}
 %
 In this last block of code for \ptc{Col2}, we give our new layout a
 formal name (\ptc{"Collider 2"}), ensure that it is topologically
@@ -1780,7 +1779,7 @@ of \ptc{ptc_geometry.f90} or, equivalently, with
 topologies.
 
 Once these systems are created, either purely by \PTC\, or through the
-intermediate use of a code like BMAD or with a CAD program, can one
+intermediate use of a code like Bmad or with a CAD program, can one
 save them and re-use them? The answer is yes if the creation mechanism
 is based on the database universe \ptc{m_u} and trackable universe
 \ptc{m_t} as described in \ptc{new_ptc_geometry.f90}. Would it be
@@ -1791,7 +1790,7 @@ option. One could theoretically translate the single universe
 representation of \ptc{ptc_geometry.f90} into the double universe of
 \ptc{new_ptc_geometry.f90} and print the accelerator complex. However
 we simply advice the user of \PTC\ to use the double universe from the
-very start as the code BMAD does when it constructs a complex topology
+very start as the code Bmad does when it constructs a complex topology
 and sends it to \PTC .
 
 \subsection{Printing the database universe}

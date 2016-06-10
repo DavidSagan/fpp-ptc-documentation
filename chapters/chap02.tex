@@ -4,7 +4,7 @@
 \label{cha:overview}
 
 %% FiXme
-\fxnote{Review underscore (\_\,) characters in index entries.}
+\fxnote{Review underscore (_\,) characters in index entries.}
 \fxnote{Review labels.}
 \fxnote{Review use of {\normalfont\texttt{\char`\\index}}.}
 \fxnote{Period at end of side refs?}
@@ -413,10 +413,10 @@ lattice topology in \PTC.
 angles in radians. (It provides the constant \ptc{twopi} to simplify
 the conversion from degrees.%
 \sidenote{Many other constants are defined in the module
-\ptcmod{precision\_constants}.})
+\ptcmod{precision_constants}.})
 Particle momenta are scaled by a value $p_o$. This scale momentum
 is usually set when defining the lattice (see, for example,
-the discussion of \ptc{set\_mad} on
+the discussion of \ptc{set_mad} on
 \pref{set.mad}). A subtle point involves the fact that the scale
 set for one element may differ from that in the preceding element,
 \eg\ in the case of acceleration.
@@ -424,12 +424,12 @@ In such cases, the patching mentioned above must include not only
 geometric transformations, but also energy transformations.
 
 \newthought{Tracking State:} \PTC\ defines a variable
-type called \ptctyp{internal\_state}.
+type called \ptctyp{internal_state}.
 Objects of this type may be used to modify certain assumptions
 \PTC\ makes when it performs tracking. One may, for example,
 ask \PTC\ to track only the 4D transverse phase-space variables;
 or one may turn on or off radiation. A variable of type
-\ptctyp{internal\_state}
+\ptctyp{internal_state}
 is essentially a list of flags that one may pass to \PTC\ tracking
 routines to modify the algorithms used. For more information, see
 \TAref*{states}.
@@ -440,9 +440,9 @@ routines to modify the algorithms used. For more information, see
 \newthought{Phase-Space Co\"ordinates:} With the default tracking
 state, \PTC\ uses the six phase-space variables%
 \sidenote{\PTC\ can turn all six of the variables into Taylor series,
-or it can omit two of them.  Setting an \ptctyp{internal\_state} flag
+or it can omit two of them.  Setting an \ptctyp{internal_state} flag
 to ``only four dimensions'' implements the latter behavior.}
-\fxnote{Add reference to use of \textsc{only\_4d}.}
+\fxnote{Add reference to use of \textsc{only_4d}.}
 \begin{subequations}\label{eq:vars.dev}
 \begin{equation}\label{eq:vars.dl}
   (x, p_x,\, y, p_y,\, \delta, \ell).
@@ -541,8 +541,8 @@ verified with careful testing.
 
 \fxnote{Consider using natbib.}
 \fxnote{Add reference to \ptc{exact=.false.}}
-\fxnote{Add references to use of \textsc{drift\_kick\_drift} and
-\textsc{mad\_kind}.}
+\fxnote{Add references to use of \textsc{drift_kick_drift} and
+\textsc{mad_kind}.}
 
 When integrating across an element described by one of the
 Hamiltonians \eqref{Hams}, one typically splits the Hamiltonian
@@ -1163,16 +1163,16 @@ then, is a functional representation of the behavior near $z^i$
 using, for example, a Taylor series. Moreover, it will be convenient,
 indeed desirable, if we can switch between the real or Taylor series
 representations at runtime. To achieve this, \PTC\ defines the
-variable type \ptctyp{real\_8}, which holds containers for a real,
+variable type \ptctyp{real_8}, which holds containers for a real,
 a Taylor series, and other information, as well as a flag that
-allows the user to set the representation. This \ptctyp{real\_8}
+allows the user to set the representation. This \ptctyp{real_8}
 is a so-called \emph{polymorphic} variable. With this polymorphism,
 \PTC\ gives us access to all of standard perturbation theory,
 including the kinds of global information mentioned above.
 To make the most effective use of polymorphism, \PTC\ also overloads
 the standard mathematical operators so that algorithms written for
 reals immediately apply to Taylor series and any other representations
-held by the type \ptctyp{real\_8}.
+held by the type \ptctyp{real_8}.
 
 As indicated above, rather than propagating a particle,
 \ie\ a \ptctyp{real}, through an accelerator, one may instead wish
@@ -1305,8 +1305,8 @@ of magnet independence; and in that case, too, one must exercise care.}
 
 In the rest of this section, we discuss some of the data
 types useful for including particle interactions:
-\ptctyp{integration\_node}, \ptctyp{node\_layout}, \ptctyp{probe},
-and \ptctyp{temporal\_probe}. We also describe the basic idea
+\ptctyp{integration_node}, \ptctyp{node_layout}, \ptctyp{probe},
+and \ptctyp{temporal_probe}. We also describe the basic idea
 behind the time-based tracking capability of \PTC.
 
 
@@ -1314,7 +1314,7 @@ behind the time-based tracking capability of \PTC.
 \label{sec:integr.node}
 
 \index{integration node!defined}
-\index{data type!\ptctyp{integration\_node}}
+\index{data type!\ptctyp{integration_node}}
 \index{element!composed of integration nodes}
 \index{node|see{integration node}}
 \index{entrance patch!integration node}
@@ -1323,7 +1323,7 @@ behind the time-based tracking capability of \PTC.
 \index{exit fringe field!integration node}
 \index{fringe field!integration node}
 %
-The data type \ptctyp{integration\_node} represents a step of
+The data type \ptctyp{integration_node} represents a step of
 integration in \PTC. In particular, this data type includes
 entrance and exit reference frames, pointers to the previous
 and next integration nodes along a particle path
@@ -1333,7 +1333,7 @@ examine data inside a beamline element without violating the
 element as a fundamental unit---a self-contained \LEGO\ block.
 They allow us to resist the temptation to ``slice'' an element
 by hand: they \emph{are} the slices. The data type
-\ptctyp{integration\_node} also contains an integer that
+\ptctyp{integration_node} also contains an integer that
 determines the \emph{type} of integration node, of which there
 are five. See \fref{integr.nodes}. On traversing the integration
 nodes that represent an element, one encounters, in order,
@@ -1387,17 +1387,17 @@ the fibres (\eg, misalignments) to the integration nodes.
 \label{sec:node.layout}
 
 \index{node layout!defined}
-\index{data type!\ptc{NODE\_LAYOUT}}
+\index{data type!\ptc{NODE_LAYOUT}}
 \index{layout|see{\emph{also} node layout}}
 \index{linked list!integration nodes}
 \index{beamline!expanded}
 %
 \fxnote{Should have some comment, probably later about
-\ptctyp{node\_layout} inserting a bunch of additional reference
+\ptctyp{node_layout} inserting a bunch of additional reference
 frames.}
 %
-The data type \ptctyp{node\_layout} represents a beamline as a
-linked list of \ptctyp{integration\_node}s. It includes pointers
+The data type \ptctyp{node_layout} represents a beamline as a
+linked list of \ptctyp{integration_node}s. It includes pointers
 to the first and last integration nodes in the beamline, as well
 as a pointer to the parent \ptctyp{layout}. To access the
 integration nodes of a particular fibre, one may step through
@@ -1405,7 +1405,7 @@ them, making use the fact that the data type \ptctyp{fibre}
 includes pointers to the first, last, and middle integration nodes
 for the corresponding element.
 
-A \ptctyp{node\_layout} is not created automatically when you
+A \ptctyp{node_layout} is not created automatically when you
 create a \ptctyp{layout}: You must ask \PTC\ to create it and
 populate the associated reference frames.
 \fxnote{Add reference to example(s).}
@@ -1420,17 +1420,17 @@ The data type \ptctyp{probe} represents a particle. In particular,
 it contains, for a given particle, both the orbital phase-space data
 and a \ptctyp{spinor} for the spin data. Should the particle become
 lost, the \ptctyp{probe} contains a \ptctyp{logical} in which to
-record this fact, as well a pointer to the \ptctyp{integration\_node}
+record this fact, as well a pointer to the \ptctyp{integration_node}
 in which the particle loss occured.
 
 \index{temporal probe!defined}
-\index{data type!\ptc{TEMPORAL\_PROBE}}
+\index{data type!\ptc{TEMPORAL_PROBE}}
 \index{probe|see{\emph{also} temporal probe}}
 %
-The data type \ptctyp{temporal\_probe} contains a \ptctyp{probe}
+The data type \ptctyp{temporal_probe} contains a \ptctyp{probe}
 together with information relevant to the time-based tracking
 capability of \PTC. This includes a pointer to the
-\ptctyp{integration\_node} that currently contains the particle.
+\ptctyp{integration_node} that currently contains the particle.
 
 
 \subsection{Time-based Tracking}
@@ -1481,7 +1481,7 @@ $\delta t = \tau - t_\text{entrance}$. Then, using the particle's
 position and momentum at the node entrance as an initial condition,
 and assuming the current integration node to be a drift,
 \PTC\ computes a position and momentum for the particle at time $\tau$.
-It records the shift $\delta s$ in the \ptctyp{temporal\_probe}.
+It records the shift $\delta s$ in the \ptctyp{temporal_probe}.
 If the element \emph{is} a drift, the position of the particle at
 time $\tau$ is exact. If the element is \emph{not} a drift, the
 position of the particle at time $\tau$ is a close approximation.

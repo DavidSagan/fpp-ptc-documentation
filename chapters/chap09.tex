@@ -141,9 +141,9 @@ For more information about integration methods, see Section~\ref{sub:Matrix-Kick
 \index{PTC!source file}
 \index{source file!splitting tutorial}
 \index{splitting!tutorial source file}
-\index{z\_ptc\_splitting.f90@\ptc{z\_ptc\_splitting.f90}!splitting tutorial source file}
+\index{z_ptc_splitting.f90@\ptc{z_ptc_splitting.f90}!splitting tutorial source file}
 %
-The example code in this chapter is from the tutorial source file \ptc{ptc\_splitting.f90} in \TAref*{splitting}. The line numbers of the code in the examples refer to the line numbers of the code in the appendix.
+The example code in this chapter is from the tutorial source file \ptc{ptc_splitting.f90} in \TAref*{splitting}. The line numbers of the code in the examples refer to the line numbers of the code in the appendix.
 
 \fxnote{Add line numbers to \PTC\ code.}
 
@@ -162,32 +162,32 @@ involved in splitting elements in the lattice.
 
 \subsection{Global Parameters}
 
-\index{global parameter!\ptc{resplit\_cutting}}
-\index{resplit\_cutting@\ptc{resplit\_cutting}!global parameter}
-\index{global parameter!\ptc{sixtrack\_compatible}}
-\index{sixtrack\_compatible@\ptc{sixtrack\_compatible}!global parameter}
-\index{global parameter!\ptc{radiation\_bend\_split}}
-\index{radiation\_bend\_split@\ptc{radiation\_bend\_split}!global parameter}
-\index{global parameter!\ptc{fuzzy\_split}}
-\index{fuzzy\_split@\ptc{fuzzy\_split}!global parameter}
+\index{global parameter!\ptc{resplit_cutting}}
+\index{resplit_cutting@\ptc{resplit_cutting}!global parameter}
+\index{global parameter!\ptc{sixtrack_compatible}}
+\index{sixtrack_compatible@\ptc{sixtrack_compatible}!global parameter}
+\index{global parameter!\ptc{radiation_bend_split}}
+\index{radiation_bend_split@\ptc{radiation_bend_split}!global parameter}
+\index{global parameter!\ptc{fuzzy_split}}
+\index{fuzzy_split@\ptc{fuzzy_split}!global parameter}
 %
 The default values for the global parameters are in {\textit{\textcolor{red}{red
 italic }}}type.
 
 Four global parameters are involved in splitting the lattice:
 \begin{itemize}
-  \item \ptc{resplit\_cutting} (\textit{\textcolor{red}{0}}, 1, or 2)
+  \item \ptc{resplit_cutting} (\textit{\textcolor{red}{0}}, 1, or 2)
         For more information, see Section~\ref{sub:LMAX0-Optional-Argument}.
-  \item \ptc{sixtrack\_compatible} (true or \textit{\textcolor{red}{false}})
+  \item \ptc{sixtrack_compatible} (true or \textit{\textcolor{red}{false}})
         This global parameter enforces a second-order integrator for all magnets.
-  \item \ptc{radiation\_bend\_split} (true or \textit{\textcolor{red}{false}})
+  \item \ptc{radiation_bend_split} (true or \textit{\textcolor{red}{false}})
         This global parameter splits bends with integration method 2 to improve
         radiation or spin results. For more information about \PTC's methods of
         integration, see Section~\ref{sub:Integration-Methods}.
-  \item \ptc{fuzzy\_split} (default to \textit{\textcolor{red}{1.0}})
+  \item \ptc{fuzzy_split} (default to \textit{\textcolor{red}{1.0}})
         If this global parameter is greater than 1.0, \PTC\ lets some magnets with
         slightly too-long integration steps go through,
-        i.e., if \ptc{ds<lmax0*fuzzy\_split}.
+        i.e., if \ptc{ds<lmax0*fuzzy_split}.
 \end{itemize}
 
 
@@ -195,23 +195,23 @@ Four global parameters are involved in splitting the lattice:
 
 \index{splitting!routines}
 \index{routines!splitting elements into integration nodes}
-\index{routine!\ptc{THIN\_LENS\_RESTART}}
-\index{THIN\_LENS\_RESTART@\ptc{THIN\_LENS\_RESTART}!routine}
-\index{routine!\ptc{THIN\_LENS\_RESPLIT}}
-\index{THIN\_LENS\_RESPLIT@\ptc{THIN\_LENS\_RESPLIT}!routine}
+\index{routine!\ptc{THIN_LENS_RESTART}}
+\index{THIN_LENS_RESTART@\ptc{THIN_LENS_RESTART}!routine}
+\index{routine!\ptc{THIN_LENS_RESPLIT}}
+\index{THIN_LENS_RESPLIT@\ptc{THIN_LENS_RESPLIT}!routine}
 %
 Mandatory arguments for the routines are in \ptc{regular black} type.
 Optional arguments are in \ptc{\textit{\textcolor{red}{red italic}}} type.
 
-\ptc{THIN\_LENS\_RESTART(R1\textit{\textcolor{red}{,FIB,USEKNOB}})}
+\ptc{THIN_LENS_RESTART(R1\textit{\textcolor{red}{,FIB,USEKNOB}})}
 
 This routine resets all magnets to second-order integration with one step. 
 
-\ptc{THIN\_LENS\_RESPLIT(R\textit{\textcolor{red}{,THIN,EVEN,LIM(1:2),LMAX0,XBEND,FIB,USEKNOB}})}
+\ptc{THIN_LENS_RESPLIT(R\textit{\textcolor{red}{,THIN,EVEN,LIM(1:2),LMAX0,XBEND,FIB,USEKNOB}})}
 
 This routine splits all the magnets in the lattice into integration nodes, or \emph{thin lenses}.
 
-To restrict the action of \ptc{THIN\_LENS\_RESTART} and \ptc{THIN\_LENS\_RESPLIT}
+To restrict the action of \ptc{THIN_LENS_RESTART} and \ptc{THIN_LENS_RESPLIT}
 to specific fibres or groups of magnets, use the optional arguments \ptc{FIB} and
 \ptc{USEKNOB}. For more information, see Section~\ref{sub:Arguments}.
 
@@ -219,8 +219,8 @@ to specific fibres or groups of magnets, use the optional arguments \ptc{FIB} an
 \subsection{Arguments}
 \label{sub:Arguments}
 
-This section describes the arguments for  the \ptc{THIN\_LENS\_RESTART} and
-\ptc{THIN\_LENS\_RESPLIT} routines.
+This section describes the arguments for  the \ptc{THIN_LENS_RESTART} and
+\ptc{THIN_LENS_RESPLIT} routines.
 
 
 \subsubsection{R1 or R Argument}
@@ -228,7 +228,7 @@ This section describes the arguments for  the \ptc{THIN\_LENS\_RESTART} and
 The name of the layout to be split.
 
 \fxnote{Al: Is the above information correct? A commented-out line
-of code in the geometry tutorial had a call to \ptc{thin\_lens\_resplit} with \ptc{m\_u\%end} as the first argument.}
+of code in the geometry tutorial had a call to \ptc{thin_lens_resplit} with \ptc{m_u\%end} as the first argument.}
 
 
 \subsubsection{Optional Argument THIN}
@@ -285,7 +285,7 @@ Section~\ref{sub:LIM-Optional-Argument}.
 In the bend, we also look at the amount of natural horizontal focusing,
 vertical focusing, or both. In this example, a small ring with bends of
 36 degrees, the bends are unusually strong. The global parameter
-\ptc{radiation\_bend\_split} and the optional argument \ptc{xbend} can be used
+\ptc{radiation_bend_split} and the optional argument \ptc{xbend} can be used
 to affect the bends.
 
 
@@ -479,14 +479,14 @@ complete set of properties: dispersion, alphas, phase advances, etc.
 
 \subsubsection{XBEND Optional Argument}
 
-\index{global parameter!\ptc{exact\_model}}
-\index{exact\_model@\ptc{exact\_model}!global parameter}
+\index{global parameter!\ptc{exact_model}}
+\index{exact_model@\ptc{exact_model}!global parameter}
 %
 This section discusses usage of the \ptc{XBEND} optional argument when 
 \ptc{exact=.true.}
 
 The lattice uses sector bends. Because this is an ideal lattice, the tune should
-be the same regardless of whether with \ptc{exact\_model=true} or \ptc{false}.
+be the same regardless of whether with \ptc{exact_model=true} or \ptc{false}.
 Therefore we will fit to the same tune as before, passing it through the same
 algorithm.
 
@@ -632,10 +632,10 @@ points directly at the center of the magnet.
 \label{sub:LMAX0-Optional-Argument}
 
 The \ptc{lmax0} optional argument must be used in conjunction with the
-\ptc{resplit\_cutting} global parameter set to \ptc{1} or \ptc{2}. The \ptc{resplit\_cutting}
+\ptc{resplit_cutting} global parameter set to \ptc{1} or \ptc{2}. The \ptc{resplit_cutting}
 global parameter is normally defaulted to zero.
 
-If \ptc{resplit\_cutting=1}, the ordinary magnets are left as is. However, the
+If \ptc{resplit_cutting=1}, the ordinary magnets are left as is. However, the
 drifts are split so that the maximum length of an integration node cannot exceed
 \ptc{lmax0}.
 
@@ -659,7 +659,7 @@ CALL THIN_LENS_resplit(R1,THIN,even=.true.,lmax0=0.05d0,xbend=1.d-4)
 \tref[c]{Results-Example-7-1} shows the results of the above run.
 
 \begin{table}[ht]\forcerectofloat
-\caption{Results of Example 7 for \ptc{resplit\_cutting=1}.}
+\caption{Results of Example 7 for \ptc{resplit_cutting=1}.}
 \label{tbl:Results-Example-7-1}
 \begin{center}
 \begin{tabular}{cccccc} \toprule
@@ -676,12 +676,12 @@ CALL THIN_LENS_resplit(R1,THIN,even=.true.,lmax0=0.05d0,xbend=1.d-4)
 
 Notice that only the drifts \ptc{D1} and \ptc{D2} were split.
 
-If \ptc{resplit\_cutting=2}, then all the magnets and the drifts are split to
+If \ptc{resplit_cutting=2}, then all the magnets and the drifts are split to
 achieve a maximum length of \ptc{lmax0}. This is useful in space-charge
 calculations. See \tref{Results-Example-7-2}.
 
 \begin{table}[htb]
-\caption{Results of Example 7 for \ptc{resplit\_cutting=2}.}
+\caption{Results of Example 7 for \ptc{resplit_cutting=2}.}
 \label{tbl:Results-Example-7-2}
 \begin{center}
 \begin{tabular}{cccccc} \toprule
@@ -730,14 +730,14 @@ CALL THIN_LENS_RESPLIT(R1,THIN,EVEN=.TRUE.,LMAX0=0.005D0,XBEND=1.D-4,FIB=D1_NEXT
 \end{center}
 \end{table}
 
-Only the fibre \ptc{D1\_NEXT} is affected. All the others are left intact.
+Only the fibre \ptc{D1_NEXT} is affected. All the others are left intact.
 This allows the splitting of a single fibre.
 
 
 \subsubsection{USEKNOB Optional Argument}
 
 \index{knob!using}
-We can use the type \ptc{pol\_block} to produce a splitting of the lattice.
+We can use the type \ptc{pol_block} to produce a splitting of the lattice.
 
 
 \subsubsection*{Example 9}
@@ -752,7 +752,7 @@ CALL THIN_LENS_RESPLIT(R1,THIN,EVEN=.TRUE.,LMAX0=0.005D0,XBEND=1.D-4,
 \end{ptccode}
 
 If \ptc{useknob} is true, then the magnets with the knob flag ``on'' are split, assuming
-no other flags prevent it. In this particular case, \ptc{resplit\_cutting=2}, therefore, the
+no other flags prevent it. In this particular case, \ptc{resplit_cutting=2}, therefore, the
 drifts will be split on the basis of \ptc{LMAX0=0.005D0}.
 
 \tref[c]{Results-Example-9-TRUE} shows the results.
@@ -810,11 +810,11 @@ This section discusses \PTC\ integration methods 1, 3, and 5.
 
 \subsection{Splitting a Single Fibre}
 
-\index{routine!\ptc{RECUT\_KIND7\_ONE}}
-\index{RECUT\_KIND7\_ONE@\ptc{RECUT\_KIND7\_ONE}!routine}
+\index{routine!\ptc{RECUT_KIND7_ONE}}
+\index{RECUT_KIND7_ONE@\ptc{RECUT_KIND7_ONE}!routine}
 This routine splits one fibre.
 
-\ptc{RECUT\_KIND7\_ONE(FIBRE,LMAX0,DRIFT)}
+\ptc{RECUT_KIND7_ONE(FIBRE,LMAX0,DRIFT)}
 
 In the presence of space charge or for other reasons, it may be more
 important to observe the beam at many locations ``approximately'' than
@@ -826,10 +826,10 @@ to use a high-order integration method.
 \subsubsection{Drift-Kick-Drift: Strict Talman Interpretation}
 
 \index{Talman, Richard!strict interpretation of drift-kick-drift}
-\index{global parameter!\ptc{exact\_model}}
-\index{exact\_model@\ptc{exact\_model}!global parameter}
-For this type of algorithm, the \ptc{exact\_model = true} and the
-\ptc{exact\_model = false} can be switched into method 1 if and only if
+\index{global parameter!\ptc{exact_model}}
+\index{exact_model@\ptc{exact_model}!global parameter}
+For this type of algorithm, the \ptc{exact_model = true} and the
+\ptc{exact_model = false} can be switched into method 1 if and only if
 the original method was method 2, i.e., second-order integrator.
 Basically, negative propagators (drifts) are not acceptable: this is the
 strict Talman interpretation to which \PTC\ does not adhere except in the
@@ -905,7 +905,7 @@ Integration methods 2, 4, and 6 switching to methods 1, 3, and 5.
 \PTC\ has a matrix-kick-matrix method where the matrix is energy independent.
 The delta dependence is buried in the kick.
 
-Our comments here apply to \ptc{exact\_model=.false.}
+Our comments here apply to \ptc{exact_model=.false.}
 
 Integration methods 2, 4, and 6---shown in \fref{Matrix-kick-matrix}---always
 split the integration step using matrices of equal length. These methods are the so-called
@@ -942,33 +942,33 @@ Let us retry the above example with the Bode-like integrator:
 1.000000000000000E-003  1.000000000000000E-003  2.529326133576445E-003
 \end{ptccode}
 
-Please note that \ptc{exact\_model=true} works only with straight elements if the matrix-kick-matrix
+Please note that \ptc{exact_model=true} works only with straight elements if the matrix-kick-matrix
 method (kind7) is selected. Bends should use the drift-kick-drift method (integration method 2) if
- \ptc{exact\_model=true}.
+ \ptc{exact_model=true}.
  
-\fxnote{Al: \'Etienne's text in his Word document is: ``bends should be of the drift-kick-drift (method 2) if \ptc{exact\_model=true}.'' I've edited his text, but I'm not sure whether he is talking about only method 2 or about methods 2, 4, and 6.}
+\fxnote{Al: \'Etienne's text in his Word document is: ``bends should be of the drift-kick-drift (method 2) if \ptc{exact_model=true}.'' I've edited his text, but I'm not sure whether he is talking about only method 2 or about methods 2, 4, and 6.}
 
 
 \subsubsection{Drifts}
 
-\index{routine!\ptc{RECUT\_KIND7\_ONE}}
-\index{RECUT\_KIND7\_ONE@\ptc{RECUT\_KIND7\_ONE}!routine}
+\index{routine!\ptc{RECUT_KIND7_ONE}}
+\index{RECUT_KIND7_ONE@\ptc{RECUT_KIND7_ONE}!routine}
 \index{splitting!drifts}
 %
 Drifts can be split using:
 
-\ptc{RECUT\_KIND7\_ONE(D1,0.45D0/16.D0,.TRUE.)}
+\ptc{RECUT_KIND7_ONE(D1,0.45D0/16.D0,.TRUE.)}
 
 
 \subsection{Splitting an Entire Lattice}
 
-\index{routine!\ptc{RECUT\_KIND7\_ONE}}
-\index{RECUT\_KIND7\_ONE@\ptc{RECUT\_KIND7\_ONE}!routine}
+\index{routine!\ptc{RECUT_KIND7_ONE}}
+\index{RECUT_KIND7_ONE@\ptc{RECUT_KIND7_ONE}!routine}
 \index{splitting!lattices}
 %
-This routine applies \ptc{RECUT\_KIND7\_ONE} over the entire layout.
+This routine applies \ptc{RECUT_KIND7_ONE} over the entire layout.
 
-\ptc{RECUT\_KIND7(LAYOUT,LMAX0,DRIFT)}
+\ptc{RECUT_KIND7(LAYOUT,LMAX0,DRIFT)}
 
 
 

@@ -4,7 +4,7 @@
 \chapter{Taylor Polymorphism and Knobs}
 \label{cha:polymorphs.knobs}
 
-\fxnote{Review underscore (\_\,) characters in index entries.}
+\fxnote{Review underscore (_\,) characters in index entries.}
 \fxnote{Review percent (\%\,) characters in index entries.}
 
 \index{Taylor polymorphism!described}
@@ -16,7 +16,7 @@
 \PTC\ supports the full usage of Taylor maps derived from the integrator for the computation of lattice functions. \PTC\ uses \FPP, a package of polymorphic types and tools to extract and analyze the Taylor maps.
 Information explaining \FPP%
 \footnote{The CERN folder is called \ptc{PTC_proper} to distinguish it from the information on \MadX. Most of the information in the \ptc{PTC_proper} folder is about \FPP.}
-is at \url{http://mad.web.cern.ch/mad/PTC\_proper/}
+is at \url{http://mad.web.cern.ch/mad/PTC_proper/}
 
 
 \section{Polymorphs}
@@ -92,7 +92,7 @@ At the end, \ptc{Y} contains the Taylor map, to order \ptc{NO}, about the closed
 \begin{enumerate}
   \item \ptc{state = default0} specifies a 6-D map with cavities;
   \item \ptc{state = default0 + nocavity0} specifies a 6-D map with cavities skipped;
-  \item \ptc{state = default0 + only\_4d0} specifies a 4-D phase space $(X, P_X, Y, P_Y)$;
+  \item \ptc{state = default0 + only_4d0} specifies a 4-D phase space $(X, P_X, Y, P_Y)$;
   \item \ptc{state = default0 + delta0} specifies a 4-D phase
 space $(X, P_X, Y, P_Y)$, plus energy as the fifth variable; cavities are skipped.
 \end{enumerate}
@@ -151,8 +151,8 @@ In the four \ptc{state} examples above:
 While \FPP\ has a routine to help users make a knob, \PTC\ has tailored
 routines to put knobs into a layout and remove knobs from a layout.
 %
-\index{scan\_for\_polymorphs@\ptc{scan\_for\_polymorphs}!routine}
-\index{routine!\ptc{scan\_for\_polymorphs}}
+\index{scan_for_polymorphs@\ptc{scan_for_polymorphs}!routine}
+\index{routine!\ptc{scan_for_polymorphs}}
 %
 The types, subroutines, and routines are
 \begin{itemize}
@@ -172,14 +172,14 @@ a \ptc{track} routine, see \TAref*{states}.
 \index{polymorphic block!described}
 \index{block|see{LEGO block \emph{or} polymorphic block}}
 %
-This section discusses type \ptc{pol\_block}, setting values for
+This section discusses type \ptc{pol_block}, setting values for
 polymorphic blocks, and removing polymorphic blocks from layouts.
 
 
 \subsubsection{Type \ptc{pol_block}}
 
-\index{pol\_block@\ptc{pol\_block}!data type}
-\index{data type!\ptc{pol\_block}}
+\index{pol_block@\ptc{pol_block}!data type}
+\index{data type!\ptc{pol_block}}
 %
 This data type creates an object to be compared with an actual layout. It identities families or single elements using the name, part of the name, or the \ptc{vorname} (first name) of an element to make certain variables knobs. (The last name is the family, for example: \ptc{QF}.)
 
@@ -212,15 +212,15 @@ type pol_block
 end type pol_block
 \end{ptccode}
 
-Consider the following \ptc{pol\_block qf}:
+Consider the following \ptc{pol_block qf}:
 \begin{ptccode}
 qf = 0         ! initialize the pol_block qf
 qf%name = 'QF' ! specify a family name
 qf%ibn(2) = 1  ! set normal quad strength as first parameter
 \end{ptccode}
 %
-\index{scan\_for\_polymorphs@\ptc{scan\_for\_polymorphs}!routine}
-\index{routine!\ptc{scan\_for\_polymorphs}}
+\index{scan_for_polymorphs@\ptc{scan_for_polymorphs}!routine}
+\index{routine!\ptc{scan_for_polymorphs}}
 %
 If we call the routine \ptc{scan_for_polymorphs(R, qf)} or \ptc{R = qf}, then the \DNA\ layout \ptc{R} is scanned. If a polymorphic magnet on any fibre of the layout \ptc{R} is named \ptc{'QF'}, then \ptc{bn(2)} becomes a knob. In our example:
 \begin{verbatim}
@@ -231,7 +231,7 @@ The index \ptc{fpp_npara} depends on the state as explained above.
 
 One may also specify an integer \ptc{qf\%n_name}. If, for example, \ptc{qf\%n_name = 2}, then a polymorph is set if the magnet name matches \ptc{'QFxxxxxxxxxxxxxxx'}, where \ptc{x} denotes any character.
 
-Once the knobs are set on the lattice using the routine \ptc{scan\_for\_polymorphs}, tracking routines can be invoked after the DA-package has been initialized.
+Once the knobs are set on the lattice using the routine \ptc{scan_for_polymorphs}, tracking routines can be invoked after the DA-package has been initialized.
 
 
 \subsubsection{Setting Values using Polymorphic Blocks}
@@ -240,12 +240,12 @@ Once the knobs are set on the lattice using the routine \ptc{scan\_for\_polymorp
 %
 Polymorphs allow for the computation of parameter-dependent maps. These maps can be analyzed by various methods including normal forms. From these maps one may attempt to fit certain computed quantities by modifying the parameters of the polymorphs on the ring.
 
-\index{scan\_for\_polymorphs@\ptc{scan\_for\_polymorphs}!routine}
-\index{routine!\ptc{scan\_for\_polymorphs}}
-\index{SET\_TPSAFIT@\ptc{SET\_TPSAFIT}!routine}
-\index{routine!\ptc{SET\_TPSAFIT}}
-\index{SET\_ELEMENT@\ptc{SET\_ELEMENT}!routine}
-\index{routine!\ptc{SET\_ELEMENT}}
+\index{scan_for_polymorphs@\ptc{scan_for_polymorphs}!routine}
+\index{routine!\ptc{scan_for_polymorphs}}
+\index{SET_TPSAFIT@\ptc{SET_TPSAFIT}!routine}
+\index{routine!\ptc{SET_TPSAFIT}}
+\index{SET_ELEMENT@\ptc{SET_ELEMENT}!routine}
+\index{routine!\ptc{SET_ELEMENT}}
 %
 This is done as follows with \ptc{scan_for_polymorphs} or the
 = sign assignment. The global parameter \ptc{set_TPSAfit} turns
@@ -270,8 +270,8 @@ set_TPSAfit = .false.
 \subsubsection{Removing Polymorphic Blocks from Layouts}
 
 \index{polymorphic block!removing from layout}
-\index{KILL\_PARA@\ptc{KILL\_PARA}!routine}
-\index{routine!\ptc{KILL\_PARA}}
+\index{KILL_PARA@\ptc{KILL_PARA}!routine}
+\index{routine!\ptc{KILL_PARA}}
 %
 To remove a polymorphic block from a layout use the subroutines
 \begin{ptccode}
@@ -287,7 +287,7 @@ call kill_para(Col1%DNA(2)%L)
 \index{source file!polymorphs and knobs tutorial}
 \index{polymorph!tutorial source file}
 \index{knob!tutorial source file}
-\index{z\_ptc\_geometry.f90@\ptc{z\_ptc\_geometry.f90}!geometry tutorial source file}
+\index{z_ptc_geometry.f90@\ptc{z_ptc_geometry.f90}!geometry tutorial source file}
 %
 The example code in this chapter is from the \PTC\ geometry tutorial source file, \ptc{ptc_geometry.f90}, which is given in \Aref{geom.tutorial}. The line numbers of the code in the examples refer to the line numbers of the code in the appendix.
 
@@ -314,8 +314,8 @@ qd(2)%name = 'qd'
 qd(2)%ibn(2) = 4
 \end{ptccode}
 
-\index{scan\_for\_polymorphs@\ptc{scan\_for\_polymorphs}!routine}
-\index{routine!\ptc{scan\_for\_polymorphs}}
+\index{scan_for_polymorphs@\ptc{scan_for_polymorphs}!routine}
+\index{routine!\ptc{scan_for_polymorphs}}
 %
 The next four lines of code declare \ptc{qf} and \ptc{qd} as independent in \DNA\ layouts \ptc{L5} and \ptc{L6}. They perform the same function as calls to the subroutine \ptc{scan_for_polymorphs}. If a polymorphic magnet on any fibre of the DNA layouts \ptc{L5} and \ptc{L6} is named \ptc{'QF'} or \ptc{'QD'}, then \ptc{ibn(2)} becomes a knob.
 
@@ -326,7 +326,7 @@ CoL1%dna(2)%L = qf(2)
 CoL1%dna(2)%L = qd(2)
 \end{ptccode}
 
-Once the knobs are set on the lattice using the \ptc{scan\_for\_polymorphs} routine (or equivalent), we can invoke tracking routines after the
+Once the knobs are set on the lattice using the \ptc{scan_for_polymorphs} routine (or equivalent), we can invoke tracking routines after the
 DA-package has been initialized.
 
 The following lines of code define the closed orbit if not 0.
@@ -344,8 +344,8 @@ call init(state, 2, c_%np_pol) ! c_%np_pol is automatically computed
 The \ptc{2} is automatically computed above---counting the number of
 \DNA\ variables (1-4). This means the Taylor series now has eight variables.
 
-\index{FIND\_ORBIT@\ptc{FIND\_ORBIT}!routine}
-\index{routine!\ptc{FIND\_ORBIT}}
+\index{FIND_ORBIT@\ptc{FIND_ORBIT}!routine}
+\index{routine!\ptc{FIND_ORBIT}}
 %
 \begin{ptccode}
 call find_orbit(CoL1, fix1, 1, state, 1.d-6)

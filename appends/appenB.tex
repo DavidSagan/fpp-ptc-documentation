@@ -5,7 +5,7 @@
 \index{data types!described}
 This appendix contains descriptions and examples of the \Fninety\ data that \PTC\ uses for $s$-based tracking and time-based tracking.
 
-\fxnote{Al: I copied the TYPE definitions is this appendix from the ptc\_2008\_8\_14 folder. I copied the definitions verbatim with two exceptions: I corrected obvious typos such as PONITER, and I retyped lowercase as uppercase.}
+\fxnote{Al: I copied the TYPE definitions is this appendix from the ptc_2008_8_14 folder. I copied the definitions verbatim with two exceptions: I corrected obvious typos such as PONITER, and I retyped lowercase as uppercase.}
 
 
 \section{S-based Tracking}
@@ -200,9 +200,9 @@ END TYPE CHART
 \end{ptccode}
 
 \index{magnet frame!defined}
-\index{data type!\ptc{MAGNET\_FRAME}}
-\index{MAGNET\_FRAME@\ptc{MAGNET\_FRAME}!data type}
-\ptc{CHART} refers to the data type \ptc{MAGNET\_FRAME}.
+\index{data type!\ptc{MAGNET_FRAME}}
+\index{MAGNET_FRAME@\ptc{MAGNET_FRAME}!data type}
+\ptc{CHART} refers to the data type \ptc{MAGNET_FRAME}.
 
 \begin{ptccode}
 TYPE MAGNET_FRAME
@@ -313,8 +313,8 @@ and gives the FORTRAN90 code:
 \subsection{Integration Node}
 
 \index{integration node!defined}
-\index{data type!\ptc{INTEGRATION\_NODE}}
-\index{INTEGRATION\_NODE@\ptc{INTEGRATION\_NODE}!data type}
+\index{data type!\ptc{INTEGRATION_NODE}}
+\index{INTEGRATION_NODE@\ptc{INTEGRATION_NODE}!data type}
 Integration nodes allow us to look at any point in the layout. One of
 the most important applications is to permit collective forces. Moreover,
 we can extend the coordinates of a particle to permit first-order
@@ -379,7 +379,7 @@ See \fref{TYPE.INTEGRATION.NODE}.
 \begin{figure}[ht]\forcerectofloat
   \centering
   \includegraphics[width=\textwidth]{illustrations/integration-node-and-fibre}
-  \caption{Type \ptc{integration\_node} and type \ptc{fibre}.}
+  \caption{Type \ptc{integration_node} and type \ptc{fibre}.}
   \label{fig:TYPE.INTEGRATION.NODE}
 \end{figure}
 
@@ -431,9 +431,9 @@ END TYPE PROBE
 
 The probe tracks position \ptc{X(6)} and spin \ptc{S}. The logical \ptc{U} is true if the particle is unstable.
 
-\index{data type!\ptc{PROBE\_8}}
-\index{PROBE\_8@\ptc{PROBE\_8}!data type}
-Here is the definition of the data type \ptc{PROBE\_8}:
+\index{data type!\ptc{PROBE_8}}
+\index{PROBE_8@\ptc{PROBE_8}!data type}
+Here is the definition of the data type \ptc{PROBE_8}:
 
 \begin{ptccode}
 TYPE PROBE_8
@@ -445,15 +445,15 @@ TYPE PROBE_8
 END TYPE PROBE_8
 \end{ptccode}
 
-\fxnote{Al: What does a PROBE\_8 do? \'Etienne provided its
+\fxnote{Al: What does a PROBE_8 do? \'Etienne provided its
 type definition with the material on Tracking Routines on Integration Nodes.}
 
 
 \subsubsection{Temporal Probe}
 \label{sub:Temporal-Probe-B}
 
-\index{data type!\ptc{TEMPORAL\_PROBE}}
-\index{TEMPORAL\_PROBE@\ptc{TEMPORAL\_PROBE}!data type}
+\index{data type!\ptc{TEMPORAL_PROBE}}
+\index{TEMPORAL_PROBE@\ptc{TEMPORAL_PROBE}!data type}
 The data type \ptc{temporal probe }holds a probe and information relevant to 
 time-based tracking.
 
@@ -477,15 +477,15 @@ traveled inside the node, assuming a drift.
 
 \ptc{STATE} is the tracking state of that beam/machine.
 
-\fxnote{Al: I couldn't find a type definition for a temporal probe or a temporal beam in the inc files in the PTC\_2008\_8\_14 folder. Did I miss those type definitions? (I couldn't find a type definition for a probe, either, but \'Etienne provided it in his Tracking Routines document.)}
+\fxnote{Al: I couldn't find a type definition for a temporal probe or a temporal beam in the inc files in the PTC_2008_8_14 folder. Did I miss those type definitions? (I couldn't find a type definition for a probe, either, but \'Etienne provided it in his Tracking Routines document.)}
 
 
 \subsubsection{Temporal Beam}
 \label{sub:Temporal-Beam-B}
 
 \index{temporal beam!defined}
-\index{data type!\ptc{TEMPORAL\_BEAM}}
-\index{TEMPORAL\_BEAM@\ptc{TEMPORAL\_BEAM}!data type}
+\index{data type!\ptc{TEMPORAL_BEAM}}
+\index{TEMPORAL_BEAM@\ptc{TEMPORAL_BEAM}!data type}
 The data type \ptc{temporal beam }is a collection of particles (probes).
 
 \begin{ptccode}
@@ -512,12 +512,12 @@ We must set the initial conditions of the layout:
 CALL POSITION_TEMPORAL_BEAM(LAYOUT,TB,STATE)
 \end{ptccode}
 
-\index{routine!\ptc{POSITION\_TEMPORAL\_BEAM}}
-\index{POSITION\_TEMPORAL\_BEAM@\ptc{POSITION\_TEMPORAL\_BEAM}!routine}
-\index{routine!\ptc{LOCATE\_TEMPORAL\_BEAM}}
-\index{LOCATE\_TEMPORAL\_BEAM@\ptc{LOCATE\_TEMPORAL\_BEAM}!routine}
-\index{routine!\ptc{ORIGINAL\_P\_TO\_PTC}}
-\index{ORIGINAL\_P\_TO\_PTC@\ptc{ORIGINAL\_P\_TO\_PTC}!routine}
+\index{routine!\ptc{POSITION_TEMPORAL_BEAM}}
+\index{POSITION_TEMPORAL_BEAM@\ptc{POSITION_TEMPORAL_BEAM}!routine}
+\index{routine!\ptc{LOCATE_TEMPORAL_BEAM}}
+\index{LOCATE_TEMPORAL_BEAM@\ptc{LOCATE_TEMPORAL_BEAM}!routine}
+\index{routine!\ptc{ORIGINAL_P_TO_PTC}}
+\index{ORIGINAL_P_TO_PTC@\ptc{ORIGINAL_P_TO_PTC}!routine}
 \index{momenta!adjusting}
 %
 The subroutine \ptc{POSITION_TEMPORAL_BEAM}
@@ -535,8 +535,8 @@ coordinates.
 \subsection{Node Layout}
 
 \index{node layout!defined}
-\index{data type!\ptc{NODE\_LAYOUT}}
-\index{NODE\_LAYOUT@\ptc{NODE\_LAYOUT}!data type}
+\index{data type!\ptc{NODE_LAYOUT}}
+\index{NODE_LAYOUT@\ptc{NODE_LAYOUT}!data type}
 \index{beam line!expanded}
 \index{linked list!node layout}
 %
@@ -590,9 +590,9 @@ TYPE BEAM
 END TYPE BEAM
 \end{ptccode}
 
-\index{data type!\ptc{BEAM\_LOCATION}}
-\index{BEAM\_LOCATION@\ptc{BEAM\_LOCATION}!data type}
-We also define the data type \ptc{BEAM\_LOCATION}:
+\index{data type!\ptc{BEAM_LOCATION}}
+\index{BEAM_LOCATION@\ptc{BEAM_LOCATION}!data type}
+We also define the data type \ptc{BEAM_LOCATION}:
 
 \begin{ptccode}
 TYPE BEAM_LOCATION
